@@ -1,0 +1,10 @@
+# label v0.20.3
+# commit 66ff21115867ef4a80ced2a662d3665d86cb0d78
+# subject Prepare release v0.20.3 (#17614)
+# parents 4629d0a8db920b96491c8715dde23a10f3a1e600
+# go go1.27.3
+# date 2026-10-26T04:04:46Z
+    fair_strategy.go:284: I1026 04:04:48.334648] Skipping FairSharing strategy evaluation, no candidate can pass preemptorNewShare="+Inf" targetClusterQueue="team-b" targetOldShare="500"
+    fair_strategy.go:332: I1026 04:04:48.334668] Evaluating FairSharing strategy preemptorNewShare="+Inf" targetClusterQueue="team-b" targetWorkload="b1" targetOldShare="500" strategyPassed=false
+ok  	sigs.k8s.io/kueue/pkg/scheduler/preemption	0.094s
+exit=0

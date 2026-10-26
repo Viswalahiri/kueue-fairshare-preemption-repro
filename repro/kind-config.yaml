@@ -1,0 +1,11 @@
+# kubeProxyMode nftables. On the machine used for these captures, kube-proxy's
+# iptables backend did not program ClusterIP, so the Kueue webhooks timed out,
+# likely because the kernel lacks xt_statistic. That missing module was not
+# confirmed. nftables programs the rules without that match.
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: kueue-fs
+networking:
+  kubeProxyMode: nftables
+nodes:
+- role: control-plane

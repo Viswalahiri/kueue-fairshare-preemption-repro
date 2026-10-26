@@ -1,0 +1,16 @@
+# label v0.20.3
+# commit 66ff21115867ef4a80ced2a662d3665d86cb0d78
+# subject Prepare release v0.20.3 (#17614)
+# parents 4629d0a8db920b96491c8715dde23a10f3a1e600
+# go go1.27.3
+# date 2026-10-26T04:04:48Z
+    zz_article_a_shares_test.go:74: SHARE Z  (a=0: a1 | b=1: b1,b2,b3) team-a: zeroWeightBorrows=false precise=0 status.fairSharing.weightedShare=0 kueue_cluster_queue_weighted_share=0
+    zz_article_a_shares_test.go:74: SHARE Z  (a=0: a1 | b=1: b1,b2,b3) team-b: zeroWeightBorrows=false precise=500 status.fairSharing.weightedShare=500 kueue_cluster_queue_weighted_share=500
+    zz_article_a_shares_test.go:74: SHARE Zc (a=1: a1 | b=1: b1,b2,b3) team-a: zeroWeightBorrows=false precise=0 status.fairSharing.weightedShare=0 kueue_cluster_queue_weighted_share=0
+    zz_article_a_shares_test.go:74: SHARE Zc (a=1: a1 | b=1: b1,b2,b3) team-b: zeroWeightBorrows=false precise=500 status.fairSharing.weightedShare=500 kueue_cluster_queue_weighted_share=500
+    zz_article_a_shares_test.go:74: SHARE Z2 (a=0: a1..a4 borrowing | b empty) team-a: zeroWeightBorrows=true precise=+Inf status.fairSharing.weightedShare=9223372036854775807 kueue_cluster_queue_weighted_share=NaN
+    zz_article_a_shares_test.go:74: SHARE Z2 (a=0: a1..a4 borrowing | b empty) team-b: zeroWeightBorrows=false precise=0 status.fairSharing.weightedShare=0 kueue_cluster_queue_weighted_share=0
+    zz_article_a_shares_test.go:74: SHARE Z2 a=0: a1..a2 (borrowing 500m) team-a: zeroWeightBorrows=true precise=+Inf status.fairSharing.weightedShare=9223372036854775807 kueue_cluster_queue_weighted_share=NaN
+    zz_article_a_shares_test.go:74: SHARE Z2 a=0: a1..a2 (borrowing 500m) team-b: zeroWeightBorrows=false precise=0 status.fairSharing.weightedShare=0 kueue_cluster_queue_weighted_share=0
+ok  	sigs.k8s.io/kueue/pkg/cache/scheduler	0.091s
+exit=0

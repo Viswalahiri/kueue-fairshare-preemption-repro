@@ -1,0 +1,2 @@
+team-a status.fairSharing={"weightedShare": 250}
+team-b status.fairSharing={"weightedShare": 250}

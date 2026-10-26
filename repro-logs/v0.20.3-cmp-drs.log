@@ -1,0 +1,79 @@
+# label v0.20.3
+# commit 66ff21115867ef4a80ced2a662d3665d86cb0d78
+# subject Prepare release v0.20.3 (#17614)
+# parents 4629d0a8db920b96491c8715dde23a10f3a1e600
+# go go1.27.3
+# date 2026-10-26T04:01:34Z
+=== RUN   TestCompareBool
+=== RUN   TestCompareBool/both_false
+=== RUN   TestCompareBool/a_true,_b_false
+=== RUN   TestCompareBool/a_false,_b_true
+=== RUN   TestCompareBool/both_true
+--- PASS: TestCompareBool (0.00s)
+    --- PASS: TestCompareBool/both_false (0.00s)
+    --- PASS: TestCompareBool/a_true,_b_false (0.00s)
+    --- PASS: TestCompareBool/a_false,_b_true (0.00s)
+    --- PASS: TestCompareBool/both_true (0.00s)
+ok  	sigs.k8s.io/kueue/pkg/util/cmp	0.002s
+=== RUN   TestDominantResourceShare
+=== RUN   TestDominantResourceShare/borrowing_against_an_exabyte-scale_lendable_quota
+=== RUN   TestDominantResourceShare/positive_weight_borrowing_only_a_resource_with_nothing_lendable
+=== RUN   TestDominantResourceShare/usage_below_nominal
+=== RUN   TestDominantResourceShare/A_resource_with_zero_lendable
+=== RUN   TestDominantResourceShare/above_nominal_with_integer_weight
+=== RUN   TestDominantResourceShare/cohort_share_below_the_smallest_float64_stays_positive
+=== RUN   TestDominantResourceShare/multiple_flavors
+=== RUN   TestDominantResourceShare/above_nominal_with_zero_weight
+=== RUN   TestDominantResourceShare/cohort_has_resource_share
+=== RUN   TestDominantResourceShare/zero_weight_borrowing_only_a_resource_with_nothing_lendable
+=== RUN   TestDominantResourceShare/zero_weight_cohort_borrowing_only_a_resource_with_nothing_lendable
+=== RUN   TestDominantResourceShare/share_below_the_smallest_float64_stays_positive
+=== RUN   TestDominantResourceShare/share_with_a_weight_past_float64_stays_positive
+=== RUN   TestDominantResourceShare/share_past_int64_is_reported_as_the_int64_maximum
+=== RUN   TestDominantResourceShare/no_cohort
+=== RUN   TestDominantResourceShare/usage_way_above_nominal_in_a_cohort_with_large_quotas_and_weights
+=== RUN   TestDominantResourceShare/one_resource_above_nominal
+=== RUN   TestDominantResourceShare/usage_with_workload_above_nominal
+=== RUN   TestDominantResourceShare/cohort_share_past_int64_is_reported_as_the_int64_maximum
+=== RUN   TestDominantResourceShare/usage_above_nominal
+=== RUN   TestDominantResourceShare/usage_slightly_above_nominal_in_a_cohort_with_large_quotas
+=== RUN   TestDominantResourceShare/above_nominal_with_decimal_weight
+=== RUN   TestDominantResourceShare/resource_share_defined_for_resources_only_available_at_the_root_cohort
+=== RUN   TestDominantResourceShare/resource_share_affected_by_borrowing_limit
+--- PASS: TestDominantResourceShare (0.12s)
+    --- PASS: TestDominantResourceShare/borrowing_against_an_exabyte-scale_lendable_quota (0.07s)
+    --- PASS: TestDominantResourceShare/positive_weight_borrowing_only_a_resource_with_nothing_lendable (0.00s)
+    --- PASS: TestDominantResourceShare/usage_below_nominal (0.00s)
+    --- PASS: TestDominantResourceShare/A_resource_with_zero_lendable (0.00s)
+    --- PASS: TestDominantResourceShare/above_nominal_with_integer_weight (0.00s)
+    --- PASS: TestDominantResourceShare/cohort_share_below_the_smallest_float64_stays_positive (0.00s)
+    --- PASS: TestDominantResourceShare/multiple_flavors (0.00s)
+    --- PASS: TestDominantResourceShare/above_nominal_with_zero_weight (0.00s)
+    --- PASS: TestDominantResourceShare/cohort_has_resource_share (0.00s)
+    --- PASS: TestDominantResourceShare/zero_weight_borrowing_only_a_resource_with_nothing_lendable (0.00s)
+    --- PASS: TestDominantResourceShare/zero_weight_cohort_borrowing_only_a_resource_with_nothing_lendable (0.00s)
+    --- PASS: TestDominantResourceShare/share_below_the_smallest_float64_stays_positive (0.00s)
+    --- PASS: TestDominantResourceShare/share_with_a_weight_past_float64_stays_positive (0.00s)
+    --- PASS: TestDominantResourceShare/share_past_int64_is_reported_as_the_int64_maximum (0.00s)
+    --- PASS: TestDominantResourceShare/no_cohort (0.00s)
+    --- PASS: TestDominantResourceShare/usage_way_above_nominal_in_a_cohort_with_large_quotas_and_weights (0.00s)
+    --- PASS: TestDominantResourceShare/one_resource_above_nominal (0.01s)
+    --- PASS: TestDominantResourceShare/usage_with_workload_above_nominal (0.00s)
+    --- PASS: TestDominantResourceShare/cohort_share_past_int64_is_reported_as_the_int64_maximum (0.00s)
+    --- PASS: TestDominantResourceShare/usage_above_nominal (0.00s)
+    --- PASS: TestDominantResourceShare/usage_slightly_above_nominal_in_a_cohort_with_large_quotas (0.00s)
+    --- PASS: TestDominantResourceShare/above_nominal_with_decimal_weight (0.00s)
+    --- PASS: TestDominantResourceShare/resource_share_defined_for_resources_only_available_at_the_root_cohort (0.00s)
+    --- PASS: TestDominantResourceShare/resource_share_affected_by_borrowing_limit (0.00s)
+=== RUN   TestZeroWeightBorrows
+=== RUN   TestZeroWeightBorrows/zero_weight_and_borrowing_returns_true
+=== RUN   TestZeroWeightBorrows/zero_weight_and_borrowing_with_a_zero_ratio_returns_true
+=== RUN   TestZeroWeightBorrows/zero_weight_and_not_borrowing_returns_false
+=== RUN   TestZeroWeightBorrows/non-zero_weight_and_borrowing_returns_false
+--- PASS: TestZeroWeightBorrows (0.00s)
+    --- PASS: TestZeroWeightBorrows/zero_weight_and_borrowing_returns_true (0.00s)
+    --- PASS: TestZeroWeightBorrows/zero_weight_and_borrowing_with_a_zero_ratio_returns_true (0.00s)
+    --- PASS: TestZeroWeightBorrows/zero_weight_and_not_borrowing_returns_false (0.00s)
+    --- PASS: TestZeroWeightBorrows/non-zero_weight_and_borrowing_returns_false (0.00s)
+ok  	sigs.k8s.io/kueue/pkg/cache/scheduler	0.149s
+exit=0

@@ -1,0 +1,10 @@
+# v0.19.1 df3d3656004f7b2478004a37b34ad8efa9ffabf0
+SHARE Z  (a=0: a1 | b=1: b1,b2,b3) team-a: precise=0 status.fairSharing.weightedShare=0 kueue_cluster_queue_weighted_share=0
+SHARE Z  (a=0: a1 | b=1: b1,b2,b3) team-b: precise=500 status.fairSharing.weightedShare=500 kueue_cluster_queue_weighted_share=500
+SHARE Z2 (a=0: a1..a4 borrowing | b empty) team-a: precise=+Inf status.fairSharing.weightedShare=9223372036854775807 kueue_cluster_queue_weighted_share=NaN
+SHARE Z2 (a=0: a1..a4 borrowing | b empty) team-b: precise=0 status.fairSharing.weightedShare=0 kueue_cluster_queue_weighted_share=0
+SHARE Z2 a=0: a1..a2 (borrowing 500m) team-a: precise=+Inf status.fairSharing.weightedShare=9223372036854775807 kueue_cluster_queue_weighted_share=NaN
+SHARE Z2 a=0: a1..a2 (borrowing 500m) team-b: precise=0 status.fairSharing.weightedShare=0 kueue_cluster_queue_weighted_share=0
+SHARE Zc (a=1: a1 | b=1: b1,b2,b3) team-a: precise=0 status.fairSharing.weightedShare=0 kueue_cluster_queue_weighted_share=0
+SHARE Zc (a=1: a1 | b=1: b1,b2,b3) team-b: precise=500 status.fairSharing.weightedShare=500 kueue_cluster_queue_weighted_share=500
+ok  	sigs.k8s.io/kueue/pkg/cache/scheduler	0.081s

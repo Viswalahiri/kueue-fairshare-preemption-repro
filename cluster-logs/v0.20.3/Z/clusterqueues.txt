@@ -1,0 +1,3 @@
+NAME     WEIGHT   SHARE   ADMITTED   PENDING
+team-a   0        0       1          1
+team-b   1        500     3          0

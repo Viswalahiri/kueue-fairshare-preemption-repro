@@ -1,0 +1,6 @@
+date 2026-10-26T04:25:02Z
+kueue v0.20.3
+kind kind v0.31.0 go1.25.5 linux/amd64
+kubectl v1.37.1
+docker 29.1.3
+image-source host docker pull, imported into the kind node with ctr

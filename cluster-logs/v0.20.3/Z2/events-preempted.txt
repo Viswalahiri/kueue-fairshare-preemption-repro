@@ -1,0 +1,2 @@
+NAMESPACE   LAST SEEN   TYPE     REASON      OBJECT                  MESSAGE
+team-a      5s          Normal   Preempted   workload/job-a4-865cb   Preempted to accommodate a workload (UID: 81518390-b56c-4640-b6fa-751a50fec7f7, JobUID: 643f69aa-ea10-4270-a42f-b033031f1920) due to reclamation within the cohort; preemptor path: /all/team-b; preemptee path: /all/team-a; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)

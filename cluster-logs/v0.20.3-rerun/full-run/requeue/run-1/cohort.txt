@@ -1,0 +1,12 @@
+date: 2026-10-26T05:17:50Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get cohort all -o jsonpath='cohort all weightedShare={.status.fairSharing.weightedShare}{"\n"}' || true
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+cohort all weightedShare=0

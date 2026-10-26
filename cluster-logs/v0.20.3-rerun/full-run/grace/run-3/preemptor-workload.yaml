@@ -1,0 +1,88 @@
+date: 2026-10-26T05:21:38Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl -n team-a get workload job-a2-00461 -o yaml
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: Workload
+metadata:
+  creationTimestamp: "2026-10-26T05:21:10Z"
+  finalizers:
+  - kueue.x-k8s.io/resource-in-use
+  generation: 1
+  labels:
+    kueue.x-k8s.io/job-uid: 3bfca4e0-d778-4770-973f-e5d56313b772
+  name: job-a2-00461
+  namespace: team-a
+  ownerReferences:
+  - apiVersion: batch/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Job
+    name: a2
+    uid: 3bfca4e0-d778-4770-973f-e5d56313b772
+  resourceVersion: "4554"
+  uid: e493568e-3a2a-4d9b-8cef-d4e95cbb5020
+spec:
+  active: true
+  podSets:
+  - count: 1
+    name: main
+    template:
+      metadata:
+        labels:
+          batch.kubernetes.io/job-name: a2
+      spec:
+        containers:
+        - image: registry.k8s.io/pause:3.10
+          imagePullPolicy: IfNotPresent
+          name: sleep
+          resources:
+            requests:
+              cpu: 500m
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    topologyRequest:
+      podIndexLabel: batch.kubernetes.io/job-completion-index
+  priority: 0
+  queueName: lq
+status:
+  admission:
+    clusterQueue: team-a
+    podSetAssignments:
+    - count: 1
+      flavors:
+        cpu: default
+      name: main
+      resourceUsage:
+        cpu: 500m
+  conditions:
+  - lastTransitionTime: "2026-10-26T05:21:10Z"
+    message: Quota reserved in ClusterQueue team-a
+    observedGeneration: 1
+    reason: QuotaReserved
+    status: "True"
+    type: QuotaReserved
+  - lastTransitionTime: "2026-10-26T05:21:10Z"
+    message: The workload is admitted
+    observedGeneration: 1
+    reason: Admitted
+    status: "True"
+    type: Admitted
+  - lastTransitionTime: "2026-10-26T05:21:11Z"
+    message: All pods reached readiness and the workload is running
+    observedGeneration: 1
+    reason: Started
+    status: "True"
+    type: PodsReady

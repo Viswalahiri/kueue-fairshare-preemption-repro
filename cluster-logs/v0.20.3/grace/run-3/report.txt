@@ -1,0 +1,34 @@
+SUMMARY (hand-written, not raw output)
+The rest of this file was not captured from kubectl, kind, curl, or the controller.
+Do not cite it as raw command output.
+===== authored banner end =====
+
+source: live kind cluster, not a unit test
+pod: b3-pbnsk
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running
+victim_workload: job-b3-c0e75
+victim_job: b3
+preemptor_workload: job-a2-9b46a
+preemptor_job: a2
+evicted_condition: {"lastTransitionTime": "2026-10-26T04:35:06Z", "message": "Preempted to accommodate a workload (UID: 1ee28254-7334-4f72-ac54-b55f08932bb3, JobUID: 7f0e9a42-7b57-4f0e-905e-61bf9496300c) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preemptor_admitted_condition: {"lastTransitionTime": "2026-10-26T04:35:06Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+preemptor_quota_reserved_condition: {"lastTransitionTime": "2026-10-26T04:35:06Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+delta_evicted_to_admitted_seconds: 0
+delta_definition: preemptor Admitted lastTransitionTime minus victim Evicted lastTransitionTime. Both are Workload condition timestamps from the live kind cluster (RFC3339, one-second resolution), not a unit test.
+pod_event: {"firstTimestamp": null, "involvedObject": "job-b3-c0e75", "lastTimestamp": null, "message": "Preempted to accommodate a workload (UID: 1ee28254-7334-4f72-ac54-b55f08932bb3, JobUID: 7f0e9a42-7b57-4f0e-905e-61bf9496300c) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "reason": "Preempted"}
+pod_event: {"firstTimestamp": "2026-10-26T04:35:06Z", "involvedObject": "b3", "lastTimestamp": "2026-10-26T04:35:06Z", "message": "Deleted pod: b3-pbnsk", "reason": "SuccessfulDelete"}
+pod_event: {"firstTimestamp": "2026-10-26T04:35:06Z", "involvedObject": "b3-pbnsk", "lastTimestamp": "2026-10-26T04:35:06Z", "message": "Stopping container sleep", "reason": "Killing"}
+
+source: live kind cluster, observed while grace run 3's preemptor was already Admitted
+pod: team-b/b3-pbnsk
+phase: Running
+container_state: running, startedAt 2026-10-26T04:35:03Z
+deletionTimestamp: 2026-10-26T04:35:36Z
+deletionGracePeriodSeconds: 30
+victim Evicted lastTransitionTime: 2026-10-26T04:35:06Z
+preemptor Admitted lastTransitionTime: 2026-10-26T04:35:06Z
+observation_wall_clock: 2026-10-26T04:35:15.957854909Z
+note: at that wall clock the container was still running. deletionTimestamp is 30s after eviction. The preemptor was already Admitted. Quota was not held until the grace period ended.

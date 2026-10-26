@@ -1,0 +1,6 @@
+NS       WL             JOB   RESERVED   RESERVED_AT            EVICTED     PREEMPTED             REQUEUED
+team-a   job-a1-5b4e7   a1    True       2026-10-26T04:32:28Z   <none>      <none>                <none>
+team-a   job-a2-7f4e5   a2    True       2026-10-26T04:32:41Z   <none>      <none>                <none>
+team-b   job-b1-f7754   b1    True       2026-10-26T04:32:32Z   <none>      <none>                <none>
+team-b   job-b2-174bc   b2    True       2026-10-26T04:32:35Z   <none>      <none>                <none>
+team-b   job-b3-407b3   b3    False      2026-10-26T04:32:41Z   Preempted   InCohortFairSharing   True

@@ -1,0 +1,17 @@
+date: 2026-10-26T05:16:17Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get workloads -A -o wide
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NAMESPACE   NAME           QUEUE   RESERVED IN   ADMITTED   FINISHED   AGE
+team-a      job-a1-d35bd   lq      team-a        True                  18s
+team-a      job-a2-dcdc7   lq      team-a        True                  5s
+team-b      job-b1-c1a3e   lq      team-b        True                  15s
+team-b      job-b2-5925b   lq      team-b        True                  12s
+team-b      job-b3-3bb84   lq                    False                 8s

@@ -1,0 +1,38 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "action": "Preempted",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T04:34:12.506225Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b3-28f84",
+                "namespace": "team-b",
+                "resourceVersion": "7671",
+                "uid": "ede1d330-c021-4869-9c85-1b27a82154a6"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Preempted to accommodate a workload (UID: 82592386-a565-4bff-b97a-a9904c091e7e, JobUID: 43c59928-3d1f-43ba-9466-21a6aa0a7149) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T04:34:12Z",
+                "name": "job-b3-28f84.18e1fa39b9ba114f",
+                "namespace": "team-b",
+                "resourceVersion": "7682",
+                "uid": "26b7efb9-510a-48e0-bf61-2d24c92fc5f7"
+            },
+            "reason": "Preempted",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-rgxl7",
+            "source": {},
+            "type": "Normal"
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

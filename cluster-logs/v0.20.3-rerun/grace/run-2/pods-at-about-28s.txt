@@ -1,0 +1,27 @@
+date: 2026-10-26T05:25:07Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get pods -A -o wide
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE   IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          11m   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          11m   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          11m   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          11m   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          11m   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          11m   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          11m   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          11m   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          11m   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          11m   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-tsh65                                         1/1     Running       0          41s   10.244.0.81   kueue-fs-control-plane   <none>           <none>
+team-a               a2-5fpjp                                         1/1     Running       0          28s   10.244.0.85   kueue-fs-control-plane   <none>           <none>
+team-b               b1-k4hhg                                         1/1     Running       0          38s   10.244.0.82   kueue-fs-control-plane   <none>           <none>
+team-b               b2-65zvs                                         1/1     Running       0          35s   10.244.0.83   kueue-fs-control-plane   <none>           <none>
+team-b               b3-sjqsg                                         1/1     Terminating   0          32s   10.244.0.84   kueue-fs-control-plane   <none>           <none>

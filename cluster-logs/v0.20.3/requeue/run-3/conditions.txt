@@ -1,0 +1,27 @@
+workload team-a/job-a1-3a27d job=a1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:33:29Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:33:29Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a2-38f53 job=a2
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b1-b07c5 job=b1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:33:32Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:33:32Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b2-f0860 job=b2
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:33:35Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:33:35Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b3-95228 job=b3
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed", "observedGeneration": 1, "reason": "WaitingForQuota", "status": "False", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "Preempted to accommodate a workload (UID: 1afa9ba4-1dbc-474b-96e6-409b5a0108fa, JobUID: 494fea0a-9eb3-4632-9f8c-a50728640cc6) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "The workload has no reservation", "observedGeneration": 1, "reason": "NoReservation", "status": "False", "type": "Admitted"}
+condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "Preempted to accommodate a workload (UID: 1afa9ba4-1dbc-474b-96e6-409b5a0108fa, JobUID: 494fea0a-9eb3-4632-9f8c-a50728640cc6) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortFairSharing", "status": "True", "type": "Preempted"}
+condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "Preempted to accommodate a workload (UID: 1afa9ba4-1dbc-474b-96e6-409b5a0108fa, JobUID: 494fea0a-9eb3-4632-9f8c-a50728640cc6) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}

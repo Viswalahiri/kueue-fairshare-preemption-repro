@@ -1,0 +1,1004 @@
+date: 2026-10-26T05:19:18Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: poll about every 1s until team-b job b3 has no pod, or 300 iterations: date -u +%Y-%m-%dT%H:%M:%S.%NZ; kubectl get pods -A -o wide; kubectl get pods -A -o custom-columns=NS:.metadata.namespace,NAME:.metadata.name,PHASE:.status.phase,DELETION:.metadata.deletionTimestamp,GRACE:.metadata.deletionGracePeriodSeconds
+source: live kind cluster
+note: POLL, DELETION_POLL, VICTIM_POD_COUNT, and POD_GONE lines are written by this loop. kubectl stdout is copied as printed. The wide list includes the preemptor pod and the victim pod.
+===== capture body =====
+POLL 2026-10-26T05:19:18.054489799Z
+NAMESPACE            NAME                                             READY   STATUS    RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running   0          5m33s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running   0          5m33s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running   0          5m39s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running   0          5m34s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running   0          5m39s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running   0          5m40s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running   0          5m34s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running   0          5m40s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running   0          5m22s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running   0          5m33s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running   0          13s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running   0          10s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running   0          7s      10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Running   0          4s      10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:18.096569971Z
+NS                   NAME                                             PHASE     DELETION   GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>     <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>     <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>     <none>
+kube-system          kindnet-6jwsg                                    Running   <none>     <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>     <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>     <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>     <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>     <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>     <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>     <none>
+team-a               a1-dfm64                                         Running   <none>     <none>
+team-b               b1-jcfmp                                         Running   <none>     <none>
+team-b               b2-s9rcq                                         Running   <none>     <none>
+team-b               b3-h89jd                                         Running   <none>     <none>
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:19.248222830Z
+NAMESPACE            NAME                                             READY   STATUS              RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running             0          5m34s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running             0          5m34s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running             0          5m40s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running             0          5m35s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running             0          5m40s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running             0          5m41s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running             0          5m35s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running             0          5m41s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running             0          5m23s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running             0          5m34s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running             0          14s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         0/1     ContainerCreating   0          1s      <none>        kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running             0          11s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running             0          8s      10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating         0          5s      10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:19.288374748Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Pending   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:20.373975226Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m35s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m35s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m41s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m36s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m41s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m42s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m36s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m42s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m24s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m35s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          15s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          2s      10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          12s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          9s      10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          6s      10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:20.416227815Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:21.507738884Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m36s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m36s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m42s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m37s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m42s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m43s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m37s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m43s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m25s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m36s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          16s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          3s      10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          13s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          10s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          7s      10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:21.551814742Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:22.645939404Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m37s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m37s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m43s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m38s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m43s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m44s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m38s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m44s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m26s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m37s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          17s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          4s      10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          14s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          11s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          8s      10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:22.690700771Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:23.784574695Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m38s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m38s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m44s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m39s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m44s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m45s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m39s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m45s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m27s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m38s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          18s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          5s      10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          15s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          12s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          9s      10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:23.826313440Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:24.911050799Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m39s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m39s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m45s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m40s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m45s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m46s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m40s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m46s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m28s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m39s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          19s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          6s      10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          16s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          13s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          10s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:24.954275273Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:26.051193136Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m41s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m41s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m47s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m42s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m47s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m48s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m42s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m48s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m30s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m41s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          21s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          8s      10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          18s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          15s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          12s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:26.092802204Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:27.175582123Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m42s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m42s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m48s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m43s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m48s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m49s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m43s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m49s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m31s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m42s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          22s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          9s      10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          19s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          16s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          13s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:27.217433897Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:28.301736128Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m43s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m43s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m49s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m44s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m49s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m50s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m44s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m50s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m32s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m43s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          23s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          10s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          20s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          17s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          14s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:28.343651775Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:29.430351562Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m44s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m44s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m50s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m45s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m50s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m51s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m45s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m51s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m33s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m44s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          24s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          11s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          21s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          18s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          15s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:29.473438790Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:30.573717935Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m45s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m45s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m51s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m46s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m51s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m52s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m46s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m52s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m34s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m45s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          25s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          12s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          22s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          19s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          16s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:30.615385337Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:31.700908657Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m46s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m46s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m52s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m47s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m52s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m53s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m47s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m53s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m35s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m46s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          26s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          13s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          23s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          20s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          17s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:31.743391230Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:32.841579175Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m47s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m47s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m53s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m48s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m53s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m54s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m48s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m54s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m36s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m47s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          27s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          14s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          24s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          21s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          18s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:32.885167109Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:33.970214043Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m49s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m49s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m55s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m50s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m55s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m56s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m50s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m56s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m38s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m49s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          29s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          16s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          26s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          23s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          20s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:34.012695685Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:35.097149507Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m50s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m50s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m56s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m51s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m56s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m57s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m51s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m57s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m39s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m50s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          30s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          17s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          27s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          24s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          21s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:35.137966252Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:36.222519475Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m51s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m51s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m57s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m52s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m57s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m58s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m52s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m58s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m40s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m51s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          31s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          18s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          28s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          25s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          22s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:36.264909730Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:37.348725884Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m52s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m52s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m58s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m53s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m58s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          5m59s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m53s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          5m59s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m41s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m52s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          32s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          19s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          29s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          26s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          23s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:37.390133825Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:38.473069462Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m53s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m53s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          5m59s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m54s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          5m59s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          6m      172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m54s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          6m      172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m42s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m53s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          33s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          20s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          30s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          27s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          24s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:38.515918142Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:39.609016641Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m54s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m54s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          6m      172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m55s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          6m      172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          6m1s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m55s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          6m1s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m43s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m54s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          34s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          21s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          31s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          28s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          25s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:39.651967081Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:40.738999840Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m55s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m55s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          6m1s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m56s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          6m1s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          6m2s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m56s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          6m2s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m44s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m55s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          35s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          22s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          32s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          29s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          26s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:40.782616447Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:41.868214367Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m56s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m56s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          6m2s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m57s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          6m2s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          6m3s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m57s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          6m3s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m45s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m56s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          36s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          23s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          33s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          30s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          27s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:41.909393801Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:42.996923275Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m58s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m58s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          6m4s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          5m59s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          6m4s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          6m5s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          5m59s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          6m5s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m47s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m58s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          38s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          25s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          35s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          32s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          29s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:43.041703011Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:44.129682318Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          5m59s   10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          5m59s   10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          6m5s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          6m      172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          6m5s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          6m6s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          6m      172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          6m6s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m48s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          5m59s   10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          39s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          26s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          36s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          33s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          30s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:44.173337386Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:45.261309658Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          6m      10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          6m      10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          6m6s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          6m1s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          6m6s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          6m7s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          6m1s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          6m7s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m49s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          6m      10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          40s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          27s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          37s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          34s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          31s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:45.306412899Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:46.394469782Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          6m1s    10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          6m1s    10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          6m7s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          6m2s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          6m7s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          6m8s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          6m2s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          6m8s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m50s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          6m1s    10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          41s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          28s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          38s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          35s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          32s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:46.449851569Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:47.549829312Z
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running       0          6m2s    10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running       0          6m2s    10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          6m8s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running       0          6m3s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          6m8s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          6m9s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running       0          6m3s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          6m9s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running       0          5m51s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running       0          6m2s    10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running       0          42s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running       0          29s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running       0          39s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running       0          36s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+team-b               b3-h89jd                                         1/1     Terminating   0          33s     10.244.0.49   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:47.600765808Z
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-dfm64                                         Running   <none>                 <none>
+team-a               a2-ltlk2                                         Running   <none>                 <none>
+team-b               b1-jcfmp                                         Running   <none>                 <none>
+team-b               b2-s9rcq                                         Running   <none>                 <none>
+team-b               b3-h89jd                                         Running   2026-10-26T05:19:48Z   30
+VICTIM_POD_COUNT 1
+POLL 2026-10-26T05:19:48.693240966Z
+NAMESPACE            NAME                                             READY   STATUS    RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running   0          6m3s    10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running   0          6m3s    10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running   0          6m9s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running   0          6m4s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running   0          6m9s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running   0          6m10s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running   0          6m4s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running   0          6m10s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running   0          5m52s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running   0          6m3s    10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running   0          43s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running   0          30s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running   0          40s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running   0          37s     10.244.0.48   kueue-fs-control-plane   <none>           <none>
+DELETION_POLL 2026-10-26T05:19:48.744933228Z
+NS                   NAME                                             PHASE     DELETION   GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>     <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>     <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>     <none>
+kube-system          kindnet-6jwsg                                    Running   <none>     <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>     <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>     <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>     <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>     <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>     <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>     <none>
+team-a               a1-dfm64                                         Running   <none>     <none>
+team-a               a2-ltlk2                                         Running   <none>     <none>
+team-b               b1-jcfmp                                         Running   <none>     <none>
+team-b               b2-s9rcq                                         Running   <none>     <none>
+VICTIM_POD_COUNT 0
+POD_GONE 2026-10-26T05:19:48.841340967Z
+POLL 2026-10-26T05:19:48.842569757Z
+NAMESPACE            NAME                                             READY   STATUS    RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-bnkn8                         1/1     Running   0          6m3s    10.244.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-wx9tz                         1/1     Running   0          6m3s    10.244.0.6    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running   0          6m9s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-6jwsg                                    1/1     Running   0          6m4s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running   0          6m9s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running   0          6m10s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-h9v7w                                 1/1     Running   0          6m4s    172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running   0          6m10s   172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         1/1     Running   0          5m52s   10.244.0.5    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          1/1     Running   0          6m3s    10.244.0.4    kueue-fs-control-plane   <none>           <none>
+team-a               a1-dfm64                                         1/1     Running   0          43s     10.244.0.46   kueue-fs-control-plane   <none>           <none>
+team-a               a2-ltlk2                                         1/1     Running   0          30s     10.244.0.50   kueue-fs-control-plane   <none>           <none>
+team-b               b1-jcfmp                                         1/1     Running   0          40s     10.244.0.47   kueue-fs-control-plane   <none>           <none>
+team-b               b2-s9rcq                                         1/1     Running   0          37s     10.244.0.48   kueue-fs-control-plane   <none>           <none>

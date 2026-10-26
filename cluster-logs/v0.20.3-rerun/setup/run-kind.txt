@@ -1,0 +1,716 @@
+date: 2026-10-26T05:13:43Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: ./run-kind.sh
+source: live kind cluster
+cwd: /workspace/repro
+OUT: /workspace/cluster-logs/v0.20.3-rerun
+note: exit_code trailer below the body is the shell status recorded by capture-rerun.sh, not a line printed by run-kind.sh
+===== capture body =====
+reusing kind cluster kueue-fs (delete it first for a cold start)
+kube-proxy mode: nftables
+preloading registry.k8s.io/kueue/kueue:v0.20.3 into kueue-fs-control-plane
+registry.k8s.io/kueue/kueue:v0.20.3     	saved	
+application/vnd.oci.image.index.v1+json sha256:f42d6f868f2dd53710c842d2a3c4801c047e556a85840703aa273f0b0c10862b
+Importing	elapsed: 2.2 s	total:   0.0 B	(0.0 B/s)	
+preloading registry.k8s.io/pause:3.10 into kueue-fs-control-plane
+registry.k8s.io/pause:3.10              	saved	
+application/vnd.docker.distribution.manifest.list.v2+json sha256:ee6521f290b2168b6e0935a181d4cff9be1ac3f505666ef0e3c98fae8199917a
+Importing	elapsed: 0.1 s	total:   0.0 B	(0.0 B/s)	
+preloading registry.k8s.io/e2e-test-images/busybox:1.36.1-1 into kueue-fs-control-plane
+registry.k8s.io/e2e test images/busybox:	saved	
+application/vnd.docker.distribution.manifest.list.v2+json sha256:a9155b13325b2abef48e71de77bb8ac015412a566829f621d06bfae5c699b1b9
+Importing	elapsed: 0.1 s	total:   0.0 B	(0.0 B/s)	
+date 2026-10-26T05:13:53Z
+kueue v0.20.3
+kind kind v0.31.0 go1.25.5 linux/amd64
+kubectl v1.37.1
+docker 29.1.3
+node-image kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+kueue-commit 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue-commit-source git-ls-remote
+kueue-commit-ls-remote 66ff21115867ef4a80ced2a662d3665d86cb0d78
+image-source host docker pull, imported into the kind node with ctr
+installing Kueue v0.20.3
+namespace/kueue-system serverside-applied
+customresourcedefinition.apiextensions.k8s.io/admissionchecks.kueue.x-k8s.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/clusterqueues.kueue.x-k8s.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/cohorts.kueue.x-k8s.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/localqueues.kueue.x-k8s.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/multikueueclusters.kueue.x-k8s.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/multikueueconfigs.kueue.x-k8s.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/provisioningrequestconfigs.kueue.x-k8s.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/resourceflavors.kueue.x-k8s.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/topologies.kueue.x-k8s.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/workloadpriorityclasses.kueue.x-k8s.io serverside-applied
+customresourcedefinition.apiextensions.k8s.io/workloads.kueue.x-k8s.io serverside-applied
+serviceaccount/kueue-controller-manager serverside-applied
+role.rbac.authorization.k8s.io/kueue-leader-election-role serverside-applied
+role.rbac.authorization.k8s.io/kueue-manager-clusterprofiles-role serverside-applied
+role.rbac.authorization.k8s.io/kueue-manager-secrets-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-admissioncheck-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-admissioncheck-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-appwrapper-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-appwrapper-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-batch-admin-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-batch-user-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-clusterqueue-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-clusterqueue-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-cohort-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-cohort-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-jaxjob-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-jaxjob-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-job-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-job-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-jobset-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-jobset-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-leaderworkerset-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-leaderworkerset-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-localqueue-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-localqueue-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-manager-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-metrics-auth-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-metrics-reader serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-mpijob-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-mpijob-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-multikueuecluster-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-multikueuecluster-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-multikueueconfig-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-multikueueconfig-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-paddlejob-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-paddlejob-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-pending-workloads-cq-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-pending-workloads-lq-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-preemptionconfig-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-preemptionconfig-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-provisioningrequestconfig-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-provisioningrequestconfig-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-pytorchjob-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-pytorchjob-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-raycluster-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-raycluster-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-rayjob-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-rayjob-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-rayservice-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-rayservice-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-resourceflavor-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-resourceflavor-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-sparkapplication-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-sparkapplication-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-tfjob-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-tfjob-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-topology-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-topology-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-trainjob-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-trainjob-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-workload-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-workload-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-workloadpriorityclass-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-workloadpriorityclass-viewer-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-xgboostjob-editor-role serverside-applied
+clusterrole.rbac.authorization.k8s.io/kueue-xgboostjob-viewer-role serverside-applied
+rolebinding.rbac.authorization.k8s.io/kueue-visibility-server-auth-reader serverside-applied
+rolebinding.rbac.authorization.k8s.io/kueue-leader-election-rolebinding serverside-applied
+rolebinding.rbac.authorization.k8s.io/kueue-manager-clusterprofiles-rolebinding serverside-applied
+rolebinding.rbac.authorization.k8s.io/kueue-manager-secrets-rolebinding serverside-applied
+clusterrolebinding.rbac.authorization.k8s.io/kueue-manager-rolebinding serverside-applied
+clusterrolebinding.rbac.authorization.k8s.io/kueue-metrics-auth-rolebinding serverside-applied
+configmap/kueue-manager-config serverside-applied
+secret/kueue-webhook-server-cert serverside-applied
+service/kueue-controller-manager-metrics-service serverside-applied
+service/kueue-visibility-server serverside-applied
+service/kueue-webhook-service serverside-applied
+deployment.apps/kueue-controller-manager serverside-applied
+apiservice.apiregistration.k8s.io/v1beta2.visibility.kueue.x-k8s.io serverside-applied
+mutatingwebhookconfiguration.admissionregistration.k8s.io/kueue-mutating-webhook-configuration serverside-applied
+validatingwebhookconfiguration.admissionregistration.k8s.io/kueue-validating-webhook-configuration serverside-applied
+Warning: resource configmaps/kueue-manager-config is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+configmap/kueue-manager-config configured
+deployment.apps/kueue-controller-manager patched
+Waiting for deployment "kueue-controller-manager" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "kueue-controller-manager" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "kueue-controller-manager" rollout to finish: 1 old replicas are pending termination...
+deployment "kueue-controller-manager" successfully rolled out
+namespace/team-a created
+namespace/team-b created
+localqueue.kueue.x-k8s.io/lq created
+localqueue.kueue.x-k8s.io/lq created
+workloadpriorityclass.kueue.x-k8s.io/low created
+workloadpriorityclass.kueue.x-k8s.io/high created
+Error from server (InternalError): error when creating "/workspace/repro/01-queues.yaml": Internal error occurred: failed calling webhook "mresourceflavor.kb.io": failed to call webhook: Post "https://kueue-webhook-service.kueue-system.svc:443/mutate-kueue-x-k8s-io-v1beta2-resourceflavor?timeout=10s": dial tcp 10.96.146.209:443: connect: connection refused
+Error from server (InternalError): error when creating "/workspace/repro/01-queues.yaml": Internal error occurred: failed calling webhook "vcohort.kb.io": failed to call webhook: Post "https://kueue-webhook-service.kueue-system.svc:443/validate-kueue-x-k8s-io-v1beta2-cohort?timeout=10s": dial tcp 10.96.146.209:443: connect: connection refused
+Error from server (InternalError): error when creating "/workspace/repro/01-queues.yaml": Internal error occurred: failed calling webhook "mclusterqueue.kb.io": failed to call webhook: Post "https://kueue-webhook-service.kueue-system.svc:443/mutate-kueue-x-k8s-io-v1beta2-clusterqueue?timeout=10s": dial tcp 10.96.146.209:443: connect: connection refused
+Error from server (InternalError): error when creating "/workspace/repro/01-queues.yaml": Internal error occurred: failed calling webhook "mclusterqueue.kb.io": failed to call webhook: Post "https://kueue-webhook-service.kueue-system.svc:443/mutate-kueue-x-k8s-io-v1beta2-clusterqueue?timeout=10s": dial tcp 10.96.146.209:443: connect: connection refused
+kubectl apply failed (attempt 1): -f /workspace/repro/01-queues.yaml
+namespace/team-a unchanged
+namespace/team-b unchanged
+resourceflavor.kueue.x-k8s.io/default created
+cohort.kueue.x-k8s.io/all created
+clusterqueue.kueue.x-k8s.io/team-a created
+clusterqueue.kueue.x-k8s.io/team-b created
+localqueue.kueue.x-k8s.io/lq unchanged
+localqueue.kueue.x-k8s.io/lq unchanged
+workloadpriorityclass.kueue.x-k8s.io/low unchanged
+workloadpriorityclass.kueue.x-k8s.io/high unchanged
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+serviceaccount/metrics-probe created
+clusterrolebinding.rbac.authorization.k8s.io/metrics-probe created
+======== scenario Z ========
+No resources found
+No resources found
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+admitted team-a/a1 workload=job-a1-73d6c
+admitted team-b/b1 workload=job-b1-02eba
+admitted team-b/b2 workload=job-b2-dd569
+admitted team-b/b3 workload=job-b3-be317
+preemptor team-a/a2 workload=job-a2-28b8a
+no preemption after 45s; preemptor QuotaReserved=False
+--- Z clusterqueues ---
+date: 2026-10-26T05:15:20Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get clusterqueue team-a team-b -o custom-columns=NAME:.metadata.name\,WEIGHT:.spec.fairSharing.weight\,SHARE:.status.fairSharing.weightedShare\,ADMITTED:.status.admittedWorkloads\,PENDING:.status.pendingWorkloads
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NAME     WEIGHT   SHARE   ADMITTED   PENDING
+team-a   0        0       1          1
+team-b   1        500     3          0
+--- Z workloads ---
+date: 2026-10-26T05:15:20Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get workloads -A -o custom-columns=NS:.metadata.namespace\,WL:.metadata.name\,JOB:.metadata.ownerReferences\[0\].name\,RESERVED:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].status\,RESERVED_AT:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].lastTransitionTime\,EVICTED:.status.conditions\[\?\(@.type==\"Evicted\"\)\].reason\,PREEMPTED:.status.conditions\[\?\(@.type==\"Preempted\"\)\].reason\,REQUEUED:.status.conditions\[\?\(@.type==\"Requeued\"\)\].status
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NS       WL             JOB   RESERVED   RESERVED_AT            EVICTED   PREEMPTED   REQUEUED
+team-a   job-a1-73d6c   a1    True       2026-10-26T05:14:21Z   <none>    <none>      <none>
+team-a   job-a2-28b8a   a2    False      2026-10-26T05:14:34Z   <none>    <none>      <none>
+team-b   job-b1-02eba   b1    True       2026-10-26T05:14:24Z   <none>    <none>      <none>
+team-b   job-b2-dd569   b2    True       2026-10-26T05:14:27Z   <none>    <none>      <none>
+team-b   job-b3-be317   b3    True       2026-10-26T05:14:31Z   <none>    <none>      <none>
+--- Z metrics ---
+date: 2026-10-26T05:15:20Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: curl -sk --max-time 20 -H "Authorization: Bearer ${token}" https://127.0.0.1:18443/metrics | grep -E 'kueue_(cluster_queue|cohort)_weighted_share'
+source: live kind cluster
+note: token minted by kubectl -n kueue-system create token metrics-probe --duration=20m; the token value is not written to this file
+exit_code: 0
+===== capture body =====
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} 0
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 500
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+======== scenario Z2 ========
+job.batch "a1" deleted from team-a namespace
+job.batch "a2" deleted from team-a namespace
+job.batch "b1" deleted from team-b namespace
+job.batch "b2" deleted from team-b namespace
+job.batch "b3" deleted from team-b namespace
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+admitted team-a/a1 workload=job-a1-fa63c
+admitted team-a/a2 workload=job-a2-bef1d
+admitted team-a/a3 workload=job-a3-7010b
+admitted team-a/a4 workload=job-a4-b3e3d
+team-a share while borrowing: 9223372036854775807
+preemptor team-b/b1 workload=job-b1-3d028
+preemptor admitted after preemption (0s)
+--- Z2 clusterqueues ---
+date: 2026-10-26T05:15:47Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get clusterqueue team-a team-b -o custom-columns=NAME:.metadata.name\,WEIGHT:.spec.fairSharing.weight\,SHARE:.status.fairSharing.weightedShare\,ADMITTED:.status.admittedWorkloads\,PENDING:.status.pendingWorkloads
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NAME     WEIGHT   SHARE                 ADMITTED   PENDING
+team-a   0        9223372036854775807   3          1
+team-b   1        0                     1          0
+--- Z2 workloads ---
+date: 2026-10-26T05:15:47Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get workloads -A -o custom-columns=NS:.metadata.namespace\,WL:.metadata.name\,JOB:.metadata.ownerReferences\[0\].name\,RESERVED:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].status\,RESERVED_AT:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].lastTransitionTime\,EVICTED:.status.conditions\[\?\(@.type==\"Evicted\"\)\].reason\,PREEMPTED:.status.conditions\[\?\(@.type==\"Preempted\"\)\].reason\,REQUEUED:.status.conditions\[\?\(@.type==\"Requeued\"\)\].status
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NS       WL             JOB   RESERVED   RESERVED_AT            EVICTED     PREEMPTED             REQUEUED
+team-a   job-a1-fa63c   a1    True       2026-10-26T05:15:28Z   <none>      <none>                <none>
+team-a   job-a2-bef1d   a2    True       2026-10-26T05:15:31Z   <none>      <none>                <none>
+team-a   job-a3-7010b   a3    True       2026-10-26T05:15:34Z   <none>      <none>                <none>
+team-a   job-a4-b3e3d   a4    False      2026-10-26T05:15:41Z   Preempted   InCohortReclamation   True
+team-b   job-b1-3d028   b1    True       2026-10-26T05:15:41Z   <none>      <none>                <none>
+--- Z2 metrics ---
+date: 2026-10-26T05:15:47Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: curl -sk --max-time 20 -H "Authorization: Bearer ${token}" https://127.0.0.1:18443/metrics | grep -E 'kueue_(cluster_queue|cohort)_weighted_share'
+source: live kind cluster
+note: token minted by kubectl -n kueue-system create token metrics-probe --duration=20m; the token value is not written to this file
+exit_code: 0
+===== capture body =====
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} NaN
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 0
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+======== scenario Zc ========
+job.batch "a1" deleted from team-a namespace
+job.batch "a2" deleted from team-a namespace
+job.batch "a3" deleted from team-a namespace
+job.batch "a4" deleted from team-a namespace
+job.batch "b1" deleted from team-b namespace
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+clusterqueue.kueue.x-k8s.io/team-a condition met
+admitted team-a/a1 workload=job-a1-d35bd
+admitted team-b/b1 workload=job-b1-c1a3e
+admitted team-b/b2 workload=job-b2-5925b
+admitted team-b/b3 workload=job-b3-3bb84
+preemptor team-a/a2 workload=job-a2-dcdc7
+preemptor admitted after preemption (0s)
+--- Zc clusterqueues ---
+date: 2026-10-26T05:16:18Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get clusterqueue team-a team-b -o custom-columns=NAME:.metadata.name\,WEIGHT:.spec.fairSharing.weight\,SHARE:.status.fairSharing.weightedShare\,ADMITTED:.status.admittedWorkloads\,PENDING:.status.pendingWorkloads
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NAME     WEIGHT   SHARE   ADMITTED   PENDING
+team-a   1        250     2          0
+team-b   1        250     2          1
+--- Zc workloads ---
+date: 2026-10-26T05:16:18Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get workloads -A -o custom-columns=NS:.metadata.namespace\,WL:.metadata.name\,JOB:.metadata.ownerReferences\[0\].name\,RESERVED:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].status\,RESERVED_AT:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].lastTransitionTime\,EVICTED:.status.conditions\[\?\(@.type==\"Evicted\"\)\].reason\,PREEMPTED:.status.conditions\[\?\(@.type==\"Preempted\"\)\].reason\,REQUEUED:.status.conditions\[\?\(@.type==\"Requeued\"\)\].status
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NS       WL             JOB   RESERVED   RESERVED_AT            EVICTED     PREEMPTED             REQUEUED
+team-a   job-a1-d35bd   a1    True       2026-10-26T05:15:59Z   <none>      <none>                <none>
+team-a   job-a2-dcdc7   a2    True       2026-10-26T05:16:12Z   <none>      <none>                <none>
+team-b   job-b1-c1a3e   b1    True       2026-10-26T05:16:02Z   <none>      <none>                <none>
+team-b   job-b2-5925b   b2    True       2026-10-26T05:16:05Z   <none>      <none>                <none>
+team-b   job-b3-3bb84   b3    False      2026-10-26T05:16:12Z   Preempted   InCohortFairSharing   True
+--- Zc metrics ---
+date: 2026-10-26T05:16:18Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: curl -sk --max-time 20 -H "Authorization: Bearer ${token}" https://127.0.0.1:18443/metrics | grep -E 'kueue_(cluster_queue|cohort)_weighted_share'
+source: live kind cluster
+note: token minted by kubectl -n kueue-system create token metrics-probe --duration=20m; the token value is not written to this file
+exit_code: 0
+===== capture body =====
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} 250
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 250
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+======== scenario O ========
+job.batch "a1" deleted from team-a namespace
+job.batch "a2" deleted from team-a namespace
+job.batch "b1" deleted from team-b namespace
+job.batch "b2" deleted from team-b namespace
+job.batch "b3" deleted from team-b namespace
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+admitted team-a/a-low workload=job-a-low-0cc8a
+admitted team-b/b1 workload=job-b1-6df74
+admitted team-b/b2 workload=job-b2-77ec3
+admitted team-b/b3 workload=job-b3-51384
+preemptor team-a/a-high workload=job-a-high-cb4ee
+preemptor admitted after preemption (0s)
+--- O clusterqueues ---
+date: 2026-10-26T05:16:48Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get clusterqueue team-a team-b -o custom-columns=NAME:.metadata.name\,WEIGHT:.spec.fairSharing.weight\,SHARE:.status.fairSharing.weightedShare\,ADMITTED:.status.admittedWorkloads\,PENDING:.status.pendingWorkloads
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NAME     WEIGHT   SHARE   ADMITTED   PENDING
+team-a   1        0       1          1
+team-b   1        250     2          1
+--- O workloads ---
+date: 2026-10-26T05:16:48Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get workloads -A -o custom-columns=NS:.metadata.namespace\,WL:.metadata.name\,JOB:.metadata.ownerReferences\[0\].name\,RESERVED:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].status\,RESERVED_AT:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].lastTransitionTime\,EVICTED:.status.conditions\[\?\(@.type==\"Evicted\"\)\].reason\,PREEMPTED:.status.conditions\[\?\(@.type==\"Preempted\"\)\].reason\,REQUEUED:.status.conditions\[\?\(@.type==\"Requeued\"\)\].status
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NS       WL                 JOB      RESERVED   RESERVED_AT            EVICTED     PREEMPTED             REQUEUED
+team-a   job-a-high-cb4ee   a-high   True       2026-10-26T05:16:43Z   <none>      <none>                <none>
+team-a   job-a-low-0cc8a    a-low    False      2026-10-26T05:16:43Z   Preempted   InClusterQueue        True
+team-b   job-b1-6df74       b1       True       2026-10-26T05:16:33Z   <none>      <none>                <none>
+team-b   job-b2-77ec3       b2       True       2026-10-26T05:16:36Z   <none>      <none>                <none>
+team-b   job-b3-51384       b3       False      2026-10-26T05:16:43Z   Preempted   InCohortFairSharing   True
+--- O metrics ---
+date: 2026-10-26T05:16:48Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: curl -sk --max-time 20 -H "Authorization: Bearer ${token}" https://127.0.0.1:18443/metrics | grep -E 'kueue_(cluster_queue|cohort)_weighted_share'
+source: live kind cluster
+note: token minted by kubectl -n kueue-system create token metrics-probe --duration=20m; the token value is not written to this file
+exit_code: 0
+===== capture body =====
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} 0
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 250
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+======== scenario O2 ========
+job.batch "a-high" deleted from team-a namespace
+job.batch "a-low" deleted from team-a namespace
+job.batch "b1" deleted from team-b namespace
+job.batch "b2" deleted from team-b namespace
+job.batch "b3" deleted from team-b namespace
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+admitted team-a/a-low workload=job-a-low-9503f
+admitted team-b/b1 workload=job-b1-918ef
+admitted team-b/b2 workload=job-b2-9b7bb
+admitted team-b/b3 workload=job-b3-967ad
+preemptor team-a/a-high workload=job-a-high-8c4c0
+preemptor admitted after preemption (0s)
+--- O2 clusterqueues ---
+date: 2026-10-26T05:17:20Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get clusterqueue team-a team-b -o custom-columns=NAME:.metadata.name\,WEIGHT:.spec.fairSharing.weight\,SHARE:.status.fairSharing.weightedShare\,ADMITTED:.status.admittedWorkloads\,PENDING:.status.pendingWorkloads
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NAME     WEIGHT   SHARE   ADMITTED   PENDING
+team-a   1        0       2          0
+team-b   1        250     2          1
+--- O2 workloads ---
+date: 2026-10-26T05:17:20Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get workloads -A -o custom-columns=NS:.metadata.namespace\,WL:.metadata.name\,JOB:.metadata.ownerReferences\[0\].name\,RESERVED:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].status\,RESERVED_AT:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].lastTransitionTime\,EVICTED:.status.conditions\[\?\(@.type==\"Evicted\"\)\].reason\,PREEMPTED:.status.conditions\[\?\(@.type==\"Preempted\"\)\].reason\,REQUEUED:.status.conditions\[\?\(@.type==\"Requeued\"\)\].status
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NS       WL                 JOB      RESERVED   RESERVED_AT            EVICTED     PREEMPTED             REQUEUED
+team-a   job-a-high-8c4c0   a-high   True       2026-10-26T05:17:14Z   <none>      <none>                <none>
+team-a   job-a-low-9503f    a-low    True       2026-10-26T05:17:01Z   <none>      <none>                <none>
+team-b   job-b1-918ef       b1       True       2026-10-26T05:17:05Z   <none>      <none>                <none>
+team-b   job-b2-9b7bb       b2       True       2026-10-26T05:17:08Z   <none>      <none>                <none>
+team-b   job-b3-967ad       b3       False      2026-10-26T05:17:14Z   Preempted   InCohortReclamation   True
+--- O2 metrics ---
+date: 2026-10-26T05:17:20Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: curl -sk --max-time 20 -H "Authorization: Bearer ${token}" https://127.0.0.1:18443/metrics | grep -E 'kueue_(cluster_queue|cohort)_weighted_share'
+source: live kind cluster
+note: token minted by kubectl -n kueue-system create token metrics-probe --duration=20m; the token value is not written to this file
+exit_code: 0
+===== capture body =====
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} 0
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 250
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+======== requeue run 1 ========
+job.batch "a-high" deleted from team-a namespace
+job.batch "a-low" deleted from team-a namespace
+job.batch "b1" deleted from team-b namespace
+job.batch "b2" deleted from team-b namespace
+job.batch "b3" deleted from team-b namespace
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+clusterqueue.kueue.x-k8s.io/team-a condition met
+admitted team-a/a1 workload=job-a1-4b30f
+admitted team-b/b1 workload=job-b1-c34af
+admitted team-b/b2 workload=job-b2-1f51a
+admitted team-b/b3 workload=job-b3-74fde
+preemptor team-a/a2 workload=job-a2-f8bcd
+preemptor admitted after preemption (0s)
+source: live kind cluster, not a unit test
+requeued_workload_count: 1
+victim_namespace: team-b
+victim_workload: job-b3-74fde
+victim_job: b3
+requeued_condition: {"lastTransitionTime": "2026-10-26T05:17:45Z", "message": "Preempted to accommodate a workload (UID: 1c8a842c-67e1-4f98-b659-ae9998c3d809, JobUID: 4f5aa4be-64a7-453c-b83b-afbb5e78a8f0) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+evicted_condition: {"lastTransitionTime": "2026-10-26T05:17:45Z", "message": "Preempted to accommodate a workload (UID: 1c8a842c-67e1-4f98-b659-ae9998c3d809, JobUID: 4f5aa4be-64a7-453c-b83b-afbb5e78a8f0) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preempted_condition: {"lastTransitionTime": "2026-10-26T05:17:45Z", "message": "Preempted to accommodate a workload (UID: 1c8a842c-67e1-4f98-b659-ae9998c3d809, JobUID: 4f5aa4be-64a7-453c-b83b-afbb5e78a8f0) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortFairSharing", "status": "True", "type": "Preempted"}
+requeueState: <absent>
+next_attempt_count_at_or_after_requeued: 3
+next_attempt_log: {"level":"Level(-2)","ts":"2026-10-26T05:17:45.57677356Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":97,"workload":{"name":"job-b3-74fde","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}
+next_attempt_timestamp: 2026-10-26T05:17:45.576773Z
+delta_seconds: 0.576773
+delta_definition: next Attempting-to-schedule log timestamp minus Requeued lastTransitionTime. Condition time is RFC3339 (one-second resolution). Log time is the controller clock. Live kind cluster, not a unit test.
+
+======== requeue run 2 ========
+job.batch "a1" deleted from team-a namespace
+job.batch "a2" deleted from team-a namespace
+job.batch "b1" deleted from team-b namespace
+job.batch "b2" deleted from team-b namespace
+job.batch "b3" deleted from team-b namespace
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+clusterqueue.kueue.x-k8s.io/team-a condition met
+admitted team-a/a1 workload=job-a1-69e02
+admitted team-b/b1 workload=job-b1-13c30
+admitted team-b/b2 workload=job-b2-714c4
+admitted team-b/b3 workload=job-b3-53187
+preemptor team-a/a2 workload=job-a2-7a72c
+preemptor admitted after preemption (0s)
+source: live kind cluster, not a unit test
+requeued_workload_count: 1
+victim_namespace: team-b
+victim_workload: job-b3-53187
+victim_job: b3
+requeued_condition: {"lastTransitionTime": "2026-10-26T05:18:16Z", "message": "Preempted to accommodate a workload (UID: e658613d-93e0-48bb-be91-c517aae3b962, JobUID: 4c4a496b-e414-4afe-b200-a01563a2ac46) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+evicted_condition: {"lastTransitionTime": "2026-10-26T05:18:16Z", "message": "Preempted to accommodate a workload (UID: e658613d-93e0-48bb-be91-c517aae3b962, JobUID: 4c4a496b-e414-4afe-b200-a01563a2ac46) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preempted_condition: {"lastTransitionTime": "2026-10-26T05:18:16Z", "message": "Preempted to accommodate a workload (UID: e658613d-93e0-48bb-be91-c517aae3b962, JobUID: 4c4a496b-e414-4afe-b200-a01563a2ac46) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortFairSharing", "status": "True", "type": "Preempted"}
+requeueState: <absent>
+next_attempt_count_at_or_after_requeued: 3
+next_attempt_log: {"level":"Level(-2)","ts":"2026-10-26T05:18:16.375599627Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":113,"workload":{"name":"job-b3-53187","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}
+next_attempt_timestamp: 2026-10-26T05:18:16.375599Z
+delta_seconds: 0.375599
+delta_definition: next Attempting-to-schedule log timestamp minus Requeued lastTransitionTime. Condition time is RFC3339 (one-second resolution). Log time is the controller clock. Live kind cluster, not a unit test.
+
+======== requeue run 3 ========
+job.batch "a1" deleted from team-a namespace
+job.batch "a2" deleted from team-a namespace
+job.batch "b1" deleted from team-b namespace
+job.batch "b2" deleted from team-b namespace
+job.batch "b3" deleted from team-b namespace
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+clusterqueue.kueue.x-k8s.io/team-a condition met
+admitted team-a/a1 workload=job-a1-30569
+admitted team-b/b1 workload=job-b1-39a18
+admitted team-b/b2 workload=job-b2-b249a
+admitted team-b/b3 workload=job-b3-3e9aa
+preemptor team-a/a2 workload=job-a2-51c02
+preemptor admitted after preemption (0s)
+source: live kind cluster, not a unit test
+requeued_workload_count: 1
+victim_namespace: team-b
+victim_workload: job-b3-3e9aa
+victim_job: b3
+requeued_condition: {"lastTransitionTime": "2026-10-26T05:18:47Z", "message": "Preempted to accommodate a workload (UID: de676a0e-4bcd-452d-baed-6aa73781b9ad, JobUID: 94a4217e-ad98-4c69-8251-b7a8410fd4da) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+evicted_condition: {"lastTransitionTime": "2026-10-26T05:18:47Z", "message": "Preempted to accommodate a workload (UID: de676a0e-4bcd-452d-baed-6aa73781b9ad, JobUID: 94a4217e-ad98-4c69-8251-b7a8410fd4da) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preempted_condition: {"lastTransitionTime": "2026-10-26T05:18:47Z", "message": "Preempted to accommodate a workload (UID: de676a0e-4bcd-452d-baed-6aa73781b9ad, JobUID: 94a4217e-ad98-4c69-8251-b7a8410fd4da) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortFairSharing", "status": "True", "type": "Preempted"}
+requeueState: <absent>
+next_attempt_count_at_or_after_requeued: 3
+next_attempt_log: {"level":"Level(-2)","ts":"2026-10-26T05:18:47.260798879Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":129,"workload":{"name":"job-b3-3e9aa","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}
+next_attempt_timestamp: 2026-10-26T05:18:47.260798Z
+delta_seconds: 0.260798
+delta_definition: next Attempting-to-schedule log timestamp minus Requeued lastTransitionTime. Condition time is RFC3339 (one-second resolution). Log time is the controller clock. Live kind cluster, not a unit test.
+
+======== grace run 1 ========
+job.batch "a1" deleted from team-a namespace
+job.batch "a2" deleted from team-a namespace
+job.batch "b1" deleted from team-b namespace
+job.batch "b2" deleted from team-b namespace
+job.batch "b3" deleted from team-b namespace
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+clusterqueue.kueue.x-k8s.io/team-a condition met
+admitted team-a/a1 workload=job-a1-41df3
+admitted team-b/b1 workload=job-b1-6f069
+admitted team-b/b2 workload=job-b2-90ac8
+submitted team-b/b3 workload=job-b3-63b8b
+admitted team-b/b3 workload=job-b3-63b8b
+pod team-b/b3 Running
+pod: b3-h89jd
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running
+preemptor team-a/a2 workload=job-a2-cc42a
+preemptor Admitted after poll 1s
+source: live kind cluster, not a unit test
+label: DERIVED by repro/run-kind.sh from workload JSON and pod-spec.txt
+pod: b3-h89jd
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running
+victim_workload: job-b3-63b8b
+victim_job: b3
+preemptor_workload: job-a2-cc42a
+preemptor_job: a2
+evicted_condition: {"lastTransitionTime": "2026-10-26T05:19:18Z", "message": "Preempted to accommodate a workload (UID: d95220c9-2c42-4495-9ee3-66c681083d19, JobUID: 1ac6680c-f12b-4c3c-83af-6f552f62f920) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preemptor_admitted_condition: {"lastTransitionTime": "2026-10-26T05:19:18Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+preemptor_quota_reserved_condition: {"lastTransitionTime": "2026-10-26T05:19:18Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+delta_evicted_to_admitted_seconds: 0
+delta_definition: preemptor Admitted lastTransitionTime minus victim Evicted lastTransitionTime. Both are Workload condition timestamps from the live kind cluster (RFC3339, one-second resolution), not a unit test.
+pod_event: {"firstTimestamp": null, "involvedObject": "job-b3-63b8b", "lastTimestamp": null, "message": "Preempted to accommodate a workload (UID: d95220c9-2c42-4495-9ee3-66c681083d19, JobUID: 1ac6680c-f12b-4c3c-83af-6f552f62f920) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "reason": "Preempted"}
+pod_event: {"firstTimestamp": "2026-10-26T05:19:18Z", "involvedObject": "b3-h89jd", "lastTimestamp": "2026-10-26T05:19:18Z", "message": "Stopping container sleep", "reason": "Killing"}
+pod_event: {"firstTimestamp": "2026-10-26T05:19:18Z", "involvedObject": "b3", "lastTimestamp": "2026-10-26T05:19:18Z", "message": "Deleted pod: b3-h89jd", "reason": "SuccessfulDelete"}
+
+======== grace run 2 ========
+job.batch "a1" deleted from team-a namespace
+job.batch "a2" deleted from team-a namespace
+job.batch "b1" deleted from team-b namespace
+job.batch "b2" deleted from team-b namespace
+job.batch "b3" deleted from team-b namespace
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+clusterqueue.kueue.x-k8s.io/team-a condition met
+admitted team-a/a1 workload=job-a1-23d27
+admitted team-b/b1 workload=job-b1-0e8a4
+admitted team-b/b2 workload=job-b2-2aa86
+submitted team-b/b3 workload=job-b3-ea090
+admitted team-b/b3 workload=job-b3-ea090
+pod team-b/b3 Running
+pod: b3-btxpk
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running
+preemptor team-a/a2 workload=job-a2-9a8fe
+preemptor Admitted after poll 1s
+source: live kind cluster, not a unit test
+label: DERIVED by repro/run-kind.sh from workload JSON and pod-spec.txt
+pod: b3-btxpk
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running
+victim_workload: job-b3-ea090
+victim_job: b3
+preemptor_workload: job-a2-9a8fe
+preemptor_job: a2
+evicted_condition: {"lastTransitionTime": "2026-10-26T05:20:14Z", "message": "Preempted to accommodate a workload (UID: df31e84a-8eba-44fa-b31c-df367bf54551, JobUID: 6ff7a18a-73f5-4049-af19-d4b0cae53089) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preemptor_admitted_condition: {"lastTransitionTime": "2026-10-26T05:20:14Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+preemptor_quota_reserved_condition: {"lastTransitionTime": "2026-10-26T05:20:14Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+delta_evicted_to_admitted_seconds: 0
+delta_definition: preemptor Admitted lastTransitionTime minus victim Evicted lastTransitionTime. Both are Workload condition timestamps from the live kind cluster (RFC3339, one-second resolution), not a unit test.
+pod_event: {"firstTimestamp": null, "involvedObject": "job-b3-ea090", "lastTimestamp": null, "message": "Preempted to accommodate a workload (UID: df31e84a-8eba-44fa-b31c-df367bf54551, JobUID: 6ff7a18a-73f5-4049-af19-d4b0cae53089) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "reason": "Preempted"}
+pod_event: {"firstTimestamp": "2026-10-26T05:20:14Z", "involvedObject": "b3", "lastTimestamp": "2026-10-26T05:20:14Z", "message": "Deleted pod: b3-btxpk", "reason": "SuccessfulDelete"}
+pod_event: {"firstTimestamp": "2026-10-26T05:20:14Z", "involvedObject": "b3-btxpk", "lastTimestamp": "2026-10-26T05:20:14Z", "message": "Stopping container sleep", "reason": "Killing"}
+
+======== grace run 3 ========
+job.batch "a1" deleted from team-a namespace
+job.batch "a2" deleted from team-a namespace
+job.batch "b1" deleted from team-b namespace
+job.batch "b2" deleted from team-b namespace
+job.batch "b3" deleted from team-b namespace
+clusterqueue.kueue.x-k8s.io/team-a condition met
+clusterqueue.kueue.x-k8s.io/team-b condition met
+clusterqueue.kueue.x-k8s.io/team-a condition met
+admitted team-a/a1 workload=job-a1-e9362
+admitted team-b/b1 workload=job-b1-05008
+admitted team-b/b2 workload=job-b2-8b7e4
+submitted team-b/b3 workload=job-b3-64a1e
+admitted team-b/b3 workload=job-b3-64a1e
+pod team-b/b3 Running
+pod: b3-j8s7q
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running
+preemptor team-a/a2 workload=job-a2-00461
+preemptor Admitted after poll 1s
+source: live kind cluster, not a unit test
+label: DERIVED by repro/run-kind.sh from workload JSON and pod-spec.txt
+pod: b3-j8s7q
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running
+victim_workload: job-b3-64a1e
+victim_job: b3
+preemptor_workload: job-a2-00461
+preemptor_job: a2
+evicted_condition: {"lastTransitionTime": "2026-10-26T05:21:10Z", "message": "Preempted to accommodate a workload (UID: e493568e-3a2a-4d9b-8cef-d4e95cbb5020, JobUID: 3bfca4e0-d778-4770-973f-e5d56313b772) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preemptor_admitted_condition: {"lastTransitionTime": "2026-10-26T05:21:10Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+preemptor_quota_reserved_condition: {"lastTransitionTime": "2026-10-26T05:21:10Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+delta_evicted_to_admitted_seconds: 0
+delta_definition: preemptor Admitted lastTransitionTime minus victim Evicted lastTransitionTime. Both are Workload condition timestamps from the live kind cluster (RFC3339, one-second resolution), not a unit test.
+pod_event: {"firstTimestamp": null, "involvedObject": "job-b3-64a1e", "lastTimestamp": null, "message": "Preempted to accommodate a workload (UID: e493568e-3a2a-4d9b-8cef-d4e95cbb5020, JobUID: 3bfca4e0-d778-4770-973f-e5d56313b772) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "reason": "Preempted"}
+pod_event: {"firstTimestamp": "2026-10-26T05:21:10Z", "involvedObject": "b3-j8s7q", "lastTimestamp": "2026-10-26T05:21:10Z", "message": "Stopping container sleep", "reason": "Killing"}
+pod_event: {"firstTimestamp": "2026-10-26T05:21:10Z", "involvedObject": "b3", "lastTimestamp": "2026-10-26T05:21:10Z", "message": "Deleted pod: b3-j8s7q", "reason": "SuccessfulDelete"}
+
+wrote /workspace/cluster-logs/v0.20.3-rerun/SUMMARY.txt
+cluster logs in /workspace/cluster-logs/v0.20.3-rerun
+===== shell status =====
+exit_code: 0

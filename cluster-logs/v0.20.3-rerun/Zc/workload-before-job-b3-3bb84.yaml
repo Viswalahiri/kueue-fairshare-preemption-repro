@@ -1,0 +1,88 @@
+date: 2026-10-26T05:16:12Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl -n team-b get workload job-b3-3bb84 -o yaml
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: Workload
+metadata:
+  creationTimestamp: "2026-10-26T05:16:09Z"
+  finalizers:
+  - kueue.x-k8s.io/resource-in-use
+  generation: 1
+  labels:
+    kueue.x-k8s.io/job-uid: 08e49eec-d57e-4ee9-8096-3cc772d07137
+  name: job-b3-3bb84
+  namespace: team-b
+  ownerReferences:
+  - apiVersion: batch/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Job
+    name: b3
+    uid: 08e49eec-d57e-4ee9-8096-3cc772d07137
+  resourceVersion: "1592"
+  uid: 8bf4adc4-f14d-4297-bf12-a3db580d7ecc
+spec:
+  active: true
+  podSets:
+  - count: 1
+    name: main
+    template:
+      metadata:
+        labels:
+          batch.kubernetes.io/job-name: b3
+      spec:
+        containers:
+        - image: registry.k8s.io/pause:3.10
+          imagePullPolicy: IfNotPresent
+          name: sleep
+          resources:
+            requests:
+              cpu: 500m
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    topologyRequest:
+      podIndexLabel: batch.kubernetes.io/job-completion-index
+  priority: 0
+  queueName: lq
+status:
+  admission:
+    clusterQueue: team-b
+    podSetAssignments:
+    - count: 1
+      flavors:
+        cpu: default
+      name: main
+      resourceUsage:
+        cpu: 500m
+  conditions:
+  - lastTransitionTime: "2026-10-26T05:16:10Z"
+    message: All pods reached readiness and the workload is running
+    observedGeneration: 1
+    reason: Started
+    status: "True"
+    type: PodsReady
+  - lastTransitionTime: "2026-10-26T05:16:09Z"
+    message: Quota reserved in ClusterQueue team-b
+    observedGeneration: 1
+    reason: QuotaReserved
+    status: "True"
+    type: QuotaReserved
+  - lastTransitionTime: "2026-10-26T05:16:09Z"
+    message: The workload is admitted
+    observedGeneration: 1
+    reason: Admitted
+    status: "True"
+    type: Admitted

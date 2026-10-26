@@ -1,0 +1,608 @@
+SUMMARY (hand-written, not raw output)
+The rest of this file was not captured from kubectl, kind, curl, or the controller.
+Do not cite it as raw command output.
+===== authored banner end =====
+
+# kind cluster results
+
+Every number in this file was read from the live kind cluster, not from a unit test.
+
+date 2026-10-26T04:25:02Z
+kueue v0.20.3
+kind kind v0.31.0 go1.25.5 linux/amd64
+kubectl v1.37.1
+docker 29.1.3
+image-source host docker pull, imported into the kind node with ctr
+
+image=registry.k8s.io/kueue/kueue:v0.20.3
+args=["--config=/controller_manager_config.yaml","--zap-log-level=4"]
+
+NAME                     CPU   MEM
+kueue-fs-control-plane   4     16387280Ki
+
+## Z
+### clusterqueues.txt
+NAME     WEIGHT   SHARE   ADMITTED   PENDING
+team-a   0        0       1          1
+team-b   1        500     3          0
+
+### fairsharing-status.txt
+team-a status.fairSharing={"weightedShare": 0}
+team-b status.fairSharing={"weightedShare": 500}
+
+### cohort.txt
+cohort all weightedShare=0
+
+### workloads.txt
+NS       WL             JOB   RESERVED   RESERVED_AT            EVICTED   PREEMPTED   REQUEUED
+team-a   job-a1-38ba2   a1    True       2026-10-26T04:25:07Z   <none>    <none>      <none>
+team-a   job-a2-b6127   a2    False      2026-10-26T04:25:21Z   <none>    <none>      <none>
+team-b   job-b1-0caec   b1    True       2026-10-26T04:25:11Z   <none>    <none>      <none>
+team-b   job-b2-c2f87   b2    True       2026-10-26T04:25:14Z   <none>    <none>      <none>
+team-b   job-b3-6c541   b3    True       2026-10-26T04:25:18Z   <none>    <none>      <none>
+
+### conditions.txt
+workload team-a/job-a1-38ba2 job=a1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:25:07Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:25:07Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a2-b6127 job=a2
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:25:21Z", "message": "couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed", "observedGeneration": 1, "reason": "WaitingForQuota", "status": "False", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:25:21Z", "message": "The workload has no reservation", "observedGeneration": 1, "reason": "NoReservation", "status": "False", "type": "Admitted"}
+
+workload team-b/job-b1-0caec job=b1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:25:11Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:25:11Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b2-c2f87 job=b2
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:25:14Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:25:14Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b3-6c541 job=b3
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:25:18Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:25:18Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+### metrics.txt
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} 0
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 500
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+
+### events-preempted.txt
+
+
+### events-preempted-lines.txt
+(no Preempted events)
+
+### controller-fairsharing.log
+{"level":"Level(-4)","ts":"2026-10-26T04:25:21.316795699Z","logger":"scheduler","caller":"preemption/fair_strategy.go:284","msg":"Skipping FairSharing strategy evaluation, no candidate can pass","replica-role":"leader","schedulingCycle":5,"preemptorNewShare":"+Inf","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500"}
+{"level":"Level(-4)","ts":"2026-10-26T04:25:21.316885126Z","logger":"scheduler","caller":"preemption/fair_strategy.go:332","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":5,"preemptorNewShare":"+Inf","targetClusterQueue":{"name":"team-b"},"targetWorkload":{"name":"job-b3-6c541","namespace":"team-b"},"targetOldShare":"500","strategyPassed":false}
+{"level":"Level(-4)","ts":"2026-10-26T04:25:21.316919373Z","logger":"scheduler","caller":"preemption/fair_strategy.go:284","msg":"Skipping FairSharing strategy evaluation, no candidate can pass","replica-role":"leader","schedulingCycle":5,"preemptorNewShare":"+Inf","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500"}
+{"level":"Level(-4)","ts":"2026-10-26T04:25:21.316930368Z","logger":"scheduler","caller":"preemption/fair_strategy.go:332","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":5,"preemptorNewShare":"+Inf","targetClusterQueue":{"name":"team-b"},"targetWorkload":{"name":"job-b3-6c541","namespace":"team-b"},"targetOldShare":"500","strategyPassed":false}
+
+## Z2
+### while borrowing, before the reclaim
+#### note.txt
+team-a share while borrowing: 9223372036854775807
+
+#### clusterqueues.txt
+NAME     WEIGHT   SHARE                 ADMITTED   PENDING
+team-a   0        9223372036854775807   4          0
+team-b   1        0                     0          0
+
+#### fairsharing-status.txt
+team-a status.fairSharing={"weightedShare": 9223372036854775807}
+team-b status.fairSharing={"weightedShare": 0}
+
+#### metrics.txt
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} NaN
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 0
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+
+#### workloads.txt
+NS       WL             JOB   RESERVED   RESERVED_AT            EVICTED   PREEMPTED   REQUEUED
+team-a   job-a1-f2d2c   a1    True       2026-10-26T04:26:15Z   <none>    <none>      <none>
+team-a   job-a2-f292b   a2    True       2026-10-26T04:26:18Z   <none>    <none>      <none>
+team-a   job-a3-af031   a3    True       2026-10-26T04:26:21Z   <none>    <none>      <none>
+team-a   job-a4-865cb   a4    True       2026-10-26T04:26:24Z   <none>    <none>      <none>
+
+#### conditions.txt
+workload team-a/job-a1-f2d2c job=a1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:15Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:15Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a2-f292b job=a2
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:18Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:18Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a3-af031 job=a3
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:21Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:21Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a4-865cb job=a4
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:24Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:24Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+### clusterqueues.txt
+NAME     WEIGHT   SHARE                 ADMITTED   PENDING
+team-a   0        9223372036854775807   3          1
+team-b   1        0                     1          0
+
+### fairsharing-status.txt
+team-a status.fairSharing={"weightedShare": 9223372036854775807}
+team-b status.fairSharing={"weightedShare": 0}
+
+### cohort.txt
+cohort all weightedShare=0
+
+### workloads.txt
+NS       WL             JOB   RESERVED   RESERVED_AT            EVICTED     PREEMPTED             REQUEUED
+team-a   job-a1-f2d2c   a1    True       2026-10-26T04:26:15Z   <none>      <none>                <none>
+team-a   job-a2-f292b   a2    True       2026-10-26T04:26:18Z   <none>      <none>                <none>
+team-a   job-a3-af031   a3    True       2026-10-26T04:26:21Z   <none>      <none>                <none>
+team-a   job-a4-865cb   a4    False      2026-10-26T04:26:28Z   Preempted   InCohortReclamation   True
+team-b   job-b1-4b73f   b1    True       2026-10-26T04:26:28Z   <none>      <none>                <none>
+
+### conditions.txt
+workload team-a/job-a1-f2d2c job=a1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:15Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:15Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a2-f292b job=a2
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:18Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:18Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a3-af031 job=a3
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:21Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:21Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a4-865cb job=a4
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:28Z", "message": "couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed", "observedGeneration": 1, "reason": "WaitingForQuota", "status": "False", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:28Z", "message": "Preempted to accommodate a workload (UID: 81518390-b56c-4640-b6fa-751a50fec7f7, JobUID: 643f69aa-ea10-4270-a42f-b033031f1920) due to reclamation within the cohort; preemptor path: /all/team-b; preemptee path: /all/team-a", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:28Z", "message": "The workload has no reservation", "observedGeneration": 1, "reason": "NoReservation", "status": "False", "type": "Admitted"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:28Z", "message": "Preempted to accommodate a workload (UID: 81518390-b56c-4640-b6fa-751a50fec7f7, JobUID: 643f69aa-ea10-4270-a42f-b033031f1920) due to reclamation within the cohort; preemptor path: /all/team-b; preemptee path: /all/team-a", "reason": "InCohortReclamation", "status": "True", "type": "Preempted"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:28Z", "message": "Preempted to accommodate a workload (UID: 81518390-b56c-4640-b6fa-751a50fec7f7, JobUID: 643f69aa-ea10-4270-a42f-b033031f1920) due to reclamation within the cohort; preemptor path: /all/team-b; preemptee path: /all/team-a", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+
+workload team-b/job-b1-4b73f job=b1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:28Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:28Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+### metrics.txt
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} NaN
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 0
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+
+### events-preempted.txt
+NAMESPACE   LAST SEEN   TYPE     REASON      OBJECT                  MESSAGE
+team-a      5s          Normal   Preempted   workload/job-a4-865cb   Preempted to accommodate a workload (UID: 81518390-b56c-4640-b6fa-751a50fec7f7, JobUID: 643f69aa-ea10-4270-a42f-b033031f1920) due to reclamation within the cohort; preemptor path: /all/team-b; preemptee path: /all/team-a; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)
+
+### events-preempted-lines.txt
+event: {"creationTimestamp": "2026-10-26T04:26:28Z", "eventTime": "2026-10-26T04:26:28.528055Z", "involvedKind": "Workload", "involvedObject": "job-a4-865cb", "message": "Preempted to accommodate a workload (UID: 81518390-b56c-4640-b6fa-751a50fec7f7, JobUID: 643f69aa-ea10-4270-a42f-b033031f1920) due to reclamation within the cohort; preemptor path: /all/team-b; preemptee path: /all/team-a; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "namespace": "team-a", "reason": "Preempted"}
+
+### controller-fairsharing.log
+
+
+## Zc
+### clusterqueues.txt
+NAME     WEIGHT   SHARE   ADMITTED   PENDING
+team-a   1        250     2          0
+team-b   1        250     2          1
+
+### fairsharing-status.txt
+team-a status.fairSharing={"weightedShare": 250}
+team-b status.fairSharing={"weightedShare": 250}
+
+### cohort.txt
+cohort all weightedShare=0
+
+### workloads.txt
+NS       WL             JOB   RESERVED   RESERVED_AT            EVICTED     PREEMPTED             REQUEUED
+team-a   job-a1-a4dd0   a1    True       2026-10-26T04:26:45Z   <none>      <none>                <none>
+team-a   job-a2-2129f   a2    True       2026-10-26T04:26:58Z   <none>      <none>                <none>
+team-b   job-b1-adaf4   b1    True       2026-10-26T04:26:49Z   <none>      <none>                <none>
+team-b   job-b2-1d8dd   b2    True       2026-10-26T04:26:52Z   <none>      <none>                <none>
+team-b   job-b3-8233e   b3    False      2026-10-26T04:26:58Z   Preempted   InCohortFairSharing   True
+
+### conditions.txt
+workload team-a/job-a1-a4dd0 job=a1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:45Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:45Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a2-2129f job=a2
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:58Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:58Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b1-adaf4 job=b1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:49Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:49Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b2-1d8dd job=b2
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:52Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:52Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b3-8233e job=b3
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:26:58Z", "message": "couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed", "observedGeneration": 1, "reason": "WaitingForQuota", "status": "False", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:58Z", "message": "Preempted to accommodate a workload (UID: 1e9d9676-81a0-4734-9505-becfaac8b77f, JobUID: 5dc52d57-ebeb-416c-bd4a-e6b74c8573e8) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:58Z", "message": "The workload has no reservation", "observedGeneration": 1, "reason": "NoReservation", "status": "False", "type": "Admitted"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:58Z", "message": "Preempted to accommodate a workload (UID: 1e9d9676-81a0-4734-9505-becfaac8b77f, JobUID: 5dc52d57-ebeb-416c-bd4a-e6b74c8573e8) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortFairSharing", "status": "True", "type": "Preempted"}
+condition: {"lastTransitionTime": "2026-10-26T04:26:58Z", "message": "Preempted to accommodate a workload (UID: 1e9d9676-81a0-4734-9505-becfaac8b77f, JobUID: 5dc52d57-ebeb-416c-bd4a-e6b74c8573e8) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+
+### metrics.txt
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} 250
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 250
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+
+### events-preempted.txt
+NAMESPACE   LAST SEEN   TYPE     REASON      OBJECT                  MESSAGE
+team-b      5s          Normal   Preempted   workload/job-b3-8233e   Preempted to accommodate a workload (UID: 1e9d9676-81a0-4734-9505-becfaac8b77f, JobUID: 5dc52d57-ebeb-416c-bd4a-e6b74c8573e8) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)
+
+### events-preempted-lines.txt
+event: {"creationTimestamp": "2026-10-26T04:26:58Z", "eventTime": "2026-10-26T04:26:58.719966Z", "involvedKind": "Workload", "involvedObject": "job-b3-8233e", "message": "Preempted to accommodate a workload (UID: 1e9d9676-81a0-4734-9505-becfaac8b77f, JobUID: 5dc52d57-ebeb-416c-bd4a-e6b74c8573e8) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "namespace": "team-b", "reason": "Preempted"}
+
+### controller-fairsharing.log
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.706799484Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":26,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.707031835Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":26,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.733356222Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":27,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.733418935Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":27,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.734660116Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":28,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.734905913Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":28,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.737109339Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":29,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.737173773Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":29,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.741793901Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":30,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.741858838Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":30,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.749601877Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":31,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.749671691Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":31,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.761539637Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":32,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.761583738Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":32,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.771398553Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":33,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.771435605Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":33,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.78139671Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":34,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.781481818Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":34,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-8233e","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.80860526Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":36,"preemptorNewShare":"500","targetClusterQueue":{"name":"team-a"},"targetOldShare":"250","strategyEvaluations":[{"targetWorkload":"team-a/job-a2-2129f","targetNewShare":"0","strategyPassed":false},{"targetWorkload":"team-a/job-a1-a4dd0","targetNewShare":"0","strategyPassed":false}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.808790042Z","logger":"scheduler","caller":"preemption/fair_strategy.go:332","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":36,"preemptorNewShare":"500","targetClusterQueue":{"name":"team-a"},"targetWorkload":{"name":"job-a2-2129f","namespace":"team-a"},"targetOldShare":"250","strategyPassed":false}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.808838974Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":36,"preemptorNewShare":"500","targetClusterQueue":{"name":"team-a"},"targetOldShare":"250","strategyEvaluations":[{"targetWorkload":"team-a/job-a2-2129f","targetNewShare":"0","strategyPassed":false},{"targetWorkload":"team-a/job-a1-a4dd0","targetNewShare":"0","strategyPassed":false}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:58.808892513Z","logger":"scheduler","caller":"preemption/fair_strategy.go:332","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":36,"preemptorNewShare":"500","targetClusterQueue":{"name":"team-a"},"targetWorkload":{"name":"job-a2-2129f","namespace":"team-a"},"targetOldShare":"250","strategyPassed":false}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:59.790124986Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":37,"preemptorNewShare":"500","targetClusterQueue":{"name":"team-a"},"targetOldShare":"250","strategyEvaluations":[{"targetWorkload":"team-a/job-a2-2129f","targetNewShare":"0","strategyPassed":false},{"targetWorkload":"team-a/job-a1-a4dd0","targetNewShare":"0","strategyPassed":false}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:59.790151756Z","logger":"scheduler","caller":"preemption/fair_strategy.go:332","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":37,"preemptorNewShare":"500","targetClusterQueue":{"name":"team-a"},"targetWorkload":{"name":"job-a2-2129f","namespace":"team-a"},"targetOldShare":"250","strategyPassed":false}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:59.790202234Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":37,"preemptorNewShare":"500","targetClusterQueue":{"name":"team-a"},"targetOldShare":"250","strategyEvaluations":[{"targetWorkload":"team-a/job-a2-2129f","targetNewShare":"0","strategyPassed":false},{"targetWorkload":"team-a/job-a1-a4dd0","targetNewShare":"0","strategyPassed":false}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:26:59.790216181Z","logger":"scheduler","caller":"preemption/fair_strategy.go:332","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":37,"preemptorNewShare":"500","targetClusterQueue":{"name":"team-a"},"targetWorkload":{"name":"job-a2-2129f","namespace":"team-a"},"targetOldShare":"250","strategyPassed":false}
+
+## O
+### clusterqueues.txt
+NAME     WEIGHT   SHARE   ADMITTED   PENDING
+team-a   1        0       1          1
+team-b   1        250     2          1
+
+### fairsharing-status.txt
+team-a status.fairSharing={"weightedShare": 0}
+team-b status.fairSharing={"weightedShare": 250}
+
+### cohort.txt
+cohort all weightedShare=0
+
+### workloads.txt
+NS       WL                 JOB      RESERVED   RESERVED_AT            EVICTED     PREEMPTED             REQUEUED
+team-a   job-a-high-86d7c   a-high   True       2026-10-26T04:27:29Z   <none>      <none>                <none>
+team-a   job-a-low-dbb14    a-low    False      2026-10-26T04:27:28Z   Preempted   InClusterQueue        True
+team-b   job-b1-9f013       b1       True       2026-10-26T04:27:19Z   <none>      <none>                <none>
+team-b   job-b2-a2613       b2       True       2026-10-26T04:27:22Z   <none>      <none>                <none>
+team-b   job-b3-ce643       b3       False      2026-10-26T04:27:28Z   Preempted   InCohortFairSharing   True
+
+### conditions.txt
+workload team-a/job-a-high-86d7c job=a-high
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:27:29Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:29Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a-low-dbb14 job=a-low
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:27:28Z", "message": "couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed", "observedGeneration": 1, "reason": "WaitingForQuota", "status": "False", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:28Z", "message": "Preempted to accommodate a workload (UID: 605220b0-1363-482f-a6ae-53e0bfa1bd6d, JobUID: 1d01a52c-954b-41d9-91b8-4b81ae2d6e98) due to prioritization in the ClusterQueue; preemptor path: /all/team-a; preemptee path: /all/team-a", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:28Z", "message": "The workload has no reservation", "observedGeneration": 1, "reason": "NoReservation", "status": "False", "type": "Admitted"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:28Z", "message": "Preempted to accommodate a workload (UID: 605220b0-1363-482f-a6ae-53e0bfa1bd6d, JobUID: 1d01a52c-954b-41d9-91b8-4b81ae2d6e98) due to prioritization in the ClusterQueue; preemptor path: /all/team-a; preemptee path: /all/team-a", "reason": "InClusterQueue", "status": "True", "type": "Preempted"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:28Z", "message": "Preempted to accommodate a workload (UID: 605220b0-1363-482f-a6ae-53e0bfa1bd6d, JobUID: 1d01a52c-954b-41d9-91b8-4b81ae2d6e98) due to prioritization in the ClusterQueue; preemptor path: /all/team-a; preemptee path: /all/team-a", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+
+workload team-b/job-b1-9f013 job=b1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:27:19Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:19Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b2-a2613 job=b2
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:27:22Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:22Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b3-ce643 job=b3
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:27:28Z", "message": "couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed", "observedGeneration": 1, "reason": "WaitingForQuota", "status": "False", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:28Z", "message": "Preempted to accommodate a workload (UID: 605220b0-1363-482f-a6ae-53e0bfa1bd6d, JobUID: 1d01a52c-954b-41d9-91b8-4b81ae2d6e98) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:28Z", "message": "The workload has no reservation", "observedGeneration": 1, "reason": "NoReservation", "status": "False", "type": "Admitted"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:28Z", "message": "Preempted to accommodate a workload (UID: 605220b0-1363-482f-a6ae-53e0bfa1bd6d, JobUID: 1d01a52c-954b-41d9-91b8-4b81ae2d6e98) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortFairSharing", "status": "True", "type": "Preempted"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:28Z", "message": "Preempted to accommodate a workload (UID: 605220b0-1363-482f-a6ae-53e0bfa1bd6d, JobUID: 1d01a52c-954b-41d9-91b8-4b81ae2d6e98) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+
+### metrics.txt
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} 0
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 250
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+
+### events-preempted.txt
+NAMESPACE   LAST SEEN   TYPE     REASON      OBJECT                     MESSAGE
+team-a      5s          Normal   Preempted   workload/job-a-low-dbb14   Preempted to accommodate a workload (UID: 605220b0-1363-482f-a6ae-53e0bfa1bd6d, JobUID: 1d01a52c-954b-41d9-91b8-4b81ae2d6e98) due to prioritization in the ClusterQueue; preemptor path: /all/team-a; preemptee path: /all/team-a; preemptor effective priority: 100 (base: 100, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)
+team-b      5s          Normal   Preempted   workload/job-b3-ce643      Preempted to accommodate a workload (UID: 605220b0-1363-482f-a6ae-53e0bfa1bd6d, JobUID: 1d01a52c-954b-41d9-91b8-4b81ae2d6e98) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 100 (base: 100, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)
+
+### events-preempted-lines.txt
+event: {"creationTimestamp": "2026-10-26T04:27:28Z", "eventTime": "2026-10-26T04:27:28.794245Z", "involvedKind": "Workload", "involvedObject": "job-a-low-dbb14", "message": "Preempted to accommodate a workload (UID: 605220b0-1363-482f-a6ae-53e0bfa1bd6d, JobUID: 1d01a52c-954b-41d9-91b8-4b81ae2d6e98) due to prioritization in the ClusterQueue; preemptor path: /all/team-a; preemptee path: /all/team-a; preemptor effective priority: 100 (base: 100, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "namespace": "team-a", "reason": "Preempted"}
+event: {"creationTimestamp": "2026-10-26T04:27:28Z", "eventTime": "2026-10-26T04:27:28.787249Z", "involvedKind": "Workload", "involvedObject": "job-b3-ce643", "message": "Preempted to accommodate a workload (UID: 605220b0-1363-482f-a6ae-53e0bfa1bd6d, JobUID: 1d01a52c-954b-41d9-91b8-4b81ae2d6e98) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 100 (base: 100, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "namespace": "team-b", "reason": "Preempted"}
+
+### controller-fairsharing.log
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.776419888Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":42,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.77651882Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":42,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"250","strategyEvaluations":[{"targetWorkload":"team-b/job-b2-a2613","targetNewShare":"0","strategyPassed":false},{"targetWorkload":"team-b/job-b1-9f013","targetNewShare":"0","strategyPassed":false}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.776583562Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":42,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.776616575Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":42,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"250","strategyEvaluations":[{"targetWorkload":"team-b/job-b2-a2613","targetNewShare":"0","strategyPassed":false},{"targetWorkload":"team-b/job-b1-9f013","targetNewShare":"0","strategyPassed":false}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.812882267Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":43,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.814381056Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":43,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.815619378Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":44,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.81566607Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":44,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.819276986Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":45,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.819446156Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":45,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.82330645Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":46,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.82343156Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":46,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.831800836Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":47,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.831960077Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":47,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.842551443Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":48,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.842741628Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":48,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.852752286Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":49,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.853263768Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":49,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.863678926Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":50,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.863920822Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":50,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.878182946Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":51,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.878410413Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":51,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.889371273Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":52,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.889667042Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":52,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.900511565Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":53,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.900652353Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":53,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.91215116Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":54,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.912277534Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":54,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.92251822Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":55,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.922601015Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":55,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.932766646Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":56,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.932953129Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":56,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.942941503Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":57,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:28.943004573Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":57,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"500","strategyEvaluations":[{"targetWorkload":"team-b/job-b3-ce643","targetNewShare":"250","strategyPassed":true}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:29.045045405Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":60,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"250","strategyEvaluations":[{"targetWorkload":"team-b/job-b2-a2613","targetNewShare":"0","strategyPassed":false},{"targetWorkload":"team-b/job-b1-9f013","targetNewShare":"0","strategyPassed":false}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:29.045065349Z","logger":"scheduler","caller":"preemption/fair_strategy.go:332","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":60,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetWorkload":{"name":"job-b2-a2613","namespace":"team-b"},"targetOldShare":"250","strategyPassed":false}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:29.045096882Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":60,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"250","strategyEvaluations":[{"targetWorkload":"team-b/job-b2-a2613","targetNewShare":"0","strategyPassed":false},{"targetWorkload":"team-b/job-b1-9f013","targetNewShare":"0","strategyPassed":false}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:29.045108721Z","logger":"scheduler","caller":"preemption/fair_strategy.go:332","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":60,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetWorkload":{"name":"job-b2-a2613","namespace":"team-b"},"targetOldShare":"250","strategyPassed":false}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:29.944289823Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":61,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"250","strategyEvaluations":[{"targetWorkload":"team-b/job-b2-a2613","targetNewShare":"0","strategyPassed":false},{"targetWorkload":"team-b/job-b1-9f013","targetNewShare":"0","strategyPassed":false}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:29.944331074Z","logger":"scheduler","caller":"preemption/fair_strategy.go:332","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":61,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetWorkload":{"name":"job-b2-a2613","namespace":"team-b"},"targetOldShare":"250","strategyPassed":false}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:29.944409907Z","logger":"scheduler","caller":"preemption/fair_sharing_log.go:87","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":61,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetOldShare":"250","strategyEvaluations":[{"targetWorkload":"team-b/job-b2-a2613","targetNewShare":"0","strategyPassed":false},{"targetWorkload":"team-b/job-b1-9f013","targetNewShare":"0","strategyPassed":false}]}
+{"level":"Level(-4)","ts":"2026-10-26T04:27:29.944427193Z","logger":"scheduler","caller":"preemption/fair_strategy.go:332","msg":"Evaluating FairSharing strategy","replica-role":"leader","schedulingCycle":61,"preemptorNewShare":"250","targetClusterQueue":{"name":"team-b"},"targetWorkload":{"name":"job-b2-a2613","namespace":"team-b"},"targetOldShare":"250","strategyPassed":false}
+
+## O2
+### clusterqueues.txt
+NAME     WEIGHT   SHARE   ADMITTED   PENDING
+team-a   1        0       2          0
+team-b   1        250     2          1
+
+### fairsharing-status.txt
+team-a status.fairSharing={"weightedShare": 0}
+team-b status.fairSharing={"weightedShare": 250}
+
+### cohort.txt
+cohort all weightedShare=0
+
+### workloads.txt
+NS       WL                 JOB      RESERVED   RESERVED_AT            EVICTED     PREEMPTED             REQUEUED
+team-a   job-a-high-7b822   a-high   True       2026-10-26T04:28:00Z   <none>      <none>                <none>
+team-a   job-a-low-0578d    a-low    True       2026-10-26T04:27:47Z   <none>      <none>                <none>
+team-b   job-b1-93ec7       b1       True       2026-10-26T04:27:50Z   <none>      <none>                <none>
+team-b   job-b2-aeb66       b2       True       2026-10-26T04:27:53Z   <none>      <none>                <none>
+team-b   job-b3-40cac       b3       False      2026-10-26T04:28:00Z   Preempted   InCohortReclamation   True
+
+### conditions.txt
+workload team-a/job-a-high-7b822 job=a-high
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:28:00Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:28:00Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-a/job-a-low-0578d job=a-low
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:27:47Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:47Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b1-93ec7 job=b1
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:27:50Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:50Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b2-aeb66 job=b2
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:27:53Z", "message": "Quota reserved in ClusterQueue team-b", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:53Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+
+workload team-b/job-b3-40cac job=b3
+requeueState: <absent>
+condition: {"lastTransitionTime": "2026-10-26T04:28:00Z", "message": "couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed", "observedGeneration": 1, "reason": "WaitingForQuota", "status": "False", "type": "QuotaReserved"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:59Z", "message": "Preempted to accommodate a workload (UID: f505d704-4f5a-4efa-8a12-e33852ea6194, JobUID: 318e62db-64a4-41b1-aaf4-6baa91465c0f) due to reclamation within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+condition: {"lastTransitionTime": "2026-10-26T04:28:00Z", "message": "The workload has no reservation", "observedGeneration": 1, "reason": "NoReservation", "status": "False", "type": "Admitted"}
+condition: {"lastTransitionTime": "2026-10-26T04:27:59Z", "message": "Preempted to accommodate a workload (UID: f505d704-4f5a-4efa-8a12-e33852ea6194, JobUID: 318e62db-64a4-41b1-aaf4-6baa91465c0f) due to reclamation within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortReclamation", "status": "True", "type": "Preempted"}
+condition: {"lastTransitionTime": "2026-10-26T04:28:00Z", "message": "Preempted to accommodate a workload (UID: f505d704-4f5a-4efa-8a12-e33852ea6194, JobUID: 318e62db-64a4-41b1-aaf4-6baa91465c0f) due to reclamation within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+
+### metrics.txt
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} 0
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 250
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
+
+### events-preempted.txt
+NAMESPACE   LAST SEEN   TYPE     REASON      OBJECT                  MESSAGE
+team-b      5s          Normal   Preempted   workload/job-b3-40cac   Preempted to accommodate a workload (UID: f505d704-4f5a-4efa-8a12-e33852ea6194, JobUID: 318e62db-64a4-41b1-aaf4-6baa91465c0f) due to reclamation within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 100 (base: 100, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)
+
+### events-preempted-lines.txt
+event: {"creationTimestamp": "2026-10-26T04:27:59Z", "eventTime": "2026-10-26T04:27:59.951402Z", "involvedKind": "Workload", "involvedObject": "job-b3-40cac", "message": "Preempted to accommodate a workload (UID: f505d704-4f5a-4efa-8a12-e33852ea6194, JobUID: 318e62db-64a4-41b1-aaf4-6baa91465c0f) due to reclamation within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 100 (base: 100, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "namespace": "team-b", "reason": "Preempted"}
+
+### controller-fairsharing.log
+
+
+## requeue
+### run-1
+source: live kind cluster, not a unit test
+requeued_workload_count: 1
+victim_namespace: team-b
+victim_workload: job-b3-407b3
+victim_job: b3
+requeued_condition: {"lastTransitionTime": "2026-10-26T04:32:41Z", "message": "Preempted to accommodate a workload (UID: 893f02df-4790-4dee-b696-7d950fe7a547, JobUID: 99f11e00-910e-40de-a31c-68ce429c0724) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+evicted_condition: {"lastTransitionTime": "2026-10-26T04:32:41Z", "message": "Preempted to accommodate a workload (UID: 893f02df-4790-4dee-b696-7d950fe7a547, JobUID: 99f11e00-910e-40de-a31c-68ce429c0724) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preempted_condition: {"lastTransitionTime": "2026-10-26T04:32:41Z", "message": "Preempted to accommodate a workload (UID: 893f02df-4790-4dee-b696-7d950fe7a547, JobUID: 99f11e00-910e-40de-a31c-68ce429c0724) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortFairSharing", "status": "True", "type": "Preempted"}
+requeueState: <absent>
+next_attempt_count_at_or_after_requeued: 3
+next_attempt_log: {"level":"Level(-2)","ts":"2026-10-26T04:32:41.768856439Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":92,"workload":{"name":"job-b3-407b3","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}
+next_attempt_timestamp: 2026-10-26T04:32:41.768856Z
+delta_seconds: 0.768856
+delta_definition: next Attempting-to-schedule log timestamp minus Requeued lastTransitionTime. Condition time is RFC3339 (one-second resolution). Log time is the controller clock. Live kind cluster, not a unit test.
+
+### run-2
+source: live kind cluster, not a unit test
+requeued_workload_count: 1
+victim_namespace: team-b
+victim_workload: job-b3-145c2
+victim_job: b3
+requeued_condition: {"lastTransitionTime": "2026-10-26T04:33:11Z", "message": "Preempted to accommodate a workload (UID: 45d45323-6ac0-4727-bde4-503888176f21, JobUID: 7139e74b-9384-4997-b30e-33541b66aa5a) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+evicted_condition: {"lastTransitionTime": "2026-10-26T04:33:11Z", "message": "Preempted to accommodate a workload (UID: 45d45323-6ac0-4727-bde4-503888176f21, JobUID: 7139e74b-9384-4997-b30e-33541b66aa5a) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preempted_condition: {"lastTransitionTime": "2026-10-26T04:33:11Z", "message": "Preempted to accommodate a workload (UID: 45d45323-6ac0-4727-bde4-503888176f21, JobUID: 7139e74b-9384-4997-b30e-33541b66aa5a) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortFairSharing", "status": "True", "type": "Preempted"}
+requeueState: <absent>
+next_attempt_count_at_or_after_requeued: 3
+next_attempt_log: {"level":"Level(-2)","ts":"2026-10-26T04:33:11.922283285Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":108,"workload":{"name":"job-b3-145c2","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}
+next_attempt_timestamp: 2026-10-26T04:33:11.922283Z
+delta_seconds: 0.922283
+delta_definition: next Attempting-to-schedule log timestamp minus Requeued lastTransitionTime. Condition time is RFC3339 (one-second resolution). Log time is the controller clock. Live kind cluster, not a unit test.
+
+### run-3
+source: live kind cluster, not a unit test
+requeued_workload_count: 1
+victim_namespace: team-b
+victim_workload: job-b3-95228
+victim_job: b3
+requeued_condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "Preempted to accommodate a workload (UID: 1afa9ba4-1dbc-474b-96e6-409b5a0108fa, JobUID: 494fea0a-9eb3-4632-9f8c-a50728640cc6) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+evicted_condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "Preempted to accommodate a workload (UID: 1afa9ba4-1dbc-474b-96e6-409b5a0108fa, JobUID: 494fea0a-9eb3-4632-9f8c-a50728640cc6) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preempted_condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "Preempted to accommodate a workload (UID: 1afa9ba4-1dbc-474b-96e6-409b5a0108fa, JobUID: 494fea0a-9eb3-4632-9f8c-a50728640cc6) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortFairSharing", "status": "True", "type": "Preempted"}
+requeueState: <absent>
+next_attempt_count_at_or_after_requeued: 3
+next_attempt_log: {"level":"Level(-2)","ts":"2026-10-26T04:33:41.926746252Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":123,"workload":{"name":"job-b3-95228","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}
+next_attempt_timestamp: 2026-10-26T04:33:41.926746Z
+delta_seconds: 0.926746
+delta_definition: next Attempting-to-schedule log timestamp minus Requeued lastTransitionTime. Condition time is RFC3339 (one-second resolution). Log time is the controller clock. Live kind cluster, not a unit test.
+
+## grace
+### run-1
+source: live kind cluster, not a unit test
+pod: b3-wxvml
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running
+victim_workload: job-b3-28f84
+victim_job: b3
+preemptor_workload: job-a2-a1f1b
+preemptor_job: a2
+evicted_condition: {"lastTransitionTime": "2026-10-26T04:34:12Z", "message": "Preempted to accommodate a workload (UID: 82592386-a565-4bff-b97a-a9904c091e7e, JobUID: 43c59928-3d1f-43ba-9466-21a6aa0a7149) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preemptor_admitted_condition: {"lastTransitionTime": "2026-10-26T04:34:12Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+preemptor_quota_reserved_condition: {"lastTransitionTime": "2026-10-26T04:34:12Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+delta_evicted_to_admitted_seconds: 0
+delta_definition: preemptor Admitted lastTransitionTime minus victim Evicted lastTransitionTime. Both are Workload condition timestamps from the live kind cluster (RFC3339, one-second resolution), not a unit test.
+pod_event: {"firstTimestamp": null, "involvedObject": "job-b3-28f84", "lastTimestamp": null, "message": "Preempted to accommodate a workload (UID: 82592386-a565-4bff-b97a-a9904c091e7e, JobUID: 43c59928-3d1f-43ba-9466-21a6aa0a7149) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "reason": "Preempted"}
+pod_event: {"firstTimestamp": "2026-10-26T04:34:12Z", "involvedObject": "b3-wxvml", "lastTimestamp": "2026-10-26T04:34:12Z", "message": "Stopping container sleep", "reason": "Killing"}
+pod_event: {"firstTimestamp": "2026-10-26T04:34:12Z", "involvedObject": "b3", "lastTimestamp": "2026-10-26T04:34:12Z", "message": "Deleted pod: b3-wxvml", "reason": "SuccessfulDelete"}
+
+### run-2
+source: live kind cluster, not a unit test
+pod: b3-vndlt
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running
+victim_workload: job-b3-5335f
+victim_job: b3
+preemptor_workload: job-a2-f9cc5
+preemptor_job: a2
+evicted_condition: {"lastTransitionTime": "2026-10-26T04:34:39Z", "message": "Preempted to accommodate a workload (UID: 1a7678c3-53ec-428f-bb5b-9bb63967b902, JobUID: e6c10353-ae80-4fa4-857d-101d983667a4) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preemptor_admitted_condition: {"lastTransitionTime": "2026-10-26T04:34:39Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+preemptor_quota_reserved_condition: {"lastTransitionTime": "2026-10-26T04:34:39Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+delta_evicted_to_admitted_seconds: 0
+delta_definition: preemptor Admitted lastTransitionTime minus victim Evicted lastTransitionTime. Both are Workload condition timestamps from the live kind cluster (RFC3339, one-second resolution), not a unit test.
+pod_event: {"firstTimestamp": null, "involvedObject": "job-b3-5335f", "lastTimestamp": null, "message": "Preempted to accommodate a workload (UID: 1a7678c3-53ec-428f-bb5b-9bb63967b902, JobUID: e6c10353-ae80-4fa4-857d-101d983667a4) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "reason": "Preempted"}
+pod_event: {"firstTimestamp": "2026-10-26T04:34:39Z", "involvedObject": "b3-vndlt", "lastTimestamp": "2026-10-26T04:34:39Z", "message": "Stopping container sleep", "reason": "Killing"}
+pod_event: {"firstTimestamp": "2026-10-26T04:34:39Z", "involvedObject": "b3", "lastTimestamp": "2026-10-26T04:34:39Z", "message": "Deleted pod: b3-vndlt", "reason": "SuccessfulDelete"}
+
+### run-3
+source: live kind cluster, not a unit test
+pod: b3-pbnsk
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running
+victim_workload: job-b3-c0e75
+victim_job: b3
+preemptor_workload: job-a2-9b46a
+preemptor_job: a2
+evicted_condition: {"lastTransitionTime": "2026-10-26T04:35:06Z", "message": "Preempted to accommodate a workload (UID: 1ee28254-7334-4f72-ac54-b55f08932bb3, JobUID: 7f0e9a42-7b57-4f0e-905e-61bf9496300c) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preemptor_admitted_condition: {"lastTransitionTime": "2026-10-26T04:35:06Z", "message": "The workload is admitted", "observedGeneration": 1, "reason": "Admitted", "status": "True", "type": "Admitted"}
+preemptor_quota_reserved_condition: {"lastTransitionTime": "2026-10-26T04:35:06Z", "message": "Quota reserved in ClusterQueue team-a", "observedGeneration": 1, "reason": "QuotaReserved", "status": "True", "type": "QuotaReserved"}
+delta_evicted_to_admitted_seconds: 0
+delta_definition: preemptor Admitted lastTransitionTime minus victim Evicted lastTransitionTime. Both are Workload condition timestamps from the live kind cluster (RFC3339, one-second resolution), not a unit test.
+pod_event: {"firstTimestamp": null, "involvedObject": "job-b3-c0e75", "lastTimestamp": null, "message": "Preempted to accommodate a workload (UID: 1ee28254-7334-4f72-ac54-b55f08932bb3, JobUID: 7f0e9a42-7b57-4f0e-905e-61bf9496300c) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)", "reason": "Preempted"}
+pod_event: {"firstTimestamp": "2026-10-26T04:35:06Z", "involvedObject": "b3", "lastTimestamp": "2026-10-26T04:35:06Z", "message": "Deleted pod: b3-pbnsk", "reason": "SuccessfulDelete"}
+pod_event: {"firstTimestamp": "2026-10-26T04:35:06Z", "involvedObject": "b3-pbnsk", "lastTimestamp": "2026-10-26T04:35:06Z", "message": "Stopping container sleep", "reason": "Killing"}
+
+source: live kind cluster, observed while grace run 3's preemptor was already Admitted
+pod: team-b/b3-pbnsk
+phase: Running
+container_state: running, startedAt 2026-10-26T04:35:03Z
+deletionTimestamp: 2026-10-26T04:35:36Z
+deletionGracePeriodSeconds: 30
+victim Evicted lastTransitionTime: 2026-10-26T04:35:06Z
+preemptor Admitted lastTransitionTime: 2026-10-26T04:35:06Z
+observation_wall_clock: 2026-10-26T04:35:15.957854909Z
+note: at that wall clock the container was still running. deletionTimestamp is 30s after eviction. The preemptor was already Admitted. Quota was not held until the grace period ended.
+

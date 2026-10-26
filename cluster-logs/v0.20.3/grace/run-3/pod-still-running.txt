@@ -1,0 +1,15 @@
+SUMMARY (hand-written, not raw output)
+The rest of this file was not captured from kubectl, kind, curl, or the controller.
+Do not cite it as raw command output.
+===== authored banner end =====
+
+source: live kind cluster, observed while grace run 3's preemptor was already Admitted
+pod: team-b/b3-pbnsk
+phase: Running
+container_state: running, startedAt 2026-10-26T04:35:03Z
+deletionTimestamp: 2026-10-26T04:35:36Z
+deletionGracePeriodSeconds: 30
+victim Evicted lastTransitionTime: 2026-10-26T04:35:06Z
+preemptor Admitted lastTransitionTime: 2026-10-26T04:35:06Z
+observation_wall_clock: 2026-10-26T04:35:15.957854909Z
+note: at that wall clock the container was still running. deletionTimestamp is 30s after eviction. The preemptor was already Admitted. Quota was not held until the grace period ended.

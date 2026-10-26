@@ -1,0 +1,1275 @@
+date: 2026-10-26T05:26:08Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl -n team-b get events --sort-by=.lastTimestamp -o json || echo '{"items":[]}'
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "action": "Admitted",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:33.152755Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b3-4294f",
+                "namespace": "team-b",
+                "resourceVersion": "6693",
+                "uid": "efcaafbc-69f6-4970-8923-f77b32e7f33e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Admitted by ClusterQueue team-b, wait time since reservation was 0s",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "job-b3-4294f.18e1fd06fe91a372",
+                "namespace": "team-b",
+                "resourceVersion": "6694",
+                "uid": "431dc93b-bc5f-4370-8d82-daf5e7ac98f5"
+            },
+            "reason": "Admitted",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "QuotaReserved",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:33.152737Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b3-4294f",
+                "namespace": "team-b",
+                "resourceVersion": "6693",
+                "uid": "efcaafbc-69f6-4970-8923-f77b32e7f33e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Quota reserved in ClusterQueue team-b, wait time since queued was 0s; Flavors considered: main: default(Fit;borrow=1)",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "job-b3-4294f.18e1fd06fe9160fa",
+                "namespace": "team-b",
+                "resourceVersion": "6695",
+                "uid": "1d28e93a-650c-4d52-93a5-1d1c9d6a6f7c"
+            },
+            "reason": "QuotaReserved",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "Stopped",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:36.585960Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b3",
+                "namespace": "team-b",
+                "resourceVersion": "6737",
+                "uid": "be154daa-d926-419a-a972-89fcd815586e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Preempted to accommodate a workload (UID: 5134d002-c22e-4083-80ca-c07e70e7c5e2, JobUID: 4a6665c8-a602-4301-8446-0cecc021d0d0) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:36Z",
+                "name": "b3.18e1fd07cb3434fd",
+                "namespace": "team-b",
+                "resourceVersion": "6739",
+                "uid": "3213b82c-2b6a-4b1f-826d-0de8ee81a573"
+            },
+            "reason": "Stopped",
+            "reportingComponent": "batch/job-kueue-controller",
+            "reportingInstance": "batch/job-kueue-controller-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "Admitted",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:26.769515Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b1-216ab",
+                "namespace": "team-b",
+                "resourceVersion": "6630",
+                "uid": "6a56b1b9-bca2-43e9-acf5-e6ff025da90e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Admitted by ClusterQueue team-b, wait time since reservation was 1s",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:26Z",
+                "name": "job-b1-216ab.18e1fd0582192675",
+                "namespace": "team-b",
+                "resourceVersion": "6632",
+                "uid": "f1aefda3-4ab0-4ed2-a97b-08974a7f8fd6"
+            },
+            "reason": "Admitted",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "QuotaReserved",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:29.949990Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b2-6f518",
+                "namespace": "team-b",
+                "resourceVersion": "6662",
+                "uid": "0cd22036-b15f-42d0-a9d4-5ff5ffbd8f87"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Quota reserved in ClusterQueue team-b, wait time since queued was 1s; Flavors considered: main: default(Fit;borrow=1)",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:29Z",
+                "name": "job-b2-6f518.18e1fd063fab5a76",
+                "namespace": "team-b",
+                "resourceVersion": "6663",
+                "uid": "b1e77a9d-18d2-4046-aa65-c81d2bda9d56"
+            },
+            "reason": "QuotaReserved",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "CreatedWorkload",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:26.755990Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b1",
+                "namespace": "team-b",
+                "resourceVersion": "6624",
+                "uid": "810cdf3c-accb-497e-a61c-1bf2ee8e393d"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Created Workload: team-b/job-b1-216ab",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:26Z",
+                "name": "b1.18e1fd05814ac90c",
+                "namespace": "team-b",
+                "resourceVersion": "6628",
+                "uid": "79d21ccd-1f23-4edb-8ff5-1c94fd72b1c2"
+            },
+            "reason": "CreatedWorkload",
+            "reportingComponent": "batch/job-kueue-controller",
+            "reportingInstance": "batch/job-kueue-controller-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "Started",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:26.774486Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b1",
+                "namespace": "team-b",
+                "resourceVersion": "6633",
+                "uid": "810cdf3c-accb-497e-a61c-1bf2ee8e393d"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Admitted by clusterQueue team-b",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:26Z",
+                "name": "b1.18e1fd058264fc38",
+                "namespace": "team-b",
+                "resourceVersion": "6634",
+                "uid": "4c76170c-ec07-443e-91d0-57af2f2f5cb1"
+            },
+            "reason": "Started",
+            "reportingComponent": "batch/job-kueue-controller",
+            "reportingInstance": "batch/job-kueue-controller-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "Started",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:33.169372Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b3",
+                "namespace": "team-b",
+                "resourceVersion": "6697",
+                "uid": "be154daa-d926-419a-a972-89fcd815586e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Admitted by clusterQueue team-b",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "b3.18e1fd06ff8f34bb",
+                "namespace": "team-b",
+                "resourceVersion": "6698",
+                "uid": "74fb781d-de9e-4bf1-b486-f5743fe3b9f8"
+            },
+            "reason": "Started",
+            "reportingComponent": "batch/job-kueue-controller",
+            "reportingInstance": "batch/job-kueue-controller-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "CreatedWorkload",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:33.140234Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b3",
+                "namespace": "team-b",
+                "resourceVersion": "6688",
+                "uid": "be154daa-d926-419a-a972-89fcd815586e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Created Workload: team-b/job-b3-4294f",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "b3.18e1fd06fdd2a2b5",
+                "namespace": "team-b",
+                "resourceVersion": "6692",
+                "uid": "9a71bac5-9548-4dad-88a5-f4b35b69ebdd"
+            },
+            "reason": "CreatedWorkload",
+            "reportingComponent": "batch/job-kueue-controller",
+            "reportingInstance": "batch/job-kueue-controller-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "Admitted",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:29.950017Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b2-6f518",
+                "namespace": "team-b",
+                "resourceVersion": "6662",
+                "uid": "0cd22036-b15f-42d0-a9d4-5ff5ffbd8f87"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Admitted by ClusterQueue team-b, wait time since reservation was 1s",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:29Z",
+                "name": "job-b2-6f518.18e1fd063fabbc68",
+                "namespace": "team-b",
+                "resourceVersion": "6664",
+                "uid": "ff12a52a-cc97-462d-977a-49d78cb5f7bd"
+            },
+            "reason": "Admitted",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "QuotaReserved",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:26.769269Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b1-216ab",
+                "namespace": "team-b",
+                "resourceVersion": "6630",
+                "uid": "6a56b1b9-bca2-43e9-acf5-e6ff025da90e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Quota reserved in ClusterQueue team-b, wait time since queued was 1s",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:26Z",
+                "name": "job-b1-216ab.18e1fd0582156328",
+                "namespace": "team-b",
+                "resourceVersion": "6631",
+                "uid": "9c604914-329e-41b8-9e5a-2c77894e9041"
+            },
+            "reason": "QuotaReserved",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "WaitingForQuota",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:37.625132Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b3-4294f",
+                "namespace": "team-b",
+                "resourceVersion": "6765",
+                "uid": "efcaafbc-69f6-4970-8923-f77b32e7f33e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:37Z",
+                "name": "job-b3-4294f.18e1fd080924b831",
+                "namespace": "team-b",
+                "resourceVersion": "6776",
+                "uid": "46d2a745-8e8c-48a7-b7e2-81da453f36d6"
+            },
+            "reason": "WaitingForQuota",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Warning"
+        },
+        {
+            "action": "WaitingForQuota",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:36.688043Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b3-4294f",
+                "namespace": "team-b",
+                "resourceVersion": "6753",
+                "uid": "efcaafbc-69f6-4970-8923-f77b32e7f33e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:36Z",
+                "name": "job-b3-4294f.18e1fd07d149df82",
+                "namespace": "team-b",
+                "resourceVersion": "6764",
+                "uid": "5605a3e7-736c-492d-8c1b-60966c71bdeb"
+            },
+            "reason": "WaitingForQuota",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Warning"
+        },
+        {
+            "action": "EvictedDueToPreempted",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:36.560261Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b3-4294f",
+                "namespace": "team-b",
+                "resourceVersion": "6726",
+                "uid": "efcaafbc-69f6-4970-8923-f77b32e7f33e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Preempted to accommodate a workload (UID: 5134d002-c22e-4083-80ca-c07e70e7c5e2, JobUID: 4a6665c8-a602-4301-8446-0cecc021d0d0) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:36Z",
+                "name": "job-b3-4294f.18e1fd07c9ac12f1",
+                "namespace": "team-b",
+                "resourceVersion": "6727",
+                "uid": "f007d6cf-38d9-4a21-9eff-7cf61384445d"
+            },
+            "reason": "EvictedDueToPreempted",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "Started",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:29.957140Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b2",
+                "namespace": "team-b",
+                "resourceVersion": "6665",
+                "uid": "6b1a9c38-668b-46a1-adab-56d7daaa777a"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Admitted by clusterQueue team-b",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:29Z",
+                "name": "b2.18e1fd0640186f60",
+                "namespace": "team-b",
+                "resourceVersion": "6666",
+                "uid": "1e47ea4d-3101-46de-abd9-dc6978cf45cf"
+            },
+            "reason": "Started",
+            "reportingComponent": "batch/job-kueue-controller",
+            "reportingInstance": "batch/job-kueue-controller-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "Preempted",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:36.560691Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b3-4294f",
+                "namespace": "team-b",
+                "resourceVersion": "6716",
+                "uid": "efcaafbc-69f6-4970-8923-f77b32e7f33e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Preempted to accommodate a workload (UID: 5134d002-c22e-4083-80ca-c07e70e7c5e2, JobUID: 4a6665c8-a602-4301-8446-0cecc021d0d0) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:36Z",
+                "name": "job-b3-4294f.18e1fd07c9b2a201",
+                "namespace": "team-b",
+                "resourceVersion": "6730",
+                "uid": "01e8f8ed-3cc7-40d2-8d7c-362589c35e35"
+            },
+            "reason": "Preempted",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "CreatedWorkload",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:29.933689Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b2",
+                "namespace": "team-b",
+                "resourceVersion": "6656",
+                "uid": "6b1a9c38-668b-46a1-adab-56d7daaa777a"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Created Workload: team-b/job-b2-6f518",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:29Z",
+                "name": "b2.18e1fd063eb2af00",
+                "namespace": "team-b",
+                "resourceVersion": "6660",
+                "uid": "0d5a8e6f-234e-4cc4-8381-9a4bfc2aa0bb"
+            },
+            "reason": "CreatedWorkload",
+            "reportingComponent": "batch/job-kueue-controller",
+            "reportingInstance": "batch/job-kueue-controller-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        },
+        {
+            "action": "WaitingForQuota",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:25:36.657989Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b3-4294f",
+                "namespace": "team-b",
+                "resourceVersion": "6746",
+                "uid": "efcaafbc-69f6-4970-8923-f77b32e7f33e"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Workload no longer fits after processing another workload",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:36Z",
+                "name": "job-b3-4294f.18e1fd07cf7f49a9",
+                "namespace": "team-b",
+                "resourceVersion": "6754",
+                "uid": "485a7258-07cf-40c1-b7ae-7bebc75da724"
+            },
+            "reason": "WaitingForQuota",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Warning"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:26Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "b1-zzwck",
+                "namespace": "team-b",
+                "resourceVersion": "6635",
+                "uid": "dd1edafe-1560-487d-8a7f-f2a4019583e6"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:26Z",
+            "message": "Successfully assigned team-b/b1-zzwck to kueue-fs-control-plane",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:26Z",
+                "name": "b1-zzwck.18e1fd0582eabc91",
+                "namespace": "team-b",
+                "resourceVersion": "6639",
+                "uid": "65b70a85-d590-4185-92ae-90916d08e337"
+            },
+            "reason": "Scheduled",
+            "reportingComponent": "default-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "default-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:26Z",
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b1",
+                "namespace": "team-b",
+                "resourceVersion": "6633",
+                "uid": "810cdf3c-accb-497e-a61c-1bf2ee8e393d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:26Z",
+            "message": "Job resumed",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:26Z",
+                "name": "b1.18e1fd0582bb5ea9",
+                "namespace": "team-b",
+                "resourceVersion": "6640",
+                "uid": "9c464e00-9184-466a-8fd8-0fdf251b3047"
+            },
+            "reason": "Resumed",
+            "reportingComponent": "job-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "job-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:26Z",
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b1",
+                "namespace": "team-b",
+                "resourceVersion": "6633",
+                "uid": "810cdf3c-accb-497e-a61c-1bf2ee8e393d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:26Z",
+            "message": "Created pod: b1-zzwck",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:26Z",
+                "name": "b1.18e1fd0582bb22ad",
+                "namespace": "team-b",
+                "resourceVersion": "6638",
+                "uid": "3c6f23b7-faa7-49f4-a29a-d42557dfd96c"
+            },
+            "reason": "SuccessfulCreate",
+            "reportingComponent": "job-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "job-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:26Z",
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b1",
+                "namespace": "team-b",
+                "resourceVersion": "6624",
+                "uid": "810cdf3c-accb-497e-a61c-1bf2ee8e393d"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:26Z",
+            "message": "Job suspended",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:26Z",
+                "name": "b1.18e1fd0580f986ce",
+                "namespace": "team-b",
+                "resourceVersion": "6625",
+                "uid": "3ac95321-52b0-4131-bbd7-24aa5183496a"
+            },
+            "reason": "Suspended",
+            "reportingComponent": "job-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "job-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:27Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{sleep}",
+                "kind": "Pod",
+                "name": "b1-zzwck",
+                "namespace": "team-b",
+                "resourceVersion": "6636",
+                "uid": "dd1edafe-1560-487d-8a7f-f2a4019583e6"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:27Z",
+            "message": "Container image \"registry.k8s.io/pause:3.10\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:27Z",
+                "name": "b1-zzwck.18e1fd059ab5d329",
+                "namespace": "team-b",
+                "resourceVersion": "6642",
+                "uid": "a964433f-bf67-410a-8808-ed53e58bedca"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "kueue-fs-control-plane",
+            "source": {
+                "component": "kubelet",
+                "host": "kueue-fs-control-plane"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:27Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{sleep}",
+                "kind": "Pod",
+                "name": "b1-zzwck",
+                "namespace": "team-b",
+                "resourceVersion": "6636",
+                "uid": "dd1edafe-1560-487d-8a7f-f2a4019583e6"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:27Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:27Z",
+                "name": "b1-zzwck.18e1fd059f040123",
+                "namespace": "team-b",
+                "resourceVersion": "6644",
+                "uid": "11323f54-d11f-456f-9d0f-da930d474687"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "kueue-fs-control-plane",
+            "source": {
+                "component": "kubelet",
+                "host": "kueue-fs-control-plane"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:27Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{sleep}",
+                "kind": "Pod",
+                "name": "b1-zzwck",
+                "namespace": "team-b",
+                "resourceVersion": "6636",
+                "uid": "dd1edafe-1560-487d-8a7f-f2a4019583e6"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:27Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:27Z",
+                "name": "b1-zzwck.18e1fd059b2d28a5",
+                "namespace": "team-b",
+                "resourceVersion": "6643",
+                "uid": "1a030d86-d3a0-4180-8603-c78a0a778b98"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "kueue-fs-control-plane",
+            "source": {
+                "component": "kubelet",
+                "host": "kueue-fs-control-plane"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:29Z",
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b2",
+                "namespace": "team-b",
+                "resourceVersion": "6665",
+                "uid": "6b1a9c38-668b-46a1-adab-56d7daaa777a"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:29Z",
+            "message": "Job resumed",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:29Z",
+                "name": "b2.18e1fd06407f9f6b",
+                "namespace": "team-b",
+                "resourceVersion": "6671",
+                "uid": "0e07fa5e-3083-40d6-8925-62e66c15d6bc"
+            },
+            "reason": "Resumed",
+            "reportingComponent": "job-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "job-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:29Z",
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b2",
+                "namespace": "team-b",
+                "resourceVersion": "6656",
+                "uid": "6b1a9c38-668b-46a1-adab-56d7daaa777a"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:29Z",
+            "message": "Job suspended",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:29Z",
+                "name": "b2.18e1fd063e614b29",
+                "namespace": "team-b",
+                "resourceVersion": "6657",
+                "uid": "c3b458d5-0865-4770-bdb7-8acfedb9261a"
+            },
+            "reason": "Suspended",
+            "reportingComponent": "job-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "job-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:29Z",
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b2",
+                "namespace": "team-b",
+                "resourceVersion": "6665",
+                "uid": "6b1a9c38-668b-46a1-adab-56d7daaa777a"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:29Z",
+            "message": "Created pod: b2-j5xqh",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:29Z",
+                "name": "b2.18e1fd064079fb20",
+                "namespace": "team-b",
+                "resourceVersion": "6668",
+                "uid": "389006ab-61c3-47ea-a54d-73be40d85173"
+            },
+            "reason": "SuccessfulCreate",
+            "reportingComponent": "job-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "job-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:29Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "b2-j5xqh",
+                "namespace": "team-b",
+                "resourceVersion": "6667",
+                "uid": "e41d8f4d-0c40-4c98-aa4b-cbc58bf823c4"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:29Z",
+            "message": "Successfully assigned team-b/b2-j5xqh to kueue-fs-control-plane",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:29Z",
+                "name": "b2-j5xqh.18e1fd0640c6966f",
+                "namespace": "team-b",
+                "resourceVersion": "6672",
+                "uid": "13cab3c2-c2e9-4129-b27d-a2a5267d26e7"
+            },
+            "reason": "Scheduled",
+            "reportingComponent": "default-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "default-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:30Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{sleep}",
+                "kind": "Pod",
+                "name": "b2-j5xqh",
+                "namespace": "team-b",
+                "resourceVersion": "6670",
+                "uid": "e41d8f4d-0c40-4c98-aa4b-cbc58bf823c4"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:30Z",
+            "message": "Container image \"registry.k8s.io/pause:3.10\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:30Z",
+                "name": "b2-j5xqh.18e1fd06587c0bb0",
+                "namespace": "team-b",
+                "resourceVersion": "6674",
+                "uid": "5ebd590a-d93f-4541-bd49-749705c046a8"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "kueue-fs-control-plane",
+            "source": {
+                "component": "kubelet",
+                "host": "kueue-fs-control-plane"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:30Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{sleep}",
+                "kind": "Pod",
+                "name": "b2-j5xqh",
+                "namespace": "team-b",
+                "resourceVersion": "6670",
+                "uid": "e41d8f4d-0c40-4c98-aa4b-cbc58bf823c4"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:30Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:30Z",
+                "name": "b2-j5xqh.18e1fd065cb44ea1",
+                "namespace": "team-b",
+                "resourceVersion": "6676",
+                "uid": "abccc90f-fbd2-4733-829e-77ed3bcdf4b6"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "kueue-fs-control-plane",
+            "source": {
+                "component": "kubelet",
+                "host": "kueue-fs-control-plane"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:30Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{sleep}",
+                "kind": "Pod",
+                "name": "b2-j5xqh",
+                "namespace": "team-b",
+                "resourceVersion": "6670",
+                "uid": "e41d8f4d-0c40-4c98-aa4b-cbc58bf823c4"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:30Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:30Z",
+                "name": "b2-j5xqh.18e1fd0658d77230",
+                "namespace": "team-b",
+                "resourceVersion": "6675",
+                "uid": "981f1284-19fb-4298-8b43-e7da380f099c"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "kueue-fs-control-plane",
+            "source": {
+                "component": "kubelet",
+                "host": "kueue-fs-control-plane"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:33Z",
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b3",
+                "namespace": "team-b",
+                "resourceVersion": "6697",
+                "uid": "be154daa-d926-419a-a972-89fcd815586e"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:33Z",
+            "message": "Job resumed",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "b3.18e1fd06fff3101b",
+                "namespace": "team-b",
+                "resourceVersion": "6703",
+                "uid": "f215bb3d-391f-4c4b-85e3-dc4ceb1ef7e8"
+            },
+            "reason": "Resumed",
+            "reportingComponent": "job-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "job-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:33Z",
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b3",
+                "namespace": "team-b",
+                "resourceVersion": "6697",
+                "uid": "be154daa-d926-419a-a972-89fcd815586e"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:33Z",
+            "message": "Created pod: b3-kpq9j",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "b3.18e1fd06fff2be51",
+                "namespace": "team-b",
+                "resourceVersion": "6700",
+                "uid": "1088a7ae-42c7-43dd-8e59-b4259cda26e7"
+            },
+            "reason": "SuccessfulCreate",
+            "reportingComponent": "job-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "job-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:33Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{sleep}",
+                "kind": "Pod",
+                "name": "b3-kpq9j",
+                "namespace": "team-b",
+                "resourceVersion": "6701",
+                "uid": "1f9aa55a-8085-44eb-915d-b7b3d91a2932"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:33Z",
+            "message": "Container started",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "b3-kpq9j.18e1fd071e2fb4f6",
+                "namespace": "team-b",
+                "resourceVersion": "6710",
+                "uid": "9c9fe190-9bbc-4554-9d24-f42b8a43b163"
+            },
+            "reason": "Started",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "kueue-fs-control-plane",
+            "source": {
+                "component": "kubelet",
+                "host": "kueue-fs-control-plane"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:33Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{sleep}",
+                "kind": "Pod",
+                "name": "b3-kpq9j",
+                "namespace": "team-b",
+                "resourceVersion": "6701",
+                "uid": "1f9aa55a-8085-44eb-915d-b7b3d91a2932"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:33Z",
+            "message": "Container created",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "b3-kpq9j.18e1fd0719a4a781",
+                "namespace": "team-b",
+                "resourceVersion": "6709",
+                "uid": "5511fab9-c68e-40a5-9f6d-4f4347d8f70f"
+            },
+            "reason": "Created",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "kueue-fs-control-plane",
+            "source": {
+                "component": "kubelet",
+                "host": "kueue-fs-control-plane"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:33Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{sleep}",
+                "kind": "Pod",
+                "name": "b3-kpq9j",
+                "namespace": "team-b",
+                "resourceVersion": "6701",
+                "uid": "1f9aa55a-8085-44eb-915d-b7b3d91a2932"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:33Z",
+            "message": "Container image \"registry.k8s.io/e2e-test-images/busybox:1.36.1-1\" already present on machine and can be accessed by the pod",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "b3-kpq9j.18e1fd07192aec1f",
+                "namespace": "team-b",
+                "resourceVersion": "6708",
+                "uid": "02b30ee5-865e-4d5a-9d0e-fac2cef4ef46"
+            },
+            "reason": "Pulled",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "kueue-fs-control-plane",
+            "source": {
+                "component": "kubelet",
+                "host": "kueue-fs-control-plane"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:33Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "kind": "Pod",
+                "name": "b3-kpq9j",
+                "namespace": "team-b",
+                "resourceVersion": "6699",
+                "uid": "1f9aa55a-8085-44eb-915d-b7b3d91a2932"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:33Z",
+            "message": "Successfully assigned team-b/b3-kpq9j to kueue-fs-control-plane",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "b3-kpq9j.18e1fd070052cea6",
+                "namespace": "team-b",
+                "resourceVersion": "6704",
+                "uid": "d417dbf6-c52a-4490-a330-66af762c7366"
+            },
+            "reason": "Scheduled",
+            "reportingComponent": "default-scheduler",
+            "reportingInstance": "",
+            "source": {
+                "component": "default-scheduler"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:36Z",
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b3",
+                "namespace": "team-b",
+                "resourceVersion": "6728",
+                "uid": "be154daa-d926-419a-a972-89fcd815586e"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:36Z",
+            "message": "Deleted pod: b3-kpq9j",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:36Z",
+                "name": "b3.18e1fd07cb48e556",
+                "namespace": "team-b",
+                "resourceVersion": "6738",
+                "uid": "77939df2-17be-4ed3-8c17-746fa88a65e2"
+            },
+            "reason": "SuccessfulDelete",
+            "reportingComponent": "job-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "job-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 3,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:33Z",
+            "involvedObject": {
+                "apiVersion": "batch/v1",
+                "kind": "Job",
+                "name": "b3",
+                "namespace": "team-b",
+                "resourceVersion": "6688",
+                "uid": "be154daa-d926-419a-a972-89fcd815586e"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:36Z",
+            "message": "Job suspended",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:33Z",
+                "name": "b3.18e1fd06fd49daec",
+                "namespace": "team-b",
+                "resourceVersion": "6744",
+                "uid": "fe28e7a0-fd40-4a81-9f30-cd547ba8f187"
+            },
+            "reason": "Suspended",
+            "reportingComponent": "job-controller",
+            "reportingInstance": "",
+            "source": {
+                "component": "job-controller"
+            },
+            "type": "Normal"
+        },
+        {
+            "apiVersion": "v1",
+            "count": 1,
+            "eventTime": null,
+            "firstTimestamp": "2026-10-26T05:25:36Z",
+            "involvedObject": {
+                "apiVersion": "v1",
+                "fieldPath": "spec.containers{sleep}",
+                "kind": "Pod",
+                "name": "b3-kpq9j",
+                "namespace": "team-b",
+                "resourceVersion": "6701",
+                "uid": "1f9aa55a-8085-44eb-915d-b7b3d91a2932"
+            },
+            "kind": "Event",
+            "lastTimestamp": "2026-10-26T05:25:36Z",
+            "message": "Stopping container sleep",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:25:36Z",
+                "name": "b3-kpq9j.18e1fd07cb45650f",
+                "namespace": "team-b",
+                "resourceVersion": "6740",
+                "uid": "47ad577e-f5ec-4dbd-b4e9-ab8f0bbddc47"
+            },
+            "reason": "Killing",
+            "reportingComponent": "kubelet",
+            "reportingInstance": "kueue-fs-control-plane",
+            "source": {
+                "component": "kubelet",
+                "host": "kueue-fs-control-plane"
+            },
+            "type": "Normal"
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

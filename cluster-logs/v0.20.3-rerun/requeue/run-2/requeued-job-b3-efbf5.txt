@@ -1,0 +1,12 @@
+date: 2026-10-26T05:22:46Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl -n team-b get workload job-b3-efbf5 -o jsonpath=\{.status.conditions\[\?\(@.type==\"Requeued\"\)\]\}\{\"\\n\"\}
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+{"lastTransitionTime":"2026-10-26T05:22:40Z","message":"Preempted to accommodate a workload (UID: 6225356b-0891-45bd-9440-1f551ce99ed9, JobUID: a96a8236-f8ed-4e4b-aa91-eb157034bb92) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b","observedGeneration":1,"reason":"Preempted","status":"True","type":"Requeued"}

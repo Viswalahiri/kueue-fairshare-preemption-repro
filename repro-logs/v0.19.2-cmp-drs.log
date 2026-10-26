@@ -1,0 +1,53 @@
+# label v0.19.2
+# commit 8eab68778fc1b52affe165fdf5af29d1e9b4f3cb
+# subject Prepare release v0.19.2 (#14686)
+# parents 3561213cd8dc99a49fbdafe447517f283531802a
+# go go1.27.3
+# date 2026-10-26T03:58:33Z
+=== RUN   TestCompareBool
+=== RUN   TestCompareBool/a_false,_b_true
+=== RUN   TestCompareBool/both_true
+=== RUN   TestCompareBool/both_false
+=== RUN   TestCompareBool/a_true,_b_false
+--- PASS: TestCompareBool (0.00s)
+    --- PASS: TestCompareBool/a_false,_b_true (0.00s)
+    --- PASS: TestCompareBool/both_true (0.00s)
+    --- PASS: TestCompareBool/both_false (0.00s)
+    --- PASS: TestCompareBool/a_true,_b_false (0.00s)
+ok  	sigs.k8s.io/kueue/pkg/util/cmp	0.002s
+=== RUN   TestDominantResourceShare
+=== RUN   TestDominantResourceShare/usage_way_above_nominal_in_a_cohort_with_large_quotas_and_weights
+=== RUN   TestDominantResourceShare/usage_with_workload_above_nominal
+=== RUN   TestDominantResourceShare/cohort_has_resource_share
+=== RUN   TestDominantResourceShare/resource_share_affected_by_borrowing_limit
+=== RUN   TestDominantResourceShare/borrowing_against_unlimited_lendable_capacity_(exabyte-scale_quota)
+=== RUN   TestDominantResourceShare/usage_below_nominal
+=== RUN   TestDominantResourceShare/usage_slightly_above_nominal_in_a_cohort_with_large_quotas
+=== RUN   TestDominantResourceShare/one_resource_above_nominal
+=== RUN   TestDominantResourceShare/A_resource_with_zero_lendable
+=== RUN   TestDominantResourceShare/usage_above_nominal
+=== RUN   TestDominantResourceShare/above_nominal_with_integer_weight
+=== RUN   TestDominantResourceShare/no_cohort
+=== RUN   TestDominantResourceShare/multiple_flavors
+=== RUN   TestDominantResourceShare/above_nominal_with_decimal_weight
+=== RUN   TestDominantResourceShare/above_nominal_with_zero_weight
+=== RUN   TestDominantResourceShare/resource_share_defined_for_resources_only_available_at_the_root_cohort
+--- PASS: TestDominantResourceShare (0.08s)
+    --- PASS: TestDominantResourceShare/usage_way_above_nominal_in_a_cohort_with_large_quotas_and_weights (0.05s)
+    --- PASS: TestDominantResourceShare/usage_with_workload_above_nominal (0.00s)
+    --- PASS: TestDominantResourceShare/cohort_has_resource_share (0.00s)
+    --- PASS: TestDominantResourceShare/resource_share_affected_by_borrowing_limit (0.00s)
+    --- PASS: TestDominantResourceShare/borrowing_against_unlimited_lendable_capacity_(exabyte-scale_quota) (0.00s)
+    --- PASS: TestDominantResourceShare/usage_below_nominal (0.00s)
+    --- PASS: TestDominantResourceShare/usage_slightly_above_nominal_in_a_cohort_with_large_quotas (0.00s)
+    --- PASS: TestDominantResourceShare/one_resource_above_nominal (0.00s)
+    --- PASS: TestDominantResourceShare/A_resource_with_zero_lendable (0.00s)
+    --- PASS: TestDominantResourceShare/usage_above_nominal (0.00s)
+    --- PASS: TestDominantResourceShare/above_nominal_with_integer_weight (0.00s)
+    --- PASS: TestDominantResourceShare/no_cohort (0.00s)
+    --- PASS: TestDominantResourceShare/multiple_flavors (0.00s)
+    --- PASS: TestDominantResourceShare/above_nominal_with_decimal_weight (0.00s)
+    --- PASS: TestDominantResourceShare/above_nominal_with_zero_weight (0.00s)
+    --- PASS: TestDominantResourceShare/resource_share_defined_for_resources_only_available_at_the_root_cohort (0.00s)
+ok  	sigs.k8s.io/kueue/pkg/cache/scheduler	0.099s
+exit=0

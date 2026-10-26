@@ -1,0 +1,27 @@
+date: 2026-10-26T05:26:05Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get pods -A -o custom-columns=NS:.metadata.namespace\,NAME:.metadata.name\,PHASE:.status.phase\,DELETION:.metadata.deletionTimestamp\,GRACE:.metadata.deletionGracePeriodSeconds
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NS                   NAME                                             PHASE     DELETION               GRACE
+kube-system          coredns-7d764666f9-bnkn8                         Running   <none>                 <none>
+kube-system          coredns-7d764666f9-wx9tz                         Running   <none>                 <none>
+kube-system          etcd-kueue-fs-control-plane                      Running   <none>                 <none>
+kube-system          kindnet-6jwsg                                    Running   <none>                 <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            Running   <none>                 <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   Running   <none>                 <none>
+kube-system          kube-proxy-h9v7w                                 Running   <none>                 <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            Running   <none>                 <none>
+kueue-system         kueue-controller-manager-d75df54bb-ns5p7         Running   <none>                 <none>
+local-path-storage   local-path-provisioner-67b8995b4b-g5vxj          Running   <none>                 <none>
+team-a               a1-s92zs                                         Running   <none>                 <none>
+team-a               a2-bm748                                         Running   <none>                 <none>
+team-b               b1-zzwck                                         Running   <none>                 <none>
+team-b               b2-j5xqh                                         Running   <none>                 <none>
+team-b               b3-kpq9j                                         Running   2026-10-26T05:26:06Z   30

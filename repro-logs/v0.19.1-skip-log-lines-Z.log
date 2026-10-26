@@ -1,0 +1,12 @@
+# label v0.19.1
+# commit df3d3656004f7b2478004a37b34ad8efa9ffabf0
+# subject Prepare release v0.19.1 (#14302)
+# parents e95163842bdd5cf2e42beb2c3fb940986a6174b6
+# go go1.27.3
+# date 2026-10-26T04:03:30Z
+    preemption.go:430: "level"=4 "msg"="Evaluating FairSharing strategy" "preemptorNewShare"=+Inf "targetClusterQueue"={"name"="team-b"} "targetWorkload"={"name"="b1"} "targetOldShare"=500 "targetNewShare"=250 "strategyPassed"=false
+    preemption.go:430: "level"=4 "msg"="Evaluating FairSharing strategy" "preemptorNewShare"=+Inf "targetClusterQueue"={"name"="team-b"} "targetWorkload"={"name"="b2"} "targetOldShare"=500 "targetNewShare"=250 "strategyPassed"=false
+    preemption.go:430: "level"=4 "msg"="Evaluating FairSharing strategy" "preemptorNewShare"=+Inf "targetClusterQueue"={"name"="team-b"} "targetWorkload"={"name"="b3"} "targetOldShare"=500 "targetNewShare"=250 "strategyPassed"=false
+    preemption.go:468: "level"=4 "msg"="Evaluating FairSharing strategy" "preemptorNewShare"=+Inf "targetClusterQueue"={"name"="team-b"} "targetWorkload"={"name"="b1"} "targetOldShare"=500 "strategyPassed"=false
+ok  	sigs.k8s.io/kueue/pkg/scheduler/preemption	0.075s
+exit=0

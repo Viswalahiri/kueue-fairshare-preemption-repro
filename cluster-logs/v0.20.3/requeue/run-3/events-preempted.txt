@@ -1,0 +1,2 @@
+NAMESPACE   LAST SEEN   TYPE     REASON      OBJECT                  MESSAGE
+team-b      5s          Normal   Preempted   workload/job-b3-95228   Preempted to accommodate a workload (UID: 1afa9ba4-1dbc-474b-96e6-409b5a0108fa, JobUID: 494fea0a-9eb3-4632-9f8c-a50728640cc6) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)

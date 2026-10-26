@@ -1,0 +1,22 @@
+# label pr15128-parent
+# commit 284ed6a563dad96c85f34d07b5bf456e990ad120
+# subject Consolidate WorkloadPriorityClass reconcile error-handling tests (#15131)
+# parents 5dc5a22382a76322726524ae8b1fe0bbadedc84a
+# go go1.27.3
+# date 2026-10-26T03:55:02Z
+=== RUN   TestSortActivePods
+=== RUN   TestSortActivePods/finalizer_state_takes_priority_over_creation_timestamp
+=== RUN   TestSortActivePods/non-gated_pods_sort_before_gated_pods_with_the_same_finalizer_state
+=== RUN   TestSortActivePods/older_creation_timestamp_sorts_first_when_finalizer_and_gate_state_match
+--- PASS: TestSortActivePods (0.00s)
+    --- PASS: TestSortActivePods/finalizer_state_takes_priority_over_creation_timestamp (0.00s)
+    --- PASS: TestSortActivePods/non-gated_pods_sort_before_gated_pods_with_the_same_finalizer_state (0.00s)
+    --- PASS: TestSortActivePods/older_creation_timestamp_sorts_first_when_finalizer_and_gate_state_match (0.00s)
+=== RUN   TestSortInactivePods
+=== RUN   TestSortInactivePods/finalizer_state_takes_priority_over_last-active_time
+=== RUN   TestSortInactivePods/more_recently_active_pods_sort_first_when_finalizer_state_matches
+--- PASS: TestSortInactivePods (0.00s)
+    --- PASS: TestSortInactivePods/finalizer_state_takes_priority_over_last-active_time (0.00s)
+    --- PASS: TestSortInactivePods/more_recently_active_pods_sort_first_when_finalizer_state_matches (0.00s)
+ok  	sigs.k8s.io/kueue/pkg/controller/jobs/pod	0.026s
+exit=0

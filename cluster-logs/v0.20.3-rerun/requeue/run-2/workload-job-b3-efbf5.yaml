@@ -1,0 +1,113 @@
+date: 2026-10-26T05:22:46Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl -n team-b get workload job-b3-efbf5 -o yaml
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: Workload
+metadata:
+  creationTimestamp: "2026-10-26T05:22:36Z"
+  finalizers:
+  - kueue.x-k8s.io/resource-in-use
+  generation: 1
+  labels:
+    kueue.x-k8s.io/job-uid: a68c1359-877f-4cc8-a979-812c402fcabd
+  name: job-b3-efbf5
+  namespace: team-b
+  ownerReferences:
+  - apiVersion: batch/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: Job
+    name: b3
+    uid: a68c1359-877f-4cc8-a979-812c402fcabd
+  resourceVersion: "5286"
+  uid: e62b9643-a0f6-4a04-8903-0ff8408fbcd8
+spec:
+  active: true
+  podSets:
+  - count: 1
+    name: main
+    template:
+      metadata:
+        labels:
+          batch.kubernetes.io/job-name: b3
+      spec:
+        containers:
+        - image: registry.k8s.io/pause:3.10
+          imagePullPolicy: IfNotPresent
+          name: sleep
+          resources:
+            requests:
+              cpu: 500m
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Never
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    topologyRequest:
+      podIndexLabel: batch.kubernetes.io/job-completion-index
+  priority: 0
+  queueName: lq
+status:
+  accumulatedPastExecutionTimeSeconds: 4
+  conditions:
+  - lastTransitionTime: "2026-10-26T05:22:40Z"
+    message: 'couldn''t assign flavors to pod set main: insufficient unused quota
+      for cpu in flavor default, 500m more needed'
+    observedGeneration: 1
+    reason: WaitingForQuota
+    status: "False"
+    type: QuotaReserved
+  - lastTransitionTime: "2026-10-26T05:22:40Z"
+    message: 'Preempted to accommodate a workload (UID: 6225356b-0891-45bd-9440-1f551ce99ed9,
+      JobUID: a96a8236-f8ed-4e4b-aa91-eb157034bb92) due to Fair Sharing within the
+      cohort; preemptor path: /all/team-a; preemptee path: /all/team-b'
+    observedGeneration: 1
+    reason: Preempted
+    status: "True"
+    type: Evicted
+  - lastTransitionTime: "2026-10-26T05:22:40Z"
+    message: The workload has no reservation
+    observedGeneration: 1
+    reason: NoReservation
+    status: "False"
+    type: Admitted
+  - lastTransitionTime: "2026-10-26T05:22:40Z"
+    message: 'Preempted to accommodate a workload (UID: 6225356b-0891-45bd-9440-1f551ce99ed9,
+      JobUID: a96a8236-f8ed-4e4b-aa91-eb157034bb92) due to Fair Sharing within the
+      cohort; preemptor path: /all/team-a; preemptee path: /all/team-b'
+    reason: InCohortFairSharing
+    status: "True"
+    type: Preempted
+  - lastTransitionTime: "2026-10-26T05:22:40Z"
+    message: 'Preempted to accommodate a workload (UID: 6225356b-0891-45bd-9440-1f551ce99ed9,
+      JobUID: a96a8236-f8ed-4e4b-aa91-eb157034bb92) due to Fair Sharing within the
+      cohort; preemptor path: /all/team-a; preemptee path: /all/team-b'
+    observedGeneration: 1
+    reason: Preempted
+    status: "True"
+    type: Requeued
+  - lastTransitionTime: "2026-10-26T05:22:40Z"
+    message: Not all pods are ready or succeeded
+    observedGeneration: 1
+    reason: WaitForStart
+    status: "False"
+    type: PodsReady
+  resourceRequests:
+  - name: main
+    resources:
+      cpu: 500m
+  schedulingStats:
+    evictions:
+    - count: 1
+      reason: Preempted
+      underlyingCause: ""

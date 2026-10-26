@@ -1,0 +1,17 @@
+date: 2026-10-26T05:16:48Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get workloads -A -o custom-columns=NS:.metadata.namespace\,WL:.metadata.name\,JOB:.metadata.ownerReferences\[0\].name\,RESERVED:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].status\,RESERVED_AT:.status.conditions\[\?\(@.type==\"QuotaReserved\"\)\].lastTransitionTime\,EVICTED:.status.conditions\[\?\(@.type==\"Evicted\"\)\].reason\,PREEMPTED:.status.conditions\[\?\(@.type==\"Preempted\"\)\].reason\,REQUEUED:.status.conditions\[\?\(@.type==\"Requeued\"\)\].status
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NS       WL                 JOB      RESERVED   RESERVED_AT            EVICTED     PREEMPTED             REQUEUED
+team-a   job-a-high-cb4ee   a-high   True       2026-10-26T05:16:43Z   <none>      <none>                <none>
+team-a   job-a-low-0cc8a    a-low    False      2026-10-26T05:16:43Z   Preempted   InClusterQueue        True
+team-b   job-b1-6df74       b1       True       2026-10-26T05:16:33Z   <none>      <none>                <none>
+team-b   job-b2-77ec3       b2       True       2026-10-26T05:16:36Z   <none>      <none>                <none>
+team-b   job-b3-51384       b3       False      2026-10-26T05:16:43Z   Preempted   InCohortFairSharing   True

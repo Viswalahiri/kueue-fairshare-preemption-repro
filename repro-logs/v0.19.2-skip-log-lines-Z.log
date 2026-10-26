@@ -1,0 +1,10 @@
+# label v0.19.2
+# commit 8eab68778fc1b52affe165fdf5af29d1e9b4f3cb
+# subject Prepare release v0.19.2 (#14686)
+# parents 3561213cd8dc99a49fbdafe447517f283531802a
+# go go1.27.3
+# date 2026-10-26T04:03:54Z
+    preemption.go:432: "level"=4 "msg"="Skipping FairSharing strategy evaluation, no candidate can pass" "preemptorNewShare"="+Inf" "targetClusterQueue"={"name"="team-b"} "targetOldShare"="500"
+    preemption.go:507: "level"=4 "msg"="Evaluating FairSharing strategy" "preemptorNewShare"="+Inf" "targetClusterQueue"={"name"="team-b"} "targetWorkload"={"name"="b1"} "targetOldShare"="500" "strategyPassed"=false
+ok  	sigs.k8s.io/kueue/pkg/scheduler/preemption	0.075s
+exit=0

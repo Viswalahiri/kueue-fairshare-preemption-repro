@@ -1,0 +1,138 @@
+date: 2026-10-26T05:15:47Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get events -A --sort-by=.lastTimestamp
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NAMESPACE            LAST SEEN   TYPE      REASON                         OBJECT                                               MESSAGE
+team-a               9s          Normal    QuotaReserved                  workload/job-a4-b3e3d                                Quota reserved in ClusterQueue team-a, wait time since queued was 1s; Flavors considered: main: default(Fit;borrow=1)
+team-b               5s          Normal    Started                        job/b1                                               Admitted by clusterQueue team-b
+team-a               18s         Normal    CreatedWorkload                job/a1                                               Created Workload: team-a/job-a1-fa63c
+team-a               18s         Normal    Started                        job/a1                                               Admitted by clusterQueue team-a
+team-a               15s         Normal    CreatedWorkload                job/a2                                               Created Workload: team-a/job-a2-bef1d
+team-a               15s         Normal    Started                        job/a2                                               Admitted by clusterQueue team-a
+default              2m          Normal    Starting                       node/kueue-fs-control-plane                          
+team-b               5s          Normal    Admitted                       workload/job-b1-3d028                                Admitted by ClusterQueue team-b, wait time since reservation was 1s
+team-b               5s          Normal    QuotaReserved                  workload/job-b1-3d028                                Quota reserved in ClusterQueue team-b, wait time since queued was 1s
+team-b               5s          Warning   WaitingForPreemptedWorkloads   workload/job-b1-3d028                                couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed. Pending the preemption of 1 workload(s)
+team-b               5s          Warning   WaitingForPreemptedWorkloads   workload/job-b1-3d028                                couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed. Pending the preemption of 1 workload(s)
+team-b               5s          Normal    PreemptedWorkload              workload/job-b1-3d028                                Preempted workload team-a/job-a4-b3e3d (UID: 02ac89ef-5374-4da3-aa67-691b5c1d07c1) in ClusterQueue team-a; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)
+team-a               12s         Normal    Admitted                       workload/job-a3-7010b                                Admitted by ClusterQueue team-a, wait time since reservation was 1s
+team-b               5s          Normal    CreatedWorkload                job/b1                                               Created Workload: team-b/job-b1-3d028
+team-a               4s          Warning   WaitingForQuota                workload/job-a4-b3e3d                                couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed
+team-a               5s          Warning   WaitingForQuota                workload/job-a4-b3e3d                                couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed
+team-a               5s          Warning   WaitingForQuota                workload/job-a4-b3e3d                                Workload no longer fits after processing another workload
+team-a               5s          Normal    Preempted                      workload/job-a4-b3e3d                                Preempted to accommodate a workload (UID: 42c7f406-548a-42dd-9c60-9b6c249a87d9, JobUID: 4bb50de9-b66e-48cf-9d26-c7e0cdf23d12) due to reclamation within the cohort; preemptor path: /all/team-b; preemptee path: /all/team-a; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)
+team-a               5s          Normal    EvictedDueToPreempted          workload/job-a4-b3e3d                                Preempted to accommodate a workload (UID: 42c7f406-548a-42dd-9c60-9b6c249a87d9, JobUID: 4bb50de9-b66e-48cf-9d26-c7e0cdf23d12) due to reclamation within the cohort; preemptor path: /all/team-b; preemptee path: /all/team-a
+team-a               9s          Normal    Admitted                       workload/job-a4-b3e3d                                Admitted by ClusterQueue team-a, wait time since reservation was 1s
+team-a               12s         Normal    CreatedWorkload                job/a3                                               Created Workload: team-a/job-a3-7010b
+team-a               12s         Normal    Started                        job/a3                                               Admitted by clusterQueue team-a
+team-a               9s          Normal    CreatedWorkload                job/a4                                               Created Workload: team-a/job-a4-b3e3d
+team-a               9s          Normal    Started                        job/a4                                               Admitted by clusterQueue team-a
+team-a               5s          Normal    Stopped                        job/a4                                               Preempted to accommodate a workload (UID: 42c7f406-548a-42dd-9c60-9b6c249a87d9, JobUID: 4bb50de9-b66e-48cf-9d26-c7e0cdf23d12) due to reclamation within the cohort; preemptor path: /all/team-b; preemptee path: /all/team-a
+team-a               18s         Normal    QuotaReserved                  workload/job-a1-fa63c                                Quota reserved in ClusterQueue team-a, wait time since queued was 0s
+team-a               18s         Normal    Admitted                       workload/job-a1-fa63c                                Admitted by ClusterQueue team-a, wait time since reservation was 0s
+team-a               15s         Normal    QuotaReserved                  workload/job-a2-bef1d                                Quota reserved in ClusterQueue team-a, wait time since queued was 1s; Flavors considered: main: default(Fit;borrow=1)
+team-a               12s         Normal    QuotaReserved                  workload/job-a3-7010b                                Quota reserved in ClusterQueue team-a, wait time since queued was 1s; Flavors considered: main: default(Fit;borrow=1)
+team-a               15s         Normal    Admitted                       workload/job-a2-bef1d                                Admitted by ClusterQueue team-a, wait time since reservation was 1s
+kube-system          2m9s        Normal    LeaderElection                 lease/kube-controller-manager                        kueue-fs-control-plane_e1d6e605-5140-437a-97e3-00069fce1ac8 became leader
+default              2m8s        Normal    NodeHasSufficientMemory        node/kueue-fs-control-plane                          Node kueue-fs-control-plane status is now: NodeHasSufficientMemory
+kube-system          2m8s        Warning   Unhealthy                      pod/kube-scheduler-kueue-fs-control-plane            Readiness probe failed: HTTP probe failed with statuscode: 500
+default              2m8s        Normal    NodeHasNoDiskPressure          node/kueue-fs-control-plane                          Node kueue-fs-control-plane status is now: NodeHasNoDiskPressure
+default              2m8s        Normal    NodeHasSufficientPID           node/kueue-fs-control-plane                          Node kueue-fs-control-plane status is now: NodeHasSufficientPID
+default              2m8s        Normal    Starting                       node/kueue-fs-control-plane                          Starting kubelet.
+default              2m8s        Normal    NodeAllocatableEnforced        node/kueue-fs-control-plane                          Updated Node Allocatable limit across pods
+kube-system          2m7s        Normal    LeaderElection                 lease/kube-scheduler                                 kueue-fs-control-plane_cad0a85d-48f8-4c22-b376-603532999e68 became leader
+default              2m4s        Normal    RegisteredNode                 node/kueue-fs-control-plane                          Node kueue-fs-control-plane event: Registered Node kueue-fs-control-plane in Controller
+kube-system          2m4s        Warning   NodeNotReady                   pod/kube-controller-manager-kueue-fs-control-plane   Node is not ready
+kube-system          2m4s        Warning   NodeNotReady                   pod/kube-apiserver-kueue-fs-control-plane            Node is not ready
+local-path-storage   2m3s        Normal    ScalingReplicaSet              deployment/local-path-provisioner                    Scaled up replica set local-path-provisioner-67b8995b4b from 0 to 1
+kube-system          2m3s        Normal    ScalingReplicaSet              deployment/coredns                                   Scaled up replica set coredns-7d764666f9 from 0 to 2
+kube-system          2m3s        Normal    Scheduled                      pod/kindnet-6jwsg                                    Successfully assigned kube-system/kindnet-6jwsg to kueue-fs-control-plane
+kube-system          2m3s        Normal    SuccessfulCreate               daemonset/kindnet                                    Created pod: kindnet-6jwsg
+kube-system          2m3s        Normal    Scheduled                      pod/kube-proxy-h9v7w                                 Successfully assigned kube-system/kube-proxy-h9v7w to kueue-fs-control-plane
+kube-system          2m3s        Normal    SuccessfulCreate               daemonset/kube-proxy                                 Created pod: kube-proxy-h9v7w
+kube-system          2m2s        Normal    Created                        pod/kube-proxy-h9v7w                                 Container created
+kube-system          2m2s        Normal    Pulled                         pod/kindnet-6jwsg                                    Container image "docker.io/kindest/kindnetd:v20251212-v0.29.0-alpha-105-g20ccfc88" already present on machine and can be accessed by the pod
+kube-system          2m2s        Normal    Started                        pod/kube-proxy-h9v7w                                 Container started
+kube-system          2m2s        Normal    Pulled                         pod/kube-proxy-h9v7w                                 Container image "registry.k8s.io/kube-proxy:v1.35.0" already present on machine and can be accessed by the pod
+kube-system          2m2s        Normal    SuccessfulCreate               replicaset/coredns-7d764666f9                        Created pod: coredns-7d764666f9-wx9tz
+kube-system          2m2s        Normal    SuccessfulCreate               replicaset/coredns-7d764666f9                        Created pod: coredns-7d764666f9-bnkn8
+local-path-storage   2m2s        Warning   FailedScheduling               pod/local-path-provisioner-67b8995b4b-g5vxj          0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system          2m2s        Warning   FailedScheduling               pod/coredns-7d764666f9-wx9tz                         0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kube-system          2m2s        Warning   FailedScheduling               pod/coredns-7d764666f9-bnkn8                         0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+local-path-storage   2m2s        Normal    SuccessfulCreate               replicaset/local-path-provisioner-67b8995b4b         Created pod: local-path-provisioner-67b8995b4b-g5vxj
+kube-system          2m1s        Normal    Started                        pod/kindnet-6jwsg                                    Container started
+kube-system          2m1s        Normal    Created                        pod/kindnet-6jwsg                                    Container created
+kueue-system         111s        Warning   FailedScheduling               pod/kueue-controller-manager-d75df54bb-ns5p7         0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kueue-system         111s        Warning   FailedScheduling               pod/kueue-controller-manager-65d87758f8-flgdp        0/1 nodes are available: 1 node(s) had untolerated taint(s). no new claims to deallocate, preemption: 0/1 nodes are available: 1 Preemption is not helpful for scheduling.
+kueue-system         111s        Normal    SuccessfulCreate               replicaset/kueue-controller-manager-65d87758f8       Created pod: kueue-controller-manager-65d87758f8-flgdp
+kueue-system         111s        Normal    SuccessfulCreate               replicaset/kueue-controller-manager-d75df54bb        Created pod: kueue-controller-manager-d75df54bb-ns5p7
+kueue-system         111s        Normal    ScalingReplicaSet              deployment/kueue-controller-manager                  Scaled up replica set kueue-controller-manager-65d87758f8 from 0 to 1
+kueue-system         111s        Normal    ScalingReplicaSet              deployment/kueue-controller-manager                  Scaled up replica set kueue-controller-manager-d75df54bb from 0 to 1
+kueue-system         110s        Normal    Pulled                         pod/kueue-controller-manager-d75df54bb-ns5p7         Container image "registry.k8s.io/kueue/kueue:v0.20.3" already present on machine and can be accessed by the pod
+local-path-storage   110s        Normal    Pulled                         pod/local-path-provisioner-67b8995b4b-g5vxj          Container image "docker.io/kindest/local-path-provisioner:v20251212-v0.29.0-alpha-105-g20ccfc88" already present on machine and can be accessed by the pod
+kueue-system         110s        Normal    Pulling                        pod/kueue-controller-manager-65d87758f8-flgdp        Pulling image "registry.k8s.io/kueue/kueue:v0.20.3"
+kueue-system         110s        Normal    Scheduled                      pod/kueue-controller-manager-65d87758f8-flgdp        Successfully assigned kueue-system/kueue-controller-manager-65d87758f8-flgdp to kueue-fs-control-plane
+local-path-storage   110s        Normal    Scheduled                      pod/local-path-provisioner-67b8995b4b-g5vxj          Successfully assigned local-path-storage/local-path-provisioner-67b8995b4b-g5vxj to kueue-fs-control-plane
+kube-system          110s        Normal    Scheduled                      pod/coredns-7d764666f9-wx9tz                         Successfully assigned kube-system/coredns-7d764666f9-wx9tz to kueue-fs-control-plane
+kube-system          110s        Normal    Pulled                         pod/coredns-7d764666f9-wx9tz                         Container image "registry.k8s.io/coredns/coredns:v1.13.1" already present on machine and can be accessed by the pod
+kueue-system         110s        Normal    Created                        pod/kueue-controller-manager-d75df54bb-ns5p7         Container created
+default              110s        Normal    NodeReady                      node/kueue-fs-control-plane                          Node kueue-fs-control-plane status is now: NodeReady
+kueue-system         110s        Normal    Scheduled                      pod/kueue-controller-manager-d75df54bb-ns5p7         Successfully assigned kueue-system/kueue-controller-manager-d75df54bb-ns5p7 to kueue-fs-control-plane
+kube-system          110s        Normal    Scheduled                      pod/coredns-7d764666f9-bnkn8                         Successfully assigned kube-system/coredns-7d764666f9-bnkn8 to kueue-fs-control-plane
+kube-system          110s        Normal    Pulled                         pod/coredns-7d764666f9-bnkn8                         Container image "registry.k8s.io/coredns/coredns:v1.13.1" already present on machine and can be accessed by the pod
+kueue-system         109s        Normal    Started                        pod/kueue-controller-manager-d75df54bb-ns5p7         Container started
+kube-system          108s        Normal    Created                        pod/coredns-7d764666f9-bnkn8                         Container created
+kube-system          108s        Normal    Started                        pod/coredns-7d764666f9-wx9tz                         Container started
+kube-system          108s        Normal    Created                        pod/coredns-7d764666f9-wx9tz                         Container created
+local-path-storage   108s        Normal    Created                        pod/local-path-provisioner-67b8995b4b-g5vxj          Container created
+kube-system          108s        Normal    Started                        pod/coredns-7d764666f9-bnkn8                         Container started
+local-path-storage   107s        Normal    Started                        pod/local-path-provisioner-67b8995b4b-g5vxj          Container started
+kueue-system         105s        Normal    LeaderElection                 lease/c1f6bfd2.kueue.x-k8s.io                        kueue-controller-manager-d75df54bb-ns5p7_7978ea71-cc5c-41a7-98f9-f41768d6c5c2 became leader
+kueue-system         98s         Normal    ScalingReplicaSet              deployment/kueue-controller-manager                  Scaled down replica set kueue-controller-manager-65d87758f8 from 1 to 0
+kueue-system         98s         Normal    SuccessfulDelete               replicaset/kueue-controller-manager-65d87758f8       Deleted pod: kueue-controller-manager-65d87758f8-flgdp
+kueue-system         80s         Warning   Failed                         pod/kueue-controller-manager-65d87758f8-flgdp        Failed to pull image "registry.k8s.io/kueue/kueue:v0.20.3": rpc error: code = DeadlineExceeded desc = failed to pull and unpack image "registry.k8s.io/kueue/kueue:v0.20.3": failed to resolve reference "registry.k8s.io/kueue/kueue:v0.20.3": failed to do request: Head "https://registry.k8s.io/v2/kueue/kueue/manifests/v0.20.3": dial tcp 34.96.108.209:443: i/o timeout
+kueue-system         80s         Warning   Failed                         pod/kueue-controller-manager-65d87758f8-flgdp        Error: ErrImagePull
+team-a               19s         Normal    SuccessfulCreate               job/a1                                               Created pod: a1-hgtr5
+team-a               19s         Normal    Resumed                        job/a1                                               Job resumed
+team-a               19s         Normal    Scheduled                      pod/a1-hgtr5                                         Successfully assigned team-a/a1-hgtr5 to kueue-fs-control-plane
+team-a               19s         Normal    Pulled                         pod/a1-hgtr5                                         Container image "registry.k8s.io/pause:3.10" already present on machine and can be accessed by the pod
+team-a               19s         Normal    Created                        pod/a1-hgtr5                                         Container created
+team-a               19s         Normal    Started                        pod/a1-hgtr5                                         Container started
+team-a               19s         Normal    Suspended                      job/a1                                               Job suspended
+team-a               16s         Normal    Scheduled                      pod/a2-tvs49                                         Successfully assigned team-a/a2-tvs49 to kueue-fs-control-plane
+team-a               16s         Normal    SuccessfulCreate               job/a2                                               Created pod: a2-tvs49
+team-a               16s         Normal    Suspended                      job/a2                                               Job suspended
+team-a               16s         Normal    Resumed                        job/a2                                               Job resumed
+team-a               15s         Normal    Pulled                         pod/a2-tvs49                                         Container image "registry.k8s.io/pause:3.10" already present on machine and can be accessed by the pod
+team-a               15s         Normal    Created                        pod/a2-tvs49                                         Container created
+team-a               15s         Normal    Started                        pod/a2-tvs49                                         Container started
+team-a               13s         Normal    Resumed                        job/a3                                               Job resumed
+team-a               13s         Normal    SuccessfulCreate               job/a3                                               Created pod: a3-8xsz8
+team-a               13s         Normal    Suspended                      job/a3                                               Job suspended
+team-a               13s         Normal    Scheduled                      pod/a3-8xsz8                                         Successfully assigned team-a/a3-8xsz8 to kueue-fs-control-plane
+team-a               12s         Normal    Pulled                         pod/a3-8xsz8                                         Container image "registry.k8s.io/pause:3.10" already present on machine and can be accessed by the pod
+team-a               12s         Normal    Created                        pod/a3-8xsz8                                         Container created
+team-a               12s         Normal    Started                        pod/a3-8xsz8                                         Container started
+team-a               9s          Normal    SuccessfulCreate               job/a4                                               Created pod: a4-jp462
+team-a               9s          Normal    Scheduled                      pod/a4-jp462                                         Successfully assigned team-a/a4-jp462 to kueue-fs-control-plane
+team-a               9s          Normal    Created                        pod/a4-jp462                                         Container created
+team-a               9s          Normal    Started                        pod/a4-jp462                                         Container started
+team-a               9s          Normal    Resumed                        job/a4                                               Job resumed
+team-a               9s          Normal    Pulled                         pod/a4-jp462                                         Container image "registry.k8s.io/pause:3.10" already present on machine and can be accessed by the pod
+team-a               6s          Normal    SuccessfulDelete               job/a4                                               Deleted pod: a4-jp462
+team-a               6s          Normal    Killing                        pod/a4-jp462                                         Stopping container sleep
+team-a               6s          Normal    Suspended                      job/a4                                               Job suspended
+team-b               6s          Normal    Suspended                      job/b1                                               Job suspended
+team-b               5s          Normal    Scheduled                      pod/b1-zbdql                                         Successfully assigned team-b/b1-zbdql to kueue-fs-control-plane
+team-b               5s          Normal    Resumed                        job/b1                                               Job resumed
+team-b               5s          Normal    SuccessfulCreate               job/b1                                               Created pod: b1-zbdql
+team-b               5s          Normal    Started                        pod/b1-zbdql                                         Container started
+team-b               5s          Normal    Created                        pod/b1-zbdql                                         Container created
+team-b               5s          Normal    Pulled                         pod/b1-zbdql                                         Container image "registry.k8s.io/pause:3.10" already present on machine and can be accessed by the pod

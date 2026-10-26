@@ -1,0 +1,14 @@
+source: live kind cluster, not a unit test
+requeued_workload_count: 1
+victim_namespace: team-b
+victim_workload: job-b3-95228
+victim_job: b3
+requeued_condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "Preempted to accommodate a workload (UID: 1afa9ba4-1dbc-474b-96e6-409b5a0108fa, JobUID: 494fea0a-9eb3-4632-9f8c-a50728640cc6) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Requeued"}
+evicted_condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "Preempted to accommodate a workload (UID: 1afa9ba4-1dbc-474b-96e6-409b5a0108fa, JobUID: 494fea0a-9eb3-4632-9f8c-a50728640cc6) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "observedGeneration": 1, "reason": "Preempted", "status": "True", "type": "Evicted"}
+preempted_condition: {"lastTransitionTime": "2026-10-26T04:33:41Z", "message": "Preempted to accommodate a workload (UID: 1afa9ba4-1dbc-474b-96e6-409b5a0108fa, JobUID: 494fea0a-9eb3-4632-9f8c-a50728640cc6) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b", "reason": "InCohortFairSharing", "status": "True", "type": "Preempted"}
+requeueState: <absent>
+next_attempt_count_at_or_after_requeued: 3
+next_attempt_log: {"level":"Level(-2)","ts":"2026-10-26T04:33:41.926746252Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":123,"workload":{"name":"job-b3-95228","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}
+next_attempt_timestamp: 2026-10-26T04:33:41.926746Z
+delta_seconds: 0.926746
+delta_definition: next Attempting-to-schedule log timestamp minus Requeued lastTransitionTime. Condition time is RFC3339 (one-second resolution). Log time is the controller clock. Live kind cluster, not a unit test.

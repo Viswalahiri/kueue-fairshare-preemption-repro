@@ -1,0 +1,4 @@
+*.raw
+cluster-logs/**/port-forward.log
+.env
+*.token

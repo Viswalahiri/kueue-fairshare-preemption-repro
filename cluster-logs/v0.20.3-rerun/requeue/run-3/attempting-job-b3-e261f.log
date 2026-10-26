@@ -1,0 +1,15 @@
+date: 2026-10-26T05:23:17Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl -n kueue-system logs deploy/kueue-controller-manager --since-time=2026-10-26T05:23:08Z | grep -F job-b3-e261f | grep -F 'Attempting to schedule workload' || true
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+{"level":"Level(-2)","ts":"2026-10-26T05:23:08.264428135Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":221,"workload":{"name":"job-b3-e261f","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}
+{"level":"Level(-2)","ts":"2026-10-26T05:23:11.550233578Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":231,"workload":{"name":"job-b3-e261f","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}
+{"level":"Level(-2)","ts":"2026-10-26T05:23:11.58548441Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":232,"workload":{"name":"job-b3-e261f","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}
+{"level":"Level(-2)","ts":"2026-10-26T05:23:12.54488832Z","logger":"scheduler","caller":"scheduler/scheduler.go:476","msg":"Attempting to schedule workload","replica-role":"leader","schedulingCycle":233,"workload":{"name":"job-b3-e261f","namespace":"team-b"},"clusterQueue":{"name":"team-b"},"parentCohort":{"name":"all"},"rootCohort":{"name":"all"}}

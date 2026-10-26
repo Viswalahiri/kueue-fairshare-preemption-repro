@@ -1,0 +1,10 @@
+date: 2026-10-26T05:13:39Z
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git rev-parse HEAD of the worktree
+header_note: kueue_commit was unknown at capture time and was corrected from cluster-logs/v0.20.3-rerun/unit/kueue-rev-parse.txt
+command: go version
+source: unit test, not a live kind cluster
+exit_code: 0
+===== capture body =====
+go version go1.27.3 linux/amd64

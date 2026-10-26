@@ -1,0 +1,49 @@
+date: 2026-10-26T05:17:20Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get events -A --field-selector reason=Preempted -o json || echo '{"items":[]}'
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "action": "Preempted",
+            "apiVersion": "v1",
+            "eventTime": "2026-10-26T05:17:14.793732Z",
+            "firstTimestamp": null,
+            "involvedObject": {
+                "apiVersion": "kueue.x-k8s.io/v1beta2",
+                "kind": "Workload",
+                "name": "job-b3-967ad",
+                "namespace": "team-b",
+                "resourceVersion": "2319",
+                "uid": "82ba971a-a706-4e97-8daa-ea0f10517dc0"
+            },
+            "kind": "Event",
+            "lastTimestamp": null,
+            "message": "Preempted to accommodate a workload (UID: 51307e3b-1761-48fe-bb2c-d84f212c50b1, JobUID: 116b47cc-2630-4196-b3ae-fa6d940cfc4e) due to reclamation within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b; preemptor effective priority: 100 (base: 100, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)",
+            "metadata": {
+                "creationTimestamp": "2026-10-26T05:17:14Z",
+                "name": "job-b3-967ad.18e1fc92f60e7667",
+                "namespace": "team-b",
+                "resourceVersion": "2332",
+                "uid": "fe740f65-f376-4121-8d5f-994028b0e8ad"
+            },
+            "reason": "Preempted",
+            "reportingComponent": "kueue-admission",
+            "reportingInstance": "kueue-admission-kueue-controller-manager-d75df54bb-ns5p7",
+            "source": {},
+            "type": "Normal"
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": ""
+    }
+}

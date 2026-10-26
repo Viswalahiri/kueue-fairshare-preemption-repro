@@ -1,0 +1,13 @@
+date: 2026-10-26T05:13:43Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: unknown
+kueue_commit_source: unknown
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get nodes -o wide
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NAME                     STATUS     ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION   CONTAINER-RUNTIME
+kueue-fs-control-plane   NotReady   control-plane   6s    v1.35.0   172.18.0.2    <none>        Debian GNU/Linux 12 (bookworm)   6.12.94+         containerd://2.2.0

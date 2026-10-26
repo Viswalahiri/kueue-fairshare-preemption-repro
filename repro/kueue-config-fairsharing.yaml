@@ -1,0 +1,35 @@
+# Replaces controller_manager_config.yaml in ConfigMap kueue-system/kueue-manager-config.
+# Uncommented manager settings match the v0.19.4 and v0.20.3 release defaults.
+# Fair sharing and metrics.enableClusterQueueResources are turned on.
+# Integrations are limited to batch/job, which is the only framework this repro submits.
+# The v0.20.3 release ConfigMap also lists MPIJob, Ray, JobSet, Pod, Deployment,
+# StatefulSet, TrainJob, AppWrapper, and LeaderWorkerSet. Those are not required here.
+apiVersion: config.kueue.x-k8s.io/v1beta2
+kind: Configuration
+health:
+  healthProbeBindAddress: :8081
+metrics:
+  bindAddress: :8443
+  enableClusterQueueResources: true
+webhook:
+  port: 9443
+leaderElection:
+  leaderElect: true
+  resourceName: c1f6bfd2.kueue.x-k8s.io
+controller:
+  groupKindConcurrency:
+    Job.batch: 5
+    Pod: 5
+    Workload.kueue.x-k8s.io: 10
+    LocalQueue.kueue.x-k8s.io: 5
+    Cohort.kueue.x-k8s.io: 1
+    ClusterQueue.kueue.x-k8s.io: 5
+    ResourceFlavor.kueue.x-k8s.io: 1
+clientConnection:
+  qps: 300
+  burst: 500
+integrations:
+  frameworks:
+  - "batch/job"
+fairSharing:
+  preemptionStrategies: [LessThanOrEqualToFinalShare, LessThanInitialShare]

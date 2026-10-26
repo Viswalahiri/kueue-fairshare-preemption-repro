@@ -1,0 +1,13 @@
+date: 2026-10-26T05:14:09Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl -n kueue-system get deploy kueue-controller-manager -o jsonpath=image=\{.spec.template.spec.containers\[0\].image\}\{\"\\n\"\}args=\{.spec.template.spec.containers\[0\].args\}\{\"\\n\"\}
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+image=registry.k8s.io/kueue/kueue:v0.20.3
+args=["--config=/controller_manager_config.yaml","--zap-log-level=4"]

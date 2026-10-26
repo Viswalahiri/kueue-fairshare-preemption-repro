@@ -1,0 +1,390 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "kueue.x-k8s.io/v1beta2",
+      "kind": "Workload",
+      "metadata": {
+        "creationTimestamp": "2026-10-26T04:34:53Z",
+        "finalizers": [
+          "kueue.x-k8s.io/resource-in-use"
+        ],
+        "generation": 1,
+        "labels": {
+          "kueue.x-k8s.io/job-uid": "68580280-18ed-4e33-aab5-f9f91c039deb"
+        },
+        "name": "job-a1-9bd2a",
+        "namespace": "team-a",
+        "ownerReferences": [
+          {
+            "apiVersion": "batch/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Job",
+            "name": "a1",
+            "uid": "68580280-18ed-4e33-aab5-f9f91c039deb"
+          }
+        ],
+        "resourceVersion": "8236",
+        "uid": "abfc5e58-de29-4c58-9a37-2c2e34f2b8b3"
+      },
+      "status": {
+        "admission": {
+          "clusterQueue": "team-a",
+          "podSetAssignments": [
+            {
+              "count": 1,
+              "flavors": {
+                "cpu": "default"
+              },
+              "name": "main",
+              "resourceUsage": {
+                "cpu": "500m"
+              }
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-26T04:34:54Z",
+            "message": "All pods reached readiness and the workload is running",
+            "observedGeneration": 1,
+            "reason": "Started",
+            "status": "True",
+            "type": "PodsReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:34:53Z",
+            "message": "Quota reserved in ClusterQueue team-a",
+            "observedGeneration": 1,
+            "reason": "QuotaReserved",
+            "status": "True",
+            "type": "QuotaReserved"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:34:53Z",
+            "message": "The workload is admitted",
+            "observedGeneration": 1,
+            "reason": "Admitted",
+            "status": "True",
+            "type": "Admitted"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "kueue.x-k8s.io/v1beta2",
+      "kind": "Workload",
+      "metadata": {
+        "creationTimestamp": "2026-10-26T04:35:06Z",
+        "finalizers": [
+          "kueue.x-k8s.io/resource-in-use"
+        ],
+        "generation": 1,
+        "labels": {
+          "kueue.x-k8s.io/job-uid": "7f0e9a42-7b57-4f0e-905e-61bf9496300c"
+        },
+        "name": "job-a2-9b46a",
+        "namespace": "team-a",
+        "ownerReferences": [
+          {
+            "apiVersion": "batch/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Job",
+            "name": "a2",
+            "uid": "7f0e9a42-7b57-4f0e-905e-61bf9496300c"
+          }
+        ],
+        "resourceVersion": "8365",
+        "uid": "1ee28254-7334-4f72-ac54-b55f08932bb3"
+      },
+      "status": {
+        "admission": {
+          "clusterQueue": "team-a",
+          "podSetAssignments": [
+            {
+              "count": 1,
+              "flavors": {
+                "cpu": "default"
+              },
+              "name": "main",
+              "resourceUsage": {
+                "cpu": "500m"
+              }
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-26T04:35:06Z",
+            "message": "Quota reserved in ClusterQueue team-a",
+            "observedGeneration": 1,
+            "reason": "QuotaReserved",
+            "status": "True",
+            "type": "QuotaReserved"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:35:06Z",
+            "message": "The workload is admitted",
+            "observedGeneration": 1,
+            "reason": "Admitted",
+            "status": "True",
+            "type": "Admitted"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:35:06Z",
+            "message": "Not all pods are ready or succeeded",
+            "observedGeneration": 1,
+            "reason": "WaitForStart",
+            "status": "False",
+            "type": "PodsReady"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "kueue.x-k8s.io/v1beta2",
+      "kind": "Workload",
+      "metadata": {
+        "creationTimestamp": "2026-10-26T04:34:56Z",
+        "finalizers": [
+          "kueue.x-k8s.io/resource-in-use"
+        ],
+        "generation": 1,
+        "labels": {
+          "kueue.x-k8s.io/job-uid": "225a1d5b-30c3-4b0f-a66a-bf729ed36c68"
+        },
+        "name": "job-b1-fb892",
+        "namespace": "team-b",
+        "ownerReferences": [
+          {
+            "apiVersion": "batch/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Job",
+            "name": "b1",
+            "uid": "225a1d5b-30c3-4b0f-a66a-bf729ed36c68"
+          }
+        ],
+        "resourceVersion": "8267",
+        "uid": "a2495d43-4122-4a0e-8838-b74c480f5e41"
+      },
+      "status": {
+        "admission": {
+          "clusterQueue": "team-b",
+          "podSetAssignments": [
+            {
+              "count": 1,
+              "flavors": {
+                "cpu": "default"
+              },
+              "name": "main",
+              "resourceUsage": {
+                "cpu": "500m"
+              }
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-26T04:34:57Z",
+            "message": "All pods reached readiness and the workload is running",
+            "observedGeneration": 1,
+            "reason": "Started",
+            "status": "True",
+            "type": "PodsReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:34:56Z",
+            "message": "Quota reserved in ClusterQueue team-b",
+            "observedGeneration": 1,
+            "reason": "QuotaReserved",
+            "status": "True",
+            "type": "QuotaReserved"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:34:56Z",
+            "message": "The workload is admitted",
+            "observedGeneration": 1,
+            "reason": "Admitted",
+            "status": "True",
+            "type": "Admitted"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "kueue.x-k8s.io/v1beta2",
+      "kind": "Workload",
+      "metadata": {
+        "creationTimestamp": "2026-10-26T04:34:59Z",
+        "finalizers": [
+          "kueue.x-k8s.io/resource-in-use"
+        ],
+        "generation": 1,
+        "labels": {
+          "kueue.x-k8s.io/job-uid": "55cd57b9-f896-44ef-9b24-c918fa4ac9a7"
+        },
+        "name": "job-b2-9c167",
+        "namespace": "team-b",
+        "ownerReferences": [
+          {
+            "apiVersion": "batch/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Job",
+            "name": "b2",
+            "uid": "55cd57b9-f896-44ef-9b24-c918fa4ac9a7"
+          }
+        ],
+        "resourceVersion": "8300",
+        "uid": "1c507378-c3e3-47fc-b335-e466cd57cd50"
+      },
+      "status": {
+        "admission": {
+          "clusterQueue": "team-b",
+          "podSetAssignments": [
+            {
+              "count": 1,
+              "flavors": {
+                "cpu": "default"
+              },
+              "name": "main",
+              "resourceUsage": {
+                "cpu": "500m"
+              }
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-26T04:35:00Z",
+            "message": "All pods reached readiness and the workload is running",
+            "observedGeneration": 1,
+            "reason": "Started",
+            "status": "True",
+            "type": "PodsReady"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:34:59Z",
+            "message": "Quota reserved in ClusterQueue team-b",
+            "observedGeneration": 1,
+            "reason": "QuotaReserved",
+            "status": "True",
+            "type": "QuotaReserved"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:34:59Z",
+            "message": "The workload is admitted",
+            "observedGeneration": 1,
+            "reason": "Admitted",
+            "status": "True",
+            "type": "Admitted"
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "kueue.x-k8s.io/v1beta2",
+      "kind": "Workload",
+      "metadata": {
+        "creationTimestamp": "2026-10-26T04:35:02Z",
+        "finalizers": [
+          "kueue.x-k8s.io/resource-in-use"
+        ],
+        "generation": 1,
+        "labels": {
+          "kueue.x-k8s.io/job-uid": "9fbfa9c8-d3ba-4334-94f3-b12f1d2b7ae0"
+        },
+        "name": "job-b3-c0e75",
+        "namespace": "team-b",
+        "ownerReferences": [
+          {
+            "apiVersion": "batch/v1",
+            "blockOwnerDeletion": true,
+            "controller": true,
+            "kind": "Job",
+            "name": "b3",
+            "uid": "9fbfa9c8-d3ba-4334-94f3-b12f1d2b7ae0"
+          }
+        ],
+        "resourceVersion": "8373",
+        "uid": "87328425-268a-4eb6-bba0-cf8d2046cd58"
+      },
+      "status": {
+        "accumulatedPastExecutionTimeSeconds": 4,
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-10-26T04:35:06Z",
+            "message": "couldn't assign flavors to pod set main: insufficient unused quota for cpu in flavor default, 500m more needed",
+            "observedGeneration": 1,
+            "reason": "WaitingForQuota",
+            "status": "False",
+            "type": "QuotaReserved"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:35:06Z",
+            "message": "Preempted to accommodate a workload (UID: 1ee28254-7334-4f72-ac54-b55f08932bb3, JobUID: 7f0e9a42-7b57-4f0e-905e-61bf9496300c) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b",
+            "observedGeneration": 1,
+            "reason": "Preempted",
+            "status": "True",
+            "type": "Evicted"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:35:06Z",
+            "message": "The workload has no reservation",
+            "observedGeneration": 1,
+            "reason": "NoReservation",
+            "status": "False",
+            "type": "Admitted"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:35:06Z",
+            "message": "Preempted to accommodate a workload (UID: 1ee28254-7334-4f72-ac54-b55f08932bb3, JobUID: 7f0e9a42-7b57-4f0e-905e-61bf9496300c) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b",
+            "reason": "InCohortFairSharing",
+            "status": "True",
+            "type": "Preempted"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:35:06Z",
+            "message": "Preempted to accommodate a workload (UID: 1ee28254-7334-4f72-ac54-b55f08932bb3, JobUID: 7f0e9a42-7b57-4f0e-905e-61bf9496300c) due to Fair Sharing within the cohort; preemptor path: /all/team-a; preemptee path: /all/team-b",
+            "observedGeneration": 1,
+            "reason": "Preempted",
+            "status": "True",
+            "type": "Requeued"
+          },
+          {
+            "lastTransitionTime": "2026-10-26T04:35:06Z",
+            "message": "Not all pods are ready or succeeded",
+            "observedGeneration": 1,
+            "reason": "WaitForStart",
+            "status": "False",
+            "type": "PodsReady"
+          }
+        ],
+        "resourceRequests": [
+          {
+            "name": "main",
+            "resources": {
+              "cpu": "500m"
+            }
+          }
+        ],
+        "schedulingStats": {
+          "evictions": [
+            {
+              "count": 1,
+              "reason": "Preempted",
+              "underlyingCause": ""
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": ""
+  }
+}

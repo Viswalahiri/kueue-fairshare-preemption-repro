@@ -1,0 +1,54 @@
+# Scenario O/O2 overrides: kubectl apply -f 02-queues-ordering.yaml on top of 01-queues.yaml (fresh cluster recommended).
+# team-a weight 1, nominal 1 CPU; Cohort pool 500m; team-b unchanged.
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: Cohort
+metadata:
+  name: all
+spec:
+  resourceGroups:
+  - coveredResources: ["cpu"]
+    flavors:
+    - name: default
+      resources:
+      - name: cpu
+        nominalQuota: 500m
+---
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: ClusterQueue
+metadata:
+  name: team-a
+spec:
+  cohortName: all
+  namespaceSelector: {}
+  fairSharing:
+    weight: "1"
+  preemption:
+    reclaimWithinCohort: Any
+    withinClusterQueue: LowerPriority
+  resourceGroups:
+  - coveredResources: ["cpu"]
+    flavors:
+    - name: default
+      resources:
+      - name: cpu
+        nominalQuota: "1"
+---
+apiVersion: kueue.x-k8s.io/v1beta2
+kind: ClusterQueue
+metadata:
+  name: team-b
+spec:
+  cohortName: all
+  namespaceSelector: {}
+  fairSharing:
+    weight: "1"
+  preemption:
+    reclaimWithinCohort: Any
+    withinClusterQueue: LowerPriority
+  resourceGroups:
+  - coveredResources: ["cpu"]
+    flavors:
+    - name: default
+      resources:
+      - name: cpu
+        nominalQuota: 500m

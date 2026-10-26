@@ -1,0 +1,19 @@
+Copied verbatim from the original run's command output (session of 2026-10-25); not re-captured.
+NAMESPACE            NAME                                             READY   STATUS        RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+kube-system          coredns-7d764666f9-l28vv                         1/1     Running       0          42m     10.244.0.4    kueue-fs-control-plane   <none>           <none>
+kube-system          coredns-7d764666f9-ztd7c                         1/1     Running       0          42m     10.244.0.3    kueue-fs-control-plane   <none>           <none>
+kube-system          etcd-kueue-fs-control-plane                      1/1     Running       0          42m     172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kindnet-5kwct                                    1/1     Running       0          42m     172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-apiserver-kueue-fs-control-plane            1/1     Running       0          42m     172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-controller-manager-kueue-fs-control-plane   1/1     Running       0          42m     172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-proxy-pdlxf                                 1/1     Running       0          18m     172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kube-system          kube-scheduler-kueue-fs-control-plane            1/1     Running       0          42m     172.18.0.2    kueue-fs-control-plane   <none>           <none>
+kueue-system         kueue-controller-manager-d75df54bb-rgxl7         1/1     Running       0          26m     10.244.0.7    kueue-fs-control-plane   <none>           <none>
+local-path-storage   local-path-provisioner-67b8995b4b-bp2gg          1/1     Running       0          3m28s   10.244.0.32   kueue-fs-control-plane   <none>           <none>
+team-a               a1-ddpzq                                         1/1     Running       0          14s     10.244.0.57   kueue-fs-control-plane   <none>           <none>
+team-a               a2-sgzfb                                         0/1     Pending       0          1s      <none>        <none>                   <none>           <none>
+team-b               b1-z9bsx                                         1/1     Running       0          11s     10.244.0.58   kueue-fs-control-plane   <none>           <none>
+team-b               b2-vnmvd                                         1/1     Running       0          8s      10.244.0.59   kueue-fs-control-plane   <none>           <none>
+team-b               b3-pbnsk                                         1/1     Terminating   0          5s      10.244.0.60   kueue-fs-control-plane   <none>           <none>
+team-b               b3-vndlt                                         1/1     Terminating   0          31s     10.244.0.56   kueue-fs-control-plane   <none>           <none>
+---

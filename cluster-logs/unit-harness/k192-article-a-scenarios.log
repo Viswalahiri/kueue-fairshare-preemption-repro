@@ -1,0 +1,7 @@
+# v0.19.2 8eab68778fc1b52affe165fdf5af29d1e9b4f3cb
+REPRO O2: same as O but a-high requests 500m targets=[/b1:InCohortReclamation]
+REPRO O: other-CQ borrower vs own low-priority workload targets=[/a-low:InClusterQueue /b1:InCohortFairSharing]
+REPRO Z2: weight-1 CQ reclaims nominal from a weight-0 borrower targets=[/a1:InCohortReclamation]
+REPRO Z: weight-0 borrower cannot preempt weight-1 borrower targets=[]
+REPRO Zc: control, same as Z but team-a weight 1 targets=[/b1:InCohortFairSharing]
+ok  	sigs.k8s.io/kueue/pkg/scheduler/preemption	0.104s

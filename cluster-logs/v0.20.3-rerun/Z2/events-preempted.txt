@@ -1,0 +1,13 @@
+date: 2026-10-26T05:15:47Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: kubectl get events -A --field-selector reason=Preempted --sort-by=.lastTimestamp || true
+source: live kind cluster
+exit_code: 0
+===== capture body =====
+NAMESPACE   LAST SEEN   TYPE     REASON      OBJECT                  MESSAGE
+team-a      5s          Normal   Preempted   workload/job-a4-b3e3d   Preempted to accommodate a workload (UID: 42c7f406-548a-42dd-9c60-9b6c249a87d9, JobUID: 4bb50de9-b66e-48cf-9d26-c7e0cdf23d12) due to reclamation within the cohort; preemptor path: /all/team-b; preemptee path: /all/team-a; preemptor effective priority: 0 (base: 0, boost: 0); preemptee effective priority: 0 (base: 0, boost: 0)

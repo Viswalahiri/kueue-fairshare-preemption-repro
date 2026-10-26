@@ -1,0 +1,22 @@
+# label v0.19.4
+# commit 5d738f203bd0d301d4966282b144f01d5bb32437
+# subject Prepare release v0.19.4 (#15409)
+# parents 3445ed96a7b26d4728debc7a56fec941838cc8d2
+# go go1.27.3
+# date 2026-10-26T03:57:16Z
+=== RUN   TestCompareBool
+=== RUN   TestCompareBool/both_true
+=== RUN   TestCompareBool/both_false
+=== RUN   TestCompareBool/a_true,_b_false
+    cmp_test.go:55: CompareBool(true, false) = 1; want -1
+=== RUN   TestCompareBool/a_false,_b_true
+    cmp_test.go:55: CompareBool(false, true) = -1; want 1
+--- FAIL: TestCompareBool (0.00s)
+    --- PASS: TestCompareBool/both_true (0.00s)
+    --- PASS: TestCompareBool/both_false (0.00s)
+    --- FAIL: TestCompareBool/a_true,_b_false (0.00s)
+    --- FAIL: TestCompareBool/a_false,_b_true (0.00s)
+FAIL
+FAIL	sigs.k8s.io/kueue/pkg/util/cmp	0.002s
+FAIL
+exit=1

@@ -1,0 +1,5 @@
+pod: b3-wxvml
+terminationGracePeriodSeconds: 30
+image: registry.k8s.io/e2e-test-images/busybox:1.36.1-1
+command: ["sh", "-c", "trap '' TERM; sleep 86400"]
+phase: Running

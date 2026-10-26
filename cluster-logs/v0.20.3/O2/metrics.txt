@@ -1,0 +1,7 @@
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} 0
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 250
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0

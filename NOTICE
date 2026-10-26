@@ -1,0 +1,20 @@
+Kueue fair-sharing preemption repro
+Copyright 2026 The Kueue fair-sharing preemption repro authors
+
+This repository is licensed under the Apache License, Version 2.0.
+See the LICENSE file.
+
+This repro exercises Kubernetes Kueue (https://github.com/kubernetes-sigs/kueue),
+Copyright The Kubernetes Authors, also licensed under the Apache License,
+Version 2.0.
+
+repro/run-unit-repro.sh checks out the upstream tags and pull-request commits
+listed in the README and runs their tests. repro/mk_test.py copies the body of
+upstream TestFairPreemptions (pkg/scheduler/preemption/preemption_fair_test.go)
+and swaps in the scenarios in repro/article_a_cases.go.txt. The generated file
+keeps Kueue's Apache-2.0 copyright header. It is written into a temporary
+git worktree under ${WORK:-/tmp/kueue-article-a} and is not committed here.
+
+The queue manifests, job template, share-mapping tests, and scenario case text
+in this repository are original to this repro. They call Kueue's public test
+helpers when the harness is compiled inside a Kueue worktree.

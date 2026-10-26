@@ -1,0 +1,2 @@
+NAME                     CPU   MEM
+kueue-fs-control-plane   4     16387280Ki

@@ -1,0 +1,34 @@
+date: 2026-10-26T05:14:56Z
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git rev-parse HEAD of the worktree
+header_note: kueue_commit was unknown at capture time and was corrected from cluster-logs/v0.20.3-rerun/unit/kueue-rev-parse.txt
+command: cd /tmp/kueue-article-a/v0.20.3 && go test -count=1 -timeout 180s -v ./pkg/scheduler/preemption/ -run TestArticleAPutBack
+source: unit test, not a live kind cluster
+exit_code: 0
+go: go version go1.27.3 linux/amd64
+===== capture body =====
+=== RUN   TestArticleAPutBack
+=== RUN   TestArticleAPutBack/8gpu_then_1gpu
+    zz_article_a_putback_test.go:100: PUTBACK CandidatesOrdering(gpu8, gpu1)=-1 (negative means gpu8 is before gpu1)
+    zz_article_a_putback_test.go:105: PUTBACK candidate order: [gpu8, gpu1]
+    clusterqueue.go:301: I1026 05:14:55.747629] Updating status in cache clusterQueue="team" newStatus="active" oldStatus=""
+    effective_resources.go:169: E1026 05:14:55.751031] Could not resolve workload resource defaults err="List on GroupVersionKind /v1, Kind=LimitRange specifies selector on field spec.hasContainerOrPodType, but no index with name spec.hasContainerOrPodType has been registered for GroupVersionKind /v1, Kind=LimitRange" workload="ns/gpu1"
+    effective_resources.go:169: E1026 05:14:55.751228] Could not resolve workload resource defaults err="List on GroupVersionKind /v1, Kind=LimitRange specifies selector on field spec.hasContainerOrPodType, but no index with name spec.hasContainerOrPodType has been registered for GroupVersionKind /v1, Kind=LimitRange" workload="ns/gpu8"
+    zz_article_a_putback_test.go:153: PUTBACK target ns/gpu8:InClusterQueue
+    zz_article_a_putback_test.go:155: PUTBACK final target names: [gpu8]
+    zz_article_a_putback_test.go:178: PUTBACK fillBackWorkloads does not restore the 1-GPU workload. The 8-GPU workload is first and already frees 8 GPUs, so the prefix that first fits has length 1. fillBackWorkloads is still called, and its loop start len(targets)-2 is -1, so the loop body does not run. The 1-GPU workload was never removed. It is spared, and the put-back step is not what spares it.
+=== RUN   TestArticleAPutBack/1gpu_then_8gpu
+    zz_article_a_putback_test.go:100: PUTBACK CandidatesOrdering(gpu8, gpu1)=1 (negative means gpu8 is before gpu1)
+    zz_article_a_putback_test.go:105: PUTBACK candidate order: [gpu1, gpu8]
+    clusterqueue.go:301: I1026 05:14:55.753623] Updating status in cache clusterQueue="team" newStatus="active" oldStatus=""
+    effective_resources.go:169: E1026 05:14:55.753787] Could not resolve workload resource defaults err="List on GroupVersionKind /v1, Kind=LimitRange specifies selector on field spec.hasContainerOrPodType, but no index with name spec.hasContainerOrPodType has been registered for GroupVersionKind /v1, Kind=LimitRange" workload="ns/gpu1"
+    effective_resources.go:169: E1026 05:14:55.753839] Could not resolve workload resource defaults err="List on GroupVersionKind /v1, Kind=LimitRange specifies selector on field spec.hasContainerOrPodType, but no index with name spec.hasContainerOrPodType has been registered for GroupVersionKind /v1, Kind=LimitRange" workload="ns/gpu8"
+    zz_article_a_putback_test.go:153: PUTBACK target ns/gpu8:InClusterQueue
+    zz_article_a_putback_test.go:155: PUTBACK final target names: [gpu8]
+    zz_article_a_putback_test.go:176: PUTBACK fillBackWorkloads does run on the 1-GPU workload: it is the earlier candidate, removing it does not free 8 GPUs, so the prefix that first fits is [gpu1, gpu8]. The loop starts at index 0, adds gpu1 back, the incoming 8-GPU workload still fits (nominal 9, gpu1 restored), and gpu1 is dropped from the target list. The 1-GPU workload is spared by that put-back.
+--- PASS: TestArticleAPutBack (0.07s)
+    --- PASS: TestArticleAPutBack/8gpu_then_1gpu (0.06s)
+    --- PASS: TestArticleAPutBack/1gpu_then_8gpu (0.00s)
+PASS
+ok  	sigs.k8s.io/kueue/pkg/scheduler/preemption	0.097s

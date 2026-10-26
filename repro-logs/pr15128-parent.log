@@ -1,0 +1,158 @@
+# label pr15128-parent
+# commit 284ed6a563dad96c85f34d07b5bf456e990ad120
+# subject Consolidate WorkloadPriorityClass reconcile error-handling tests (#15131)
+# parents 5dc5a22382a76322726524ae8b1fe0bbadedc84a
+# go go1.27.3
+# date 2026-10-26T03:52:33Z
+=== RUN   TestCompareBool
+=== RUN   TestCompareBool/both_true
+=== RUN   TestCompareBool/both_false
+=== RUN   TestCompareBool/a_true,_b_false
+=== RUN   TestCompareBool/a_false,_b_true
+--- PASS: TestCompareBool (0.00s)
+    --- PASS: TestCompareBool/both_true (0.00s)
+    --- PASS: TestCompareBool/both_false (0.00s)
+    --- PASS: TestCompareBool/a_true,_b_false (0.00s)
+    --- PASS: TestCompareBool/a_false,_b_true (0.00s)
+ok  	sigs.k8s.io/kueue/pkg/util/cmp	0.002s
+=== RUN   TestFairPreemptions
+=== RUN   TestFairPreemptions/reclaim_borrowable_quota_from_user_using_the_most
+=== RUN   TestFairPreemptions/can't_preempt_2_smaller_workloads_if_the_incoming_is_huge
+=== RUN   TestFairPreemptions/prefer_to_preempt_workloads_that_don't_make_the_target_CQ_have_the_biggest_share
+=== RUN   TestFairPreemptions/CQ_with_higher_weight_can_preempt_more
+=== RUN   TestFairPreemptions/hierarchical_preemption
+=== RUN   TestFairPreemptions/forced_to_preempt_within_clusterqueue_because_borrowing_workload_too_important
+=== RUN   TestFairPreemptions/cq_with_zero_weight_can_reclaim_nominal_quota
+=== RUN   TestFairPreemptions/can_admit_after_preempting_workloads_from_the_preemptor's_CQ_with_lower_processing_priority
+=== RUN   TestFairPreemptions/can_reclaim_from_queue_using_less,_if_taking_the_latest_workload_from_user_using_the_most_isn't_enough
+=== RUN   TestFairPreemptions/cannot_preempt_if_it_would_make_the_candidate_CQ_go_under_nominal_after_preempting_one_element
+=== RUN   TestFairPreemptions/preempt_lower_priority_first,_even_if_big
+=== RUN   TestFairPreemptions/reclaim_nominal_from_user_using_the_most
+=== RUN   TestFairPreemptions/preempt_one_from_each_CQ_borrowing
+=== RUN   TestFairPreemptions/can't_preempt_nominal_from_Cohort_with_0_weight
+=== RUN   TestFairPreemptions/can_preempt_within_cluster_queue_when_no_cohort
+=== RUN   TestFairPreemptions/borrowing_cq_in_non-borrowing_cohort_is_protected
+=== RUN   TestFairPreemptions/nominal_first:_workload_fitting_within_nominal_can_preempt_despite_high_aggregate_DRS
+=== RUN   TestFairPreemptions/can_preempt_lower_priority_workloads_from_same_CQ
+=== RUN   TestFairPreemptions/can't_preempt_huge_workload_if_the_incoming_is_also_huge
+=== RUN   TestFairPreemptions/preempt_from_target_and_others_even_if_over_nominal
+=== RUN   TestFairPreemptions/preempt_from_different_cluster_queues_if_the_end_result_has_a_smaller_max_share
+=== RUN   TestFairPreemptions/scenario_above_does_not_flap
+=== RUN   TestFairPreemptions/can't_preempt_nominal_from_CQ_with_0_weight
+=== RUN   TestFairPreemptions/can't_preempt_when_it_would_switch_the_imbalance
+=== RUN   TestFairPreemptions/can_preempt_a_combination_of_same_CQ_and_highest_user
+=== RUN   TestFairPreemptions/can_preempt_anything_borrowing_from_CQ_with_0_weight
+=== RUN   TestFairPreemptions/zero_weight_borrowing_preemptor_cannot_preempt_from_a_borrowing_CQ_with_a_non-zero_weight
+=== RUN   TestFairPreemptions/can't_preempt_when_everyone_under_nominal
+=== RUN   TestFairPreemptions/preempt_workload_that_doesn't_transfer_the_imbalance,_even_if_high_priority
+=== RUN   TestFairPreemptions/deep_preemption
+=== RUN   TestFairPreemptions/zero_weight_borrowing_preemptor_can_preempt_from_a_borrowing_CQ_which_also_has_zero_weight
+=== RUN   TestFairPreemptions/candidates_skipped_by_the_first_strategy_are_still_available_to_the_second_strategy
+=== RUN   TestFairPreemptions/preempt_huge_workload_if_there_is_no_other_option,_as_long_as_the_target_CQ_gets_a_lower_share
+=== RUN   TestFairPreemptions/workloads_under_priority_threshold_not_capriciously_preempted
+=== RUN   TestFairPreemptions/cohort_with_zero_weight_can_reclaim_nominal_quota
+=== RUN   TestFairPreemptions/non-zero_weight_borrowing_preemptor_preempts_from_a_borrowing_CQ
+--- PASS: TestFairPreemptions (0.21s)
+    --- PASS: TestFairPreemptions/reclaim_borrowable_quota_from_user_using_the_most (0.06s)
+    --- PASS: TestFairPreemptions/can't_preempt_2_smaller_workloads_if_the_incoming_is_huge (0.00s)
+    --- PASS: TestFairPreemptions/prefer_to_preempt_workloads_that_don't_make_the_target_CQ_have_the_biggest_share (0.00s)
+    --- PASS: TestFairPreemptions/CQ_with_higher_weight_can_preempt_more (0.01s)
+    --- PASS: TestFairPreemptions/hierarchical_preemption (0.01s)
+    --- PASS: TestFairPreemptions/forced_to_preempt_within_clusterqueue_because_borrowing_workload_too_important (0.00s)
+    --- PASS: TestFairPreemptions/cq_with_zero_weight_can_reclaim_nominal_quota (0.00s)
+    --- PASS: TestFairPreemptions/can_admit_after_preempting_workloads_from_the_preemptor's_CQ_with_lower_processing_priority (0.01s)
+    --- PASS: TestFairPreemptions/can_reclaim_from_queue_using_less,_if_taking_the_latest_workload_from_user_using_the_most_isn't_enough (0.01s)
+    --- PASS: TestFairPreemptions/cannot_preempt_if_it_would_make_the_candidate_CQ_go_under_nominal_after_preempting_one_element (0.00s)
+    --- PASS: TestFairPreemptions/preempt_lower_priority_first,_even_if_big (0.00s)
+    --- PASS: TestFairPreemptions/reclaim_nominal_from_user_using_the_most (0.01s)
+    --- PASS: TestFairPreemptions/preempt_one_from_each_CQ_borrowing (0.00s)
+    --- PASS: TestFairPreemptions/can't_preempt_nominal_from_Cohort_with_0_weight (0.00s)
+    --- PASS: TestFairPreemptions/can_preempt_within_cluster_queue_when_no_cohort (0.00s)
+    --- PASS: TestFairPreemptions/borrowing_cq_in_non-borrowing_cohort_is_protected (0.00s)
+    --- PASS: TestFairPreemptions/nominal_first:_workload_fitting_within_nominal_can_preempt_despite_high_aggregate_DRS (0.00s)
+    --- PASS: TestFairPreemptions/can_preempt_lower_priority_workloads_from_same_CQ (0.01s)
+    --- PASS: TestFairPreemptions/can't_preempt_huge_workload_if_the_incoming_is_also_huge (0.00s)
+    --- PASS: TestFairPreemptions/preempt_from_target_and_others_even_if_over_nominal (0.00s)
+    --- PASS: TestFairPreemptions/preempt_from_different_cluster_queues_if_the_end_result_has_a_smaller_max_share (0.00s)
+    --- PASS: TestFairPreemptions/scenario_above_does_not_flap (0.00s)
+    --- PASS: TestFairPreemptions/can't_preempt_nominal_from_CQ_with_0_weight (0.00s)
+    --- PASS: TestFairPreemptions/can't_preempt_when_it_would_switch_the_imbalance (0.00s)
+    --- PASS: TestFairPreemptions/can_preempt_a_combination_of_same_CQ_and_highest_user (0.01s)
+    --- PASS: TestFairPreemptions/can_preempt_anything_borrowing_from_CQ_with_0_weight (0.00s)
+    --- PASS: TestFairPreemptions/zero_weight_borrowing_preemptor_cannot_preempt_from_a_borrowing_CQ_with_a_non-zero_weight (0.00s)
+    --- PASS: TestFairPreemptions/can't_preempt_when_everyone_under_nominal (0.01s)
+    --- PASS: TestFairPreemptions/preempt_workload_that_doesn't_transfer_the_imbalance,_even_if_high_priority (0.00s)
+    --- PASS: TestFairPreemptions/deep_preemption (0.00s)
+    --- PASS: TestFairPreemptions/zero_weight_borrowing_preemptor_can_preempt_from_a_borrowing_CQ_which_also_has_zero_weight (0.00s)
+    --- PASS: TestFairPreemptions/candidates_skipped_by_the_first_strategy_are_still_available_to_the_second_strategy (0.01s)
+    --- PASS: TestFairPreemptions/preempt_huge_workload_if_there_is_no_other_option,_as_long_as_the_target_CQ_gets_a_lower_share (0.00s)
+    --- PASS: TestFairPreemptions/workloads_under_priority_threshold_not_capriciously_preempted (0.00s)
+    --- PASS: TestFairPreemptions/cohort_with_zero_weight_can_reclaim_nominal_quota (0.00s)
+    --- PASS: TestFairPreemptions/non-zero_weight_borrowing_preemptor_preempts_from_a_borrowing_CQ (0.00s)
+=== RUN   TestHierarchicalPreemptions
+=== RUN   TestHierarchicalPreemptions/hiearchical_preemption_with_multiple_resources_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/hiearchical_preemption_with_multiple_resources_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/prefer_to_preempt_evicted_workloads_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/prefer_to_preempt_evicted_workloads_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/respect_lending_limits_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/respect_lending_limits_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/avoid_queues_within_nominal_quota_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/avoid_queues_within_nominal_quota_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/prefer_to_preempt_hierarchical_candidate_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/prefer_to_preempt_hierarchical_candidate_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/incoming_workload_fits_in_CQ_nominal_quota_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/incoming_workload_fits_in_CQ_nominal_quota_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/reclaim_nominal_quota_from_lowest_priority_workload,_excluding_non-borrowing_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/reclaim_nominal_quota_from_lowest_priority_workload,_excluding_non-borrowing_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/reclaim_in_complex_hierarchy_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/reclaim_in_complex_hierarchy_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/preempt_with_hierarchical_advantage_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/preempt_with_hierarchical_advantage_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/preempt_multiple_with_hierarchical_advantage_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/preempt_multiple_with_hierarchical_advantage_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/forced_to_preempt_priority_candidate_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/forced_to_preempt_priority_candidate_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/preempt_hierarchical_candidates_and_inside_CQ_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/preempt_hierarchical_candidates_and_inside_CQ_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/preempt_in_cohort_and_own_CQ_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/preempt_in_cohort_and_own_CQ_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/preempt_hierarchical_and_priority_candidates_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/preempt_hierarchical_and_priority_candidates_when_the_WorkloadRequestUseMergePatch_feature_is_true
+=== RUN   TestHierarchicalPreemptions/infeasible_preemption_all_available_workloads_in_pruned_subtrees_when_the_WorkloadRequestUseMergePatch_feature_is_false
+=== RUN   TestHierarchicalPreemptions/infeasible_preemption_all_available_workloads_in_pruned_subtrees_when_the_WorkloadRequestUseMergePatch_feature_is_true
+--- PASS: TestHierarchicalPreemptions (0.25s)
+    --- PASS: TestHierarchicalPreemptions/hiearchical_preemption_with_multiple_resources_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/hiearchical_preemption_with_multiple_resources_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/prefer_to_preempt_evicted_workloads_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.00s)
+    --- PASS: TestHierarchicalPreemptions/prefer_to_preempt_evicted_workloads_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/respect_lending_limits_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.00s)
+    --- PASS: TestHierarchicalPreemptions/respect_lending_limits_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/avoid_queues_within_nominal_quota_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/avoid_queues_within_nominal_quota_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/prefer_to_preempt_hierarchical_candidate_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/prefer_to_preempt_hierarchical_candidate_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/incoming_workload_fits_in_CQ_nominal_quota_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/incoming_workload_fits_in_CQ_nominal_quota_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/reclaim_nominal_quota_from_lowest_priority_workload,_excluding_non-borrowing_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/reclaim_nominal_quota_from_lowest_priority_workload,_excluding_non-borrowing_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/reclaim_in_complex_hierarchy_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.02s)
+    --- PASS: TestHierarchicalPreemptions/reclaim_in_complex_hierarchy_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.02s)
+    --- PASS: TestHierarchicalPreemptions/preempt_with_hierarchical_advantage_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/preempt_with_hierarchical_advantage_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.00s)
+    --- PASS: TestHierarchicalPreemptions/preempt_multiple_with_hierarchical_advantage_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/preempt_multiple_with_hierarchical_advantage_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/forced_to_preempt_priority_candidate_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/forced_to_preempt_priority_candidate_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/preempt_hierarchical_candidates_and_inside_CQ_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/preempt_hierarchical_candidates_and_inside_CQ_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/preempt_in_cohort_and_own_CQ_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/preempt_in_cohort_and_own_CQ_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/preempt_hierarchical_and_priority_candidates_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.01s)
+    --- PASS: TestHierarchicalPreemptions/preempt_hierarchical_and_priority_candidates_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+    --- PASS: TestHierarchicalPreemptions/infeasible_preemption_all_available_workloads_in_pruned_subtrees_when_the_WorkloadRequestUseMergePatch_feature_is_false (0.00s)
+    --- PASS: TestHierarchicalPreemptions/infeasible_preemption_all_available_workloads_in_pruned_subtrees_when_the_WorkloadRequestUseMergePatch_feature_is_true (0.01s)
+=== RUN   TestCandidatesOrdering
+--- PASS: TestCandidatesOrdering (0.00s)
+ok  	sigs.k8s.io/kueue/pkg/scheduler/preemption	0.485s
+ok  	sigs.k8s.io/kueue/pkg/controller/jobs/pod	0.020s [no tests to run]
+exit=0

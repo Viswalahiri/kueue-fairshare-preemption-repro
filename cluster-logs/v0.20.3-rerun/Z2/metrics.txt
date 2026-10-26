@@ -1,0 +1,19 @@
+date: 2026-10-26T05:15:47Z
+kind: kind v0.31.0 go1.25.5 linux/amd64
+kubectl: v1.37.1
+kueue: v0.20.3
+kueue_commit: 66ff21115867ef4a80ced2a662d3665d86cb0d78
+kueue_commit_source: git-ls-remote
+node_image: kindest/node:v1.35.0@sha256:452d707d4862f52530247495d180205e029056831160e22870e37e3f6c1ac31f
+command: curl -sk --max-time 20 -H "Authorization: Bearer ${token}" https://127.0.0.1:18443/metrics | grep -E 'kueue_(cluster_queue|cohort)_weighted_share'
+source: live kind cluster
+note: token minted by kubectl -n kueue-system create token metrics-probe --duration=20m; the token value is not written to this file
+exit_code: 0
+===== capture body =====
+# HELP kueue_cluster_queue_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the cohort, among all the resources provided by\nthe ClusterQueue, and divided by the weight.\nIf zero, it means that the usage of the ClusterQueue is below the nominal quota.\nIf the ClusterQueue has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cluster_queue_weighted_share gauge
+kueue_cluster_queue_weighted_share{cluster_queue="team-a",cohort="all",replica_role="leader"} NaN
+kueue_cluster_queue_weighted_share{cluster_queue="team-b",cohort="all",replica_role="leader"} 0
+# HELP kueue_cohort_weighted_share Reports a value that representing the maximum of the ratios of usage above nominal\nquota to the lendable resources in the Cohort, among all the resources provided by\nthe Cohort, and divided by the weight.\nIf zero, it means that the usage of the Cohort is below the nominal quota.\nIf the Cohort has a weight of zero and is borrowing, this will return NaN.
+# TYPE kueue_cohort_weighted_share gauge
+kueue_cohort_weighted_share{cohort="all",replica_role="leader"} 0
